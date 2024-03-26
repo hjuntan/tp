@@ -76,6 +76,10 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
     }
 
+    /**
+     * Sets the UI tag for the {@code Person}.
+     * If the tag is None, the tag will not be displayed.
+     */
     public void setUiTag(){
         TagType tagType = person.getTag().value;
         if (tagType != TagType.None) {
