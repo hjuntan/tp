@@ -3,8 +3,8 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -80,7 +80,7 @@ public class PersonCard extends UiPart<Region> {
      * Sets the UI tag for the {@code Person}.
      * If the tag is None, the tag will not be displayed.
      */
-    public void setUiTag(){
+    public void setUiTag() {
         TagType tagType = person.getTag().value;
         if (tagType != TagType.None) {
             tag.setText(tagType.toString());
