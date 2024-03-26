@@ -54,11 +54,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane groups;
 
-    private Insets tagPadding = new Insets(0.69, 4.20, 0.69, 4.20);
-    private BackgroundFill tagFill = new BackgroundFill(Color.HOTPINK, new CornerRadii(4.20), new Insets(0));
-    private Background tagBackground = new Background(tagFill);
-    private Insets groupPadding = new Insets(0.1, 4.20, 0.1, 4.20);
-    private BackgroundFill groupFill = new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(4.20), new Insets(0));
+    private Insets groupPadding = new Insets(0, 4.20, 0, 4.20);
+    private BackgroundFill groupFill = new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(4.20), Insets.EMPTY);
     private Background groupBackground = new Background(groupFill);
     private Consumer<Label> groupConsumer = new Consumer<Label>() {
         @Override
@@ -94,11 +91,30 @@ public class PersonCard extends UiPart<Region> {
      * If the tag is None, the tag will not be displayed.
      */
     public void setUiTag() {
+        Color tagColor = Color.TRANSPARENT;
         TagType tagType = person.getTag().value;
-        if (tagType != TagType.None) {
-            tag.setText(tagType.toString());
-            tag.setPadding(tagPadding);
-            tag.setBackground(tagBackground);
+        switch (tagType) {
+        case Professor:
+            tagColor = Color.HOTPINK;
+            break;
+        case Student:
+            tagColor = Color.GOLDENROD;
+            break;
+        case TA:
+            tagColor = Color.YELLOWGREEN;
+            break;
+        default:
+            break;
+        }
+
+        tag.setText(tagType.toString());
+
+        BackgroundFill tagFill = new BackgroundFill(tagColor, new CornerRadii(4.20), Insets.EMPTY);
+        Background tagBackground = new Background(tagFill);
+        tag.setBackground(tagBackground);
+
+        if (tagType == TagType.None) {
+            tag.setVisible(false);
         }
     }
 }
