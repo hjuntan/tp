@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.function.Consumer;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -56,6 +57,17 @@ public class PersonCard extends UiPart<Region> {
     private Insets tagPadding = new Insets(0.69, 4.20, 0.69, 4.20);
     private BackgroundFill tagFill = new BackgroundFill(Color.HOTPINK, new CornerRadii(4.20), new Insets(0));
     private Background tagBackground = new Background(tagFill);
+    private Insets groupPadding = new Insets(0.1, 4.20, 0.1, 4.20);
+    private BackgroundFill groupFill = new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(4.20), new Insets(0));
+    private Background groupBackground = new Background(groupFill);
+    private Consumer<Label> groupConsumer = new Consumer<Label>() {
+        @Override
+        public void accept(Label label) {
+            label.setPadding(groupPadding);
+            label.setBackground(groupBackground);
+            groups.getChildren().add(label);
+        }
+    };
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -67,13 +79,14 @@ public class PersonCard extends UiPart<Region> {
         nusId.setText(person.getNusId().value);
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        setUiTag();
         email.setText(person.getEmail().value);
         schedule.setText(person.getSchedule().date);
         remark.setText(person.getRemark().value);
         person.getGroups().stream()
                 .sorted(Comparator.comparing(group -> group.groupName))
-                .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
+                .map(group -> new Label(group.groupName))
+                .forEach(groupConsumer);
+        setUiTag();
     }
 
     /**
