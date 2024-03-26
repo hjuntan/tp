@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Comparator;
 import java.util.function.Consumer;
 
@@ -60,6 +62,7 @@ public class PersonCard extends UiPart<Region> {
     private Consumer<Label> groupConsumer = new Consumer<Label>() {
         @Override
         public void accept(Label label) {
+            requireNonNull(label);
             label.setPadding(groupPadding);
             label.setBackground(groupBackground);
             groups.getChildren().add(label);
@@ -109,6 +112,7 @@ public class PersonCard extends UiPart<Region> {
 
         tag.setText(tagType.toString());
 
+        requireNonNull(tagColor);
         BackgroundFill tagFill = new BackgroundFill(tagColor, new CornerRadii(4.20), Insets.EMPTY);
         Background tagBackground = new Background(tagFill);
         tag.setBackground(tagBackground);
