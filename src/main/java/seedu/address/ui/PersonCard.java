@@ -56,19 +56,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane groups;
 
-    private Insets groupPadding = new Insets(0, 4.20, 0, 4.20);
-    private BackgroundFill groupFill = new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(4.20), Insets.EMPTY);
-    private Background groupBackground = new Background(groupFill);
-    private Consumer<Label> groupConsumer = new Consumer<Label>() {
-        @Override
-        public void accept(Label label) {
-            requireNonNull(label);
-            label.setPadding(groupPadding);
-            label.setBackground(groupBackground);
-            groups.getChildren().add(label);
-        }
-    };
-
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -84,8 +71,7 @@ public class PersonCard extends UiPart<Region> {
         remark.setText(person.getRemark().value);
         person.getGroups().stream()
                 .sorted(Comparator.comparing(group -> group.groupName))
-                .map(group -> new Label(group.groupName))
-                .forEach(groupConsumer);
+                .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
         setUiTag();
     }
 
