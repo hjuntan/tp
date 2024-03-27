@@ -3,7 +3,6 @@ package seedu.address.ui;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
-import java.util.function.Consumer;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
