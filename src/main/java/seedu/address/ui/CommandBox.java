@@ -3,7 +3,9 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
+import javafx.scene.input.KeyEvent;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -46,6 +48,19 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+        }
+    }
+
+    /**
+     * Handles navigational key presses while in the command box
+     */
+    @FXML
+    private void handleKeyPress(KeyEvent event) {
+        // somehow get the key pressed
+        if (event.getCode() == KeyCode.UP) {
+            commandTextField.setText("you clown");
+        } else if ((event.getCode() == KeyCode.DOWN)) {
+            commandTextField.setText("you bottom");
         }
     }
 
