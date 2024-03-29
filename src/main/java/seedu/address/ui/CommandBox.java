@@ -1,11 +1,13 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Region;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.CommandHistory;
@@ -13,8 +15,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.storage.Storage;
-
-import java.util.logging.Logger;
 
 
 /**
@@ -24,11 +24,10 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
-
-    private final CommandExecutor commandExecutor;
-    private static CommandHistory commandHistory = new CommandHistory();
-    private String currentCommand = "";
     private static final Logger logger = LogsCenter.getLogger(CommandBox.class);
+    private static CommandHistory commandHistory = new CommandHistory();
+    private final CommandExecutor commandExecutor;
+    private String currentCommand = "";
 
     @FXML
     private TextField commandTextField;
@@ -69,18 +68,16 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleKeyPress(KeyEvent event) {
         if (event.getCode() == KeyCode.UP) {
-            commandTextField.setText(commandHistory.getPreviousCommand().orElseGet(
-                    () -> {
-                        commandHistory.moveCursorToMostRecent();
-                        return currentCommand;
-                    }));
+            commandTextField.setText(commandHistory.getPreviousCommand().orElseGet(() -> {
+                commandHistory.moveCursorToMostRecent();
+                return currentCommand;
+            }));
             commandTextField.positionCaret(commandTextField.getLength());
         } else if (event.getCode() == KeyCode.DOWN) {
-            commandTextField.setText(commandHistory.getNextCommand().orElseGet(
-                    () -> {
-                        commandHistory.moveCursorToMostRecent();
-                        return currentCommand;
-                    }));
+            commandTextField.setText(commandHistory.getNextCommand().orElseGet(() -> {
+                commandHistory.moveCursorToMostRecent();
+                return currentCommand;
+            }));
             commandTextField.positionCaret(commandTextField.getLength());
         } else {
             logger.info("Caret at " + commandTextField.getCaretPosition());

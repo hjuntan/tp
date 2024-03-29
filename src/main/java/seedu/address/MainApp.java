@@ -23,7 +23,14 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.*;
+import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CommandHistoryStorage;
+import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCommandHistoryStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.CommandBox;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -174,7 +181,7 @@ public class MainApp extends Application {
         CommandHistory initializedHistory;
         try {
             Optional<CommandHistory> historyOptional = storage.readCommandHistory();
-            if(historyOptional.isEmpty()) {
+            if (historyOptional.isEmpty()) {
                 logger.info("Creating new preference file " + prefHistoryPath);
             }
             initializedHistory = historyOptional.orElse(new CommandHistory());
@@ -193,7 +200,7 @@ public class MainApp extends Application {
         return initializedHistory;
     }
 
-    protected void provideStorageForCommandBox(Storage storage) throws DataLoadingException{
+    protected void provideStorageForCommandBox(Storage storage) throws DataLoadingException {
         CommandBox.setCommandHistory(storage.readCommandHistory().orElse(new CommandHistory()));
     }
 

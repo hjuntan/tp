@@ -1,10 +1,9 @@
 package seedu.address.logic;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.util.Optional;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Represents the list of commands the user has typed,
@@ -16,9 +15,15 @@ public class CommandHistory implements ReadOnlyCommandHistory {
     private final ObservableList<String> unmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Creates a new Command History the user can interact with using their up and down keys.
+     */
     public CommandHistory() {
     }
 
+    /**
+     * Creates a Command History with the given history data.
+     */
     public CommandHistory(ReadOnlyCommandHistory history) {
         this();
         resetData(history);
