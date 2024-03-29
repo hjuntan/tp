@@ -30,6 +30,13 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    /**
+     * Returns the user's Command History
+     *
+     * @see CommandHistory#getCommandHistory()
+     */
+    ReadOnlyCommandHistory getCommandHistory();
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 

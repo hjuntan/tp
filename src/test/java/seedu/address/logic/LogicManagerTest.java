@@ -54,7 +54,7 @@ public class LogicManagerTest {
         JsonCommandHistoryStorage commandHistoryStorage =
                 new JsonCommandHistoryStorage(temporaryFolder.resolve("commandHistory.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, commandHistoryStorage);
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, new CommandHistory());
     }
 
     @Test
@@ -169,7 +169,7 @@ public class LogicManagerTest {
                 new JsonCommandHistoryStorage(temporaryFolder.resolve("commandHistory.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, commandHistoryStorage);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, new CommandHistory());
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NUSID_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY

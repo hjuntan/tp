@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.commons.util.JsonUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.ReadOnlyCommandHistory;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -82,6 +83,7 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ======================= User Command History ==================================================
     @Override
     public Path getCommandHistoryFilePath() {
         return commandHistoryStorage.getCommandHistoryFilePath();
@@ -89,11 +91,13 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<CommandHistory> readCommandHistory() throws DataLoadingException {
-        return Optional.empty();
+        logger.fine("Attempting to read user's command history at: "
+                + commandHistoryStorage.getCommandHistoryFilePath());
+        return commandHistoryStorage.readCommandHistory();
     }
 
     @Override
     public void saveCommandHistory(ReadOnlyCommandHistory history) throws IOException {
-
+        JsonUtil.saveJsonFile(history, getCommandHistoryFilePath());
     }
 }

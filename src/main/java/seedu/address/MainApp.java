@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.*;
+import seedu.address.ui.CommandBox;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -56,10 +57,11 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         CommandHistoryStorage commandHistoryStorage = new JsonCommandHistoryStorage(config.getCommandHistoryFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, commandHistoryStorage);
+        CommandHistory c = initCommandHistory(commandHistoryStorage);
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, new CommandHistory());
 
         ui = new UiManager(logic);
     }
@@ -190,6 +192,11 @@ public class MainApp extends Application {
 
         return initializedHistory;
     }
+
+    protected void provideStorageForCommandBox(Storage storage) throws DataLoadingException{
+        CommandBox.setCommandHistory(storage.readCommandHistory().orElse(new CommandHistory()));
+    }
+
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
@@ -201,6 +208,7 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
+            storage.saveCommandHistory(logic.getCommandHistory());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
