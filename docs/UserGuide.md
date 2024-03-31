@@ -170,7 +170,14 @@ Examples:
 * `group id/E0123456 g/CS2101-T15` will assign the person with nusid E0123456 to the group CS2101-T15
 * `group id/E0123456 t/STUDENT` will assign the person with nusid E0123456 to the student tag
 
+### Pinning a person: `pin`
 
+Pins a person to the address book.
+
+Format: `pin id/nusId`
+
+Examples:
+* `pin id/E0123456` will pin an existing person with `nusId` of "E0123456".
 
 
 ### Clearing all entries : `clear`
