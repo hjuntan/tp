@@ -29,16 +29,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
             if (argMultimap.getValue(PREFIX_NUSID).isPresent() && argMultimap.getValue(PREFIX_GROUP).isPresent()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-            }
-            else if (argMultimap.getValue(PREFIX_GROUP).isPresent()) {
+            } else if (argMultimap.getValue(PREFIX_GROUP).isPresent()) {
                 return new DeleteCommand(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get()));
-            }
-            else if (argMultimap.getValue(PREFIX_NUSID).isPresent()) {
+            } else if (argMultimap.getValue(PREFIX_NUSID).isPresent()) {
                 return new DeleteCommand(ParserUtil.parseNusId(argMultimap.getValue(PREFIX_NUSID).get()));
-
-            }
-
-            else {
+            } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
             }
 
