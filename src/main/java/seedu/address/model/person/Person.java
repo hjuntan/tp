@@ -80,6 +80,10 @@ public class Person {
         return Collections.unmodifiableSet(groups);
     }
 
+    public boolean hasSchedule(){
+        return schedule.isPresent();
+    }
+
     /**
      * Returns true if both persons have the same nusId.
      * This defines a weaker notion of equality between two persons.
