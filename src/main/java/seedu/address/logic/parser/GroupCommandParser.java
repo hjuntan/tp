@@ -45,7 +45,7 @@ public class GroupCommandParser implements Parser<GroupCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
-        NusId nusid = ParserUtil.parseNusId(argMultimap.getValue(PREFIX_NUSID).get());
+
 
 
         GroupCommand.GroupPersonDescriptor groupPersonDescriptor = new GroupCommand.GroupPersonDescriptor();
