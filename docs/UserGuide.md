@@ -79,22 +79,22 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add id/ID n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
+Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have 0 or 1 tag
+**Tip:** A person can have 0 or more groups
 </box>
 
 Examples:
-* `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com`
-* `add id/E7654321 n/Betsy Crowe t/student e/betsycrowe@example.com p/1234567`
+* `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T-T15`
+* `add id/E7654321 n/Betsy Crowe t/TA e/betsycrowe@example.com p/1234567`
 
-### Listing all persons : `list`
+### Listing all persons : `view`
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+Format: `view`
 
 ### Editing a person : `edit`
 
@@ -170,8 +170,27 @@ Examples:
 * `group id/E0123456 g/CS2101-T15` will assign the person with nusid E0123456 to the group CS2101-T15
 * `group id/E0123456 t/STUDENT` will assign the person with nusid E0123456 to the student tag
 
+### Schedule a meeting with a person: `schedule`
 
+Schedule a meeting with a person in the address book.
 
+Format: `schedule id/NUSID d/DATE [r/REMARK]`
+
+* Schedule a meeting with a person with the specified `nusId` on the specified `date` with an optional `remark`.
+* The `nusId` provided must be from an existing person in the address book.
+* If `date` and `remark` is not provided, the schedule will be removed.
+* If `remark` is provided, `date` must be provided as well.
+
+<box type="tip" seamless>
+
+**Tip:** The `date` must be in one of the format `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`.
+
+</box>
+
+Examples:
+* `schedule id/E0123456 d/12/12/2021 r/Consultation` will schedule a meeting with the person with nusId E0123456 on 12th December 2021 with a remark of Consultation.
+* `schedule id/E0123456 d/Dec 12, 2021` will schedule a meeting with the person with nusId E0123456 on 12th December 2021 without a remark.
+* `schedule id/E0123456` will remove the schedule with the person with nusId E0123456.
 
 ### Clearing all entries : `clear`
 
@@ -221,14 +240,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                      |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                                                  |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                                                       |
-| **Group**  | `group [id/NUSID] [g/GROUP] [t/TAG] `                                                                                                                                 |
-| **List**   | `list`                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                |
+| Action       | Format, Examples                                                                                                                           |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/Student g/CS2103T-T15` |
+| **Clear**    | `clear`                                                                                                                                    |
+| **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                       |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                |
+| **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
+| **Group**    | `group [id/NUSID] [g/GROUP] [t/TAG] `                                                                                                      |
+| **Schedule** | `schedule id/NUSID s/DATE [r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                        |
+| **View**     | `view`                                                                                                                                     |
+| **Help**     | `help`                                                                                                                                     |
 
