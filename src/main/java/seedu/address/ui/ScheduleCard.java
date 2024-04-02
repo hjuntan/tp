@@ -1,17 +1,14 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
-import java.util.Comparator;
-import java.util.function.Consumer;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * An UI component that displays the {@code Schedule} and {@code Remark} of a {@code Person}.
+ */
 public class ScheduleCard extends UiPart<Region> {
     private static final String FXML = "ScheduleListCard.fxml";
 

@@ -80,7 +80,7 @@ public class Person {
         return Collections.unmodifiableSet(groups);
     }
 
-    public boolean hasSchedule(){
+    public boolean hasSchedule() {
         return schedule.isPresent();
     }
 
