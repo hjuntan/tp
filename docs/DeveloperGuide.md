@@ -381,6 +381,60 @@ The following activity diagram summarizes what happens when a user executes a ne
   
 _{more aspects and alternatives to be added}_
 
+
+### Schedule feature
+
+#### Proposed Implementation
+
+The schedule mechanism is facilitated by `ScheduleCommand` and it extends `Command`. A schedule is added if s/ and/or r/ parameter is present. Otherwise if s/ parameter is absent, the schedule is removed. Additionally, it implements the following operations:
+
+* `ScheduleCommand#execute()` — Execute the schedule command for the given person.
+* `ScheduleCommand#generateSuccessMessage()` — Generate message for either add schedule or remove schedule.
+
+`ScheduleCommand#execute()` is exposed in the `Logic` interface as `Logic#execute()`.
+
+Given below is an example usage scenario and how the `ScheduleCommand` mechanism behaves at each step.
+
+Step 1. The user launches the application. The `AddressBook` will be initialized with the initial address book state.
+
+Step 2. The user executes `schedule id/E1234567 s/20-12-2022 r/Consultation at 3pm` command to schedule a consultation session with person nusId E1234567 at date 20-12-2022 in the address book. The `schedule` command calls `Model#getFilteredPersonList()` to get a list of person in the `addressbook` and filter to find the relevant person with the given nusId. `Model#setPerson()` is called to update the schedule for that person in `addressbook`.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#setPerson()`, so the schedule will not be updated for that person in `addressbook`.
+
+</box>
+
+Step 3. Now the user decides to remove the schedule with that person. The user executes `schedule id/E1234567` to remove the schedule.`schedule` again calls `Model#getFilteredPersonList()` and filter to find the relevant person. `Model#setPerson()` is called to remove the schedule for that person in `addressbook`.
+
+The following sequence diagram shows how a schedule operation goes through the `Logic` component:
+
+<puml src="diagrams/ScheduleSequenceDiagram.puml" alt="ScheduleSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ScheduleCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes a schedule command:
+
+<puml src="diagrams/ScheduleDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How schedule executes:**
+
+* **Alternative 1 (current choice):** Set the schedule for the person by using s/ parameter. Remove schedule by removing s/ parameter.
+    * Pros: Easy to implement.
+    * Cons: Additional checks are required to check if it is an add or remove schedule command.
+
+* **Alternative 2:** Introduce add schedule and remove schedule command as separate commands.
+    * Pros: There is usage of Single Responsibility Principle.
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+_{more aspects and alternatives to be added}_
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
