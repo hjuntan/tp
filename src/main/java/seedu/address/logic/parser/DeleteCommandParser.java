@@ -33,7 +33,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 return new DeleteCommand(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get()));
             } else if (argMultimap.getValue(PREFIX_NUSID).isPresent()) {
                 return new DeleteCommand(ParserUtil.parseNusId(argMultimap.getValue(PREFIX_NUSID).get()));
-
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
             }
