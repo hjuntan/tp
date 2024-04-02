@@ -1,13 +1,21 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag.TagType;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -35,11 +43,17 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label tag;
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label nusId;
+    @FXML
+    private Label schedule;
+    @FXML
+    private Label remark;
+    @FXML
+    private FlowPane groups;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -48,12 +62,48 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
+        nusId.setText(person.getNusId().value);
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        schedule.setText(person.getSchedule().date);
+        remark.setText(person.getRemark().value);
+        person.getGroups().stream()
+                .sorted(Comparator.comparing(group -> group.groupName))
+                .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
+        setUiTag();
+    }
+
+    /**
+     * Sets the UI tag for the {@code Person}.
+     * If the tag is None, the tag will not be displayed.
+     */
+    public void setUiTag() {
+        Color tagColor = Color.TRANSPARENT;
+        TagType tagType = person.getTag().value;
+        switch (tagType) {
+        case Professor:
+            tagColor = Color.HOTPINK;
+            break;
+        case Student:
+            tagColor = Color.GOLDENROD;
+            break;
+        case TA:
+            tagColor = Color.YELLOWGREEN;
+            break;
+        default:
+            break;
+        }
+
+        tag.setText(tagType.toString());
+
+        requireNonNull(tagColor);
+        BackgroundFill tagFill = new BackgroundFill(tagColor, new CornerRadii(4.20), Insets.EMPTY);
+        Background tagBackground = new Background(tagFill);
+        tag.setBackground(tagBackground);
+
+        if (tagType == TagType.None) {
+            tag.setVisible(false);
+        }
     }
 }

@@ -17,7 +17,7 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, getting started**f
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete E0123456`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -90,9 +90,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete E0123456")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete E0123456` Command" />
 
 <box type="info" seamless>
 
@@ -157,6 +157,136 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### `Add` feature
+
+`Add` for a person can be added using the `add` command. The `AddCommand` class is responsible for handling the addition of a person. This command is implemented through `AddCommand` which extend the `Command` class.
+
+A new `Person` can be added by specifying `nusId`, `name`, `phone`, `email`, `tags` and optional `group`.
+
+<box type="info" seamless>
+
+**Note:** There can be 0 or more optional `group`.
+
+</box>
+
+#### Proposed Implementation
+
+Given below is an example usage scenario and how the `AddCommand` mechanism behaves at each step.
+
+Step 1. The user executes `add` command.
+
+Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `AddCommandParser`.
+
+Step 3. `AddCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `AddCommand`.
+
+Step 4. The `LogicManager` calls the `execute` method in `AddCommand`.
+
+Step 5. The `execute` method in `AddCommand` executes and calls `Model#addPerson()` to add the person to the address book.
+
+Step 6. Success message is printed onto the results display to notify user.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addPerson()` and the person will not be added to the address book.
+
+</box>
+
+The following sequence diagram shows how an add operation goes through the `Logic` component:
+
+<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
+
+The following activity diagram summarizes what happens when a user inputs a schedule command:
+
+<puml src="diagrams/AddDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**How add executes**
+
+* User inputs an `add` command with `nusId`, `name`, `phone`, `email`, `tags` and optional `group` fields. The inputs are parsed and a `AddCommand` is created.
+* The instances of the relevant fields are created and the person is added to the model.
+
+**Alternative considerations**  
+
+* **Alternative 1 (current choice):** Create instances of objects for each of the fields and add the person to the model.
+    * Pros: Allow for each field to be validated before adding the person.
+    * Cons: Additional checks are required 
+
+    
+
+### `Schedule` feature
+
+#### Proposed Implementation
+
+`Schedule` for a person can be added or removed using the `schedule` command. The `ScheduleCommand` class is responsible for handling the scheduling of events for a person. This command is implemented through `ScheduleCommand` which extend the `Command` class.
+
+A new `Schedule` can be added by specifying `nusId`, `date` and an optional `remark`. If the `date` is not specified, the schedule will be removed instead.
+
+<box type="info" seamless>
+
+**Note:** If `remark` is present, `date` has to be present as well.
+
+</box>
+
+Given below is an example usage scenario and how the `ScheduleCommand` mechanism behaves at each step.
+
+Step 1. The user executes `schedule` command.
+
+Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `ScheduleCommandParser`.
+
+Step 3. `ScheduleCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `ScheduleCommand`.
+
+Step 4. The `LogicManager` calls the `execute` method in `ScheduleCommand`.
+
+Step 5. The `execute` method in `ScheduleCommand` executes and calls `Model#getFilteredPersonList()` to get a list of person in the address book and filter to find the relevant person with the given `nusId`. 
+
+Step 6. `Model#setPerson()` is called to update the schedule for that person.
+
+Step 7. Success message is printed onto the results display to notify user.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#setPerson()` and the schedule will not be updated for that person.
+
+</box>
+
+The following sequence diagram shows how a schedule operation goes through the `Logic` component:
+
+<puml src="diagrams/ScheduleSequenceDiagram.puml" alt="ScheduleSequenceDiagram" />
+
+The following activity diagram summarizes what happens when a user inputs a schedule command:
+
+<puml src="diagrams/ScheduleDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**How schedule executes**
+
+* User inputs a `schedule` command with `nusId`, `date` and an optional `remark`. The inputs are parsed and a `ScheduleCommand` is created.
+* A list of persons is retrieved from `model` and the relevant person is found by matching `nusId`.
+* The relevant fields are updated for the person and the person is set back into the model.
+
+**Why is it implemented this way?**
+
+* The functionality of adding and removing schedule is similar to the `EditCommand`. Both require changes in the `Person` object.
+* Hence, the approach is similar to how `edit` command works.
+
+**Alternative considerations**
+
+* **Alternative 1 (current choice):** Set the schedule for the person by indicating `date`, otherwise remove schedule.
+    * Pros: Easy to implement.
+    * Cons: Additional checks are required to check if it is an add or remove schedule command.
+
+* **Alternative 2:** Introduce add schedule and remove schedule command as separate commands.
+    * Pros: There is usage of Single Responsibility Principle.
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+* **Alternative 3:** Since schedule and edit commands are similar, we could consider adding a generic class which both extend from.
+    * Pros: It follows the DRY principle.
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -241,14 +371,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
+  
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
@@ -353,6 +483,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AddressBook shows an error message.
 
       Use case resumes at step 1.
+      
 * 2b. The given information is insufficient to form a contact.
 
     * 2b1. AddressBook shows an error message.
@@ -376,7 +507,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AddressBook shows an error message.
 
       Use case resumes at step 1.
-
+      
 * 2a. The contact does not exist.
 
     * 2a1. AddressBook shows an error message.
@@ -432,13 +563,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AddressBook shows an error message.
 
       Use case ends.
-  
+
 **Use case: Assign an existing contact to a tutorial group**
 
 **MSS**
 
 1.  User requests to tag a specific contact to a tutorial group.
 2.  AddressBook tags the contact to the tutorial group.
+
+    Use case ends.
 
 **Extensions**
 
@@ -490,6 +623,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+
 **Use case: schedules an event with a contact**
 
 **MSS**
@@ -520,6 +654,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+**Use case: deletes a group of people**
+
+**MSS**
+
+1.  User requests to delete all people in a specific group.
+2.  User inputs the name of the group into the AddressBook.
+3.  AddressBook deletes all people that are classified under the specified group.
+
+**Extensions**
+
+* 1a. User uses the wrong format in his request.
+
+    * 1a1. AddressBook shows an error message.
+    * 1a2. User uses the correct format as shown in the error message for his request.
+
+      Use case resumes at step 2.
+
+* 2a. The group does not exist.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
+
+
+
 
 ### Non-Functional Requirements
 
@@ -543,7 +702,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
+<boxtype="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -573,13 +732,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete E0123456`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete E0000000`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is NusId which does not exist currently in the address book)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
