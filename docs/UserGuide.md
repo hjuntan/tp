@@ -192,6 +192,15 @@ Examples:
 * `schedule id/E0123456 d/Dec 12, 2021` will schedule a meeting with the person with nusId E0123456 on 12th December 2021 without a remark.
 * `schedule id/E0123456` will remove the schedule with the person with nusId E0123456.
 
+### Pinning a person: `pin`
+
+Pins a person to the address book.
+
+Format: `pin id/nusId`
+
+Examples:
+* `pin id/E0123456` will pin an existing person with `nusId` of "E0123456".
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
