@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -91,6 +92,24 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getScheduleFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () ->
+                modelManager.getScheduleFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void noSchedulePerson_personNoScheduleInAddressBook_returnsFalse() {
+        modelManager.addPerson(new PersonBuilder(ALICE).withSchedule("").withRemark("").build());
+        assertFalse(modelManager.getScheduleFilteredPersonList().contains(ALICE));
+    }
+
+    @Test
+    public void hasSchedulePerson_personInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.getScheduleFilteredPersonList().contains(ALICE));
     }
 
     @Test

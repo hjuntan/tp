@@ -105,6 +105,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void pinPerson(Person person) {
+        requireNonNull(person);
+        addressBook.pinPerson(person);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -120,6 +126,15 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getScheduleFilteredPersonList() {
+        return filteredPersons.filtered(person -> person.hasSchedule());
     }
 
     @Override

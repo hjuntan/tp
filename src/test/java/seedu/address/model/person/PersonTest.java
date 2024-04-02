@@ -44,6 +44,16 @@ public class PersonTest {
     }
 
     @Test
+    public void hasSchedule() {
+        // has schedule -> returns true
+        assertTrue(ALICE.hasSchedule());
+
+        // no schedule -> returns false
+        Person alice = new PersonBuilder(ALICE).withSchedule("").build();
+        assertFalse(alice.hasSchedule());
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();
