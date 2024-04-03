@@ -23,19 +23,14 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
+    CommandHistory getCommandHistory();
+
     /**
      * Returns the AddressBook.
      *
      * @see seedu.address.model.Model#getAddressBook()
      */
     ReadOnlyAddressBook getAddressBook();
-
-    /**
-     * Returns the user's Command History
-     *
-     * @see CommandHistory#getCommandHistory()
-     */
-    ReadOnlyCommandHistory getCommandHistory();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
