@@ -24,9 +24,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.CommandHistoryStorage;
 import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonCommandHistoryStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -62,9 +60,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        CommandHistoryStorage commandHistoryStorage = new JsonCommandHistoryStorage(config.getCommandHistoryFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, commandHistoryStorage);
-        CommandHistory c = initCommandHistory(commandHistoryStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -174,32 +170,6 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
-    protected CommandHistory initCommandHistory(CommandHistoryStorage historyStorage) {
-        Path prefHistoryPath = storage.getCommandHistoryFilePath();
-        logger.info("Using command history file: " + prefHistoryPath);
-
-        CommandHistory initializedHistory;
-        try {
-            Optional<CommandHistory> historyOptional = storage.readCommandHistory();
-            if (historyOptional.isEmpty()) {
-                logger.info("Creating new preference file " + prefHistoryPath);
-            }
-            initializedHistory = historyOptional.orElse(new CommandHistory());
-        } catch (DataLoadingException d) {
-            logger.warning("Command History File at " + prefHistoryPath + " could not be loaded."
-                    + " Using default preferences");
-            initializedHistory = new CommandHistory();
-        }
-
-        try {
-            storage.saveCommandHistory(initializedHistory);
-        } catch (IOException e) {
-            logger.warning("Failed to save command history : " + StringUtil.getDetails(e));
-        }
-
-        return initializedHistory;
-    }
-
     protected void provideStorageForCommandBox(Storage storage) throws DataLoadingException {
         CommandBox.setCommandHistory(storage.readCommandHistory().orElse(new CommandHistory()));
     }
@@ -215,7 +185,6 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
-            storage.saveCommandHistory(logic.getCommandHistory());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

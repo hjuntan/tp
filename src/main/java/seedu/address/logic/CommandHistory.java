@@ -21,21 +21,9 @@ public class CommandHistory implements ReadOnlyCommandHistory {
     public CommandHistory() {
     }
 
-    /**
-     * Creates a Command History with the given history data.
-     */
-    public CommandHistory(ReadOnlyCommandHistory history) {
-        this();
-        resetData(history);
-    }
-
     @Override
     public ObservableList<String> getCommandHistory() {
         return unmodifiableList;
-    }
-
-    public void resetData(ReadOnlyCommandHistory replacement) {
-        internalList.setAll(replacement.getCommandHistory());
     }
 
     /**
