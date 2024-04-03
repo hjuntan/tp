@@ -128,6 +128,15 @@ public class ModelManager implements Model {
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
     }
+  
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getScheduleFilteredPersonList() {
+        return filteredPersons.filtered(person -> person.hasSchedule());
+    }
 
     /**
      * Returns a person, if any, after filtering the list with the nusId of concern.

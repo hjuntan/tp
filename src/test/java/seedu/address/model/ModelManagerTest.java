@@ -29,6 +29,7 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Tag;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -123,6 +124,22 @@ public class ModelManagerTest {
     public void filterPersonListWithNusId_nonexistentNusId() {
         NusId nusId = new NusId("E0000000"); // This nusId does not in tbe typical address book
         assertTrue(modelManagerWithAddressBook.filterPersonListWithNusId(nusId) == null);
+
+    public void getScheduleFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () ->
+                modelManager.getScheduleFilteredPersonList().remove(0));
+    }
+      
+    @Test
+    public void noSchedulePerson_personNoScheduleInAddressBook_returnsFalse() {
+        modelManager.addPerson(new PersonBuilder(ALICE).withSchedule("").withRemark("").build());
+        assertFalse(modelManager.getScheduleFilteredPersonList().contains(ALICE));
+    }
+
+    @Test
+    public void hasSchedulePerson_personInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.getScheduleFilteredPersonList().contains(ALICE));
     }
 
     @Test
