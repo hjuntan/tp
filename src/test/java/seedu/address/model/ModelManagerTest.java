@@ -124,6 +124,7 @@ public class ModelManagerTest {
     public void filterPersonListWithNusId_nonexistentNusId() {
         NusId nusId = new NusId("E0000000"); // This nusId does not in tbe typical address book
         assertTrue(modelManagerWithAddressBook.filterPersonListWithNusId(nusId) == null);
+    }
 
     @Test
     public void getScheduleFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
