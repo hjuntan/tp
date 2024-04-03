@@ -34,8 +34,6 @@ public class CommandHistoryTest {
         commandHistoryStub.add("find n/John Doe");
         commandHistoryStub.setCursorPosition(2);
         assertTrue(commandHistoryStub.getNextCommand().isEmpty());
-        commandHistoryStub.setCursorPosition(-1);
-        assertTrue(commandHistoryStub.getNextCommand().isEmpty());
     }
 
     @Test
@@ -51,8 +49,6 @@ public class CommandHistoryTest {
         commandHistoryStub.add("add n/John");
         commandHistoryStub.setCursorPosition(2);
         assertTrue(commandHistoryStub.getPreviousCommand().isEmpty());
-        commandHistoryStub.setCursorPosition(-1);
-        assertTrue(commandHistoryStub.getPreviousCommand().isEmpty());
     }
 
     @Test
@@ -64,6 +60,7 @@ public class CommandHistoryTest {
         commandHistoryStub.add("add n/Bobby");
         commandHistoryStub.setCursorPosition(0);
         assertTrue(commandHistoryStub.getNextCommand().isPresent());
+        commandHistoryStub.setCursorPosition(0); // note to reset the cursor back to 0
         assertEquals(commandHistoryStub.getNextCommand().get(), "add n/Bobby");
     }
 

@@ -62,6 +62,8 @@ public class CommandHistory implements ReadOnlyCommandHistory {
             return Optional.empty();
         } else if (cursorPosition == 0) {
             return Optional.of(internalList.get(0));
+        } else if (cursorPosition > internalList.size()) {
+            return Optional.empty();
         } else {
             cursorPosition--;
             assert cursorPosition >= 0;
