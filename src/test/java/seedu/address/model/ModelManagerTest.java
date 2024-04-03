@@ -129,7 +129,7 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () ->
                 modelManager.getScheduleFilteredPersonList().remove(0));
     }
-      
+
     @Test
     public void noSchedulePerson_personNoScheduleInAddressBook_returnsFalse() {
         modelManager.addPerson(new PersonBuilder(ALICE).withSchedule("").withRemark("").build());
