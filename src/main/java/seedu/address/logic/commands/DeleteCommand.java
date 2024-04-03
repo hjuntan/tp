@@ -65,15 +65,14 @@ public class DeleteCommand extends Command {
 
             model.deletePerson(personToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
-        }
-        else {
+        } else {
             List<Person> peopleToDelete = new ArrayList<Person>();
             Set<Group> deletedGroup = new HashSet<Group>();
             deletedGroup.add(group);
 
 
             for (int i = 0; i < lastShownList.size(); i++) {
-                if (lastShownList.get(i).getGroups().equals(deletedGroup) ) {
+                if (lastShownList.get(i).getGroups().equals(deletedGroup)) {
                     peopleToDelete.add(lastShownList.get(i));
                 }
             }
@@ -104,8 +103,7 @@ public class DeleteCommand extends Command {
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         if (nusId != null) {
             return nusId.equals(otherDeleteCommand.nusId);
-        }
-        else if (group != null) {
+        } else if (group != null) {
             return group.equals(otherDeleteCommand.group);
         }
         return false;
@@ -117,8 +115,7 @@ public class DeleteCommand extends Command {
             return new ToStringBuilder(this)
                     .add("targetNusId", nusId.toString())
                     .toString();
-        }
-        else if (group != null) {
+        } else if (group != null) {
             return new ToStringBuilder(this)
                     .add("targetGroup", group.toString())
                     .toString();

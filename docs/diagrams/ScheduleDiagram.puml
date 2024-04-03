@@ -3,6 +3,8 @@ skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
+
+
 :User inputs schedule command;
 :Parse schedule command;
 
@@ -10,12 +12,12 @@ start
 'diamond we place it as the true branch instead.
 
 if () then ([valid command])
-    :Execute add command;
-    :Create instances of each field;
-    :Add person to AddressBook;
+    :Parse schedule command;
+    :Execute schedule command;
+    :Save modified person
+          AddressBook;
     :Display success message;
 else ([else])
-    :Display error message;
 endif
 stop
 @enduml
