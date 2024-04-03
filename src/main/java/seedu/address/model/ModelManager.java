@@ -128,7 +128,7 @@ public class ModelManager implements Model {
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
     }
-  
+
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
