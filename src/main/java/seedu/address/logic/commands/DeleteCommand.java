@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUSID;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,10 +26,15 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the NusId used in the displayed person list.\n"
-            + "Parameters: NusId (8 digits long, starting with an 'E'). \n"
-            + "Example: " + COMMAND_WORD + " id/E0123456\n\n"
-            + "OR Deletes all the people identified by the group used in the displayed person list.\n"
-            + "Parameters: Group (Already existing in the address book). \n"
+            + "Parameters: "
+            + PREFIX_NUSID + "NUSID\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NUSID + "E1234567\n"
+            + "OR \n"
+            + COMMAND_WORD
+            + ": Deletes all the people identified by the group used in the displayed person list.\n"
+            + "Parameters: "
+            + PREFIX_GROUP + "GROUP\n"
             + "Example: " + COMMAND_WORD + " g/CS2103-T15";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
@@ -56,9 +63,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         if (this.nusId != null) {
-            Person personToDelete = lastShownList.stream().filter(person -> person.getNusId().equals(nusId))
-                    .findFirst().orElse(null);
-
+            Person personToDelete = model.filterPersonListWithNusId(nusId);
             if (personToDelete == null) {
                 throw new CommandException(Messages.MESSAGE_NON_EXISTENT_PERSON);
             }

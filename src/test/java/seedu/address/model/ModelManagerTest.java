@@ -7,20 +7,35 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NusId;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.Schedule;
+import seedu.address.model.person.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
+
+    private ModelManager modelManagerWithAddressBook = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
 
     @Test
     public void constructor() {
@@ -91,6 +106,23 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void filterPersonListWithNusId_existentNusId() {
+        NusId nusId = new NusId("E0123456"); // This nusId exists in tbe typical address book
+        Set<Group> groups = new HashSet<>();
+        groups.add(new Group("friends"));
+        Person personOfInterest = new Person(nusId, new Name("Alice Pauline"), new Phone("94351253"),
+                new Email("alice@example.com"), new Tag("Student"), groups,
+                new Schedule("10-09-2020"), new Remark(""));
+        assertEquals(personOfInterest, modelManagerWithAddressBook.filterPersonListWithNusId(nusId));
+    }
+
+    @Test
+    public void filterPersonListWithNusId_nonexistentNusId() {
+        NusId nusId = new NusId("E0000000"); // This nusId does not in tbe typical address book
+        assertTrue(modelManagerWithAddressBook.filterPersonListWithNusId(nusId) == null);
     }
 
     @Test
