@@ -59,6 +59,22 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void pin_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.pin(null));
+    }
+
+    @Test
+    public void pinPerson_success() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.add(ALICE);
+        uniquePersonList.pin(BOB);
+        assertEquals(expectedUniquePersonList, uniquePersonList);
+    }
+
+    @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePersonList.setPerson(null, ALICE));
     }
