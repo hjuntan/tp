@@ -13,6 +13,7 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -23,11 +24,14 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CommandHistoryStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCommandHistoryStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.ui.CommandBox;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -58,11 +62,13 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CommandHistoryStorage commandHistoryStorage = new JsonCommandHistoryStorage(config.getCommandHistoryFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, commandHistoryStorage);
+        CommandHistory c = initCommandHistory(commandHistoryStorage);
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, new CommandHistory());
 
         ui = new UiManager(logic);
     }
@@ -168,6 +174,36 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
+    protected CommandHistory initCommandHistory(CommandHistoryStorage historyStorage) {
+        Path prefHistoryPath = storage.getCommandHistoryFilePath();
+        logger.info("Using command history file: " + prefHistoryPath);
+
+        CommandHistory initializedHistory;
+        try {
+            Optional<CommandHistory> historyOptional = storage.readCommandHistory();
+            if (historyOptional.isEmpty()) {
+                logger.info("Creating new preference file " + prefHistoryPath);
+            }
+            initializedHistory = historyOptional.orElse(new CommandHistory());
+        } catch (DataLoadingException d) {
+            logger.warning("Command History File at " + prefHistoryPath + " could not be loaded."
+                    + " Using default preferences");
+            initializedHistory = new CommandHistory();
+        }
+
+        try {
+            storage.saveCommandHistory(initializedHistory);
+        } catch (IOException e) {
+            logger.warning("Failed to save command history : " + StringUtil.getDetails(e));
+        }
+
+        return initializedHistory;
+    }
+
+    protected void provideStorageForCommandBox(Storage storage) throws DataLoadingException {
+        CommandBox.setCommandHistory(storage.readCommandHistory().orElse(new CommandHistory()));
+    }
+
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
@@ -179,6 +215,7 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
+            storage.saveCommandHistory(logic.getCommandHistory());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

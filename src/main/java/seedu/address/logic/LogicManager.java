@@ -33,12 +33,15 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final AddressBookParser addressBookParser;
 
+    private final CommandHistory commandHistory;
+
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, CommandHistory commandHistory) {
         this.model = model;
         this.storage = storage;
+        this.commandHistory = commandHistory;
         addressBookParser = new AddressBookParser();
     }
 
@@ -84,5 +87,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public CommandHistory getCommandHistory() {
+        return commandHistory;
     }
 }
