@@ -31,7 +31,9 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_NUSID)
                 || !argMultimap.getPreamble().isEmpty()
                 || (arePrefixesPresent(argMultimap, PREFIX_REMARK)
-                && !arePrefixesPresent(argMultimap, PREFIX_SCHEDULE))) {
+                && !arePrefixesPresent(argMultimap, PREFIX_SCHEDULE))
+                || (!arePrefixesPresent(argMultimap, PREFIX_REMARK)
+                && arePrefixesPresent(argMultimap, PREFIX_SCHEDULE))) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
 
