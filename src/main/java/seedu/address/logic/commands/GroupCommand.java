@@ -43,7 +43,7 @@ public class GroupCommand extends Command {
             + "[" + PREFIX_NUSID + "NUSID] "
             + "[" + PREFIX_GROUP + "GROUP] "
             + "[" + PREFIX_TAG + "TAG] \n"
-            + "Example: " + COMMAND_WORD + PREFIX_NUSID + "EXXXXXXX "
+            + "Example: " + COMMAND_WORD +  " " + PREFIX_NUSID + "EXXXXXXX "
             + PREFIX_GROUP + "Class T15 "
             + PREFIX_TAG + "TA";
 

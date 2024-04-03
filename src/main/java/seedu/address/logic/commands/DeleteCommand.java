@@ -67,17 +67,18 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else {
             List<Person> peopleToDelete = new ArrayList<Person>();
-            Set<Group> deletedGroup = new HashSet<Group>();
-            deletedGroup.add(group);
+            Group deletedGroup = group;
+            //deletedGroup.add(group);
 
 
             for (int i = 0; i < lastShownList.size(); i++) {
-                if (lastShownList.get(i).getGroups().equals(deletedGroup)) {
+                System.out.println(lastShownList.get(i).getGroups().contains(deletedGroup));
+                if (lastShownList.get(i).getGroups().contains(deletedGroup)) {
                     peopleToDelete.add(lastShownList.get(i));
                 }
             }
             System.out.println(lastShownList.size());
-            if (peopleToDelete.size() <= 0) {
+            if (peopleToDelete.size() == 0) {
                 throw new CommandException(Messages.MESSAGE_NON_EXISTENT_GROUP);
             }
 
