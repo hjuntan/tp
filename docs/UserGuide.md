@@ -1,13 +1,10 @@
----
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
----
+
 
 # AronaPro's User Guide
 
 AronaPro is a **desktop app** catered primarily for Computing Professors and Teaching Assistants(TAs) to manage your students contacts efficiently, optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 Our product ensures that you can always centralise your student's contacts, connect and coordinate with them. 
+=======
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -29,7 +26,7 @@ Our product ensures that you can always centralise your student's contacts, conn
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `view` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -45,7 +42,6 @@ Our product ensures that you can always centralise your student's contacts, conn
 
 ## Features
 
-<box type="info" seamless>
 
 ### **Notes about the command format:**<br>
 
@@ -61,7 +57,7 @@ Our product ensures that you can always centralise your student's contacts, conn
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -82,10 +78,8 @@ Adds a student to the address book.
 
 Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 
-<box type="tip" seamless>
 
 **Tip:** A student can have 0 or more groups
-</box>
 
 Examples:
 * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T-T15`
@@ -104,6 +98,7 @@ Format: `view`
 ### Editing a student information : `edit`
 
 Edits an existing student in the address book.
+
 
 Format: `edit NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]` 
 
@@ -187,6 +182,7 @@ Examples:
 * `group id/E0123456 t/STUDENT` 
  > This command will assign the student with `NUSID` E0123456 to the student tag.
 
+
 ### Schedule a meeting with a student: `schedule`
 
 Schedule a meeting with a student in the address book.
@@ -199,11 +195,8 @@ Format: `schedule id/NUSID d/DATE [r/REMARK]`
 * If `date` and `remark` are not provided, the schedule will be removed.
 * If `remark` is provided, `date` must be provided as well.
 
-<box type="tip" seamless>
-
 **Tip:** The `date` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`.
 
-</box>
 
 Examples:
 * `schedule id/E0123456 d/12/12/2024 r/Consultation` 
@@ -215,13 +208,15 @@ Examples:
 
 ### Pinning a person: `pin`
 
-Pins a student to the address book.
+Pins a student to the top of the address book.
 
 Format: `pin id/NUSID`
 
 Examples:
+
 * `pin id/E0123456` 
   > This command will pin a student with `NUSID` of "E0123456".
+
 
 ### Clearing all entries : `clear`
 
@@ -243,7 +238,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" seamless
 
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -280,6 +275,7 @@ _Details coming soon ..._
 | **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
 | **Group**    | `group [id/NUSID] [g/GROUP] [t/TAG] `                                                                                                      |
 | **Schedule** | `schedule id/NUSID s/DATE [r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                        |
+| **Pin**      | `pin id/NUSID`                                                                                                                             |
 | **View**     | `view`                                                                                                                                     |
 | **Help**     | `help`                                                                                                                                     |
 
