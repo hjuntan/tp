@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
  * Persists between opening and closing of AronaPro.
  */
 public class CommandHistory implements ReadOnlyCommandHistory {
-    int cursorPosition = 0;
+    private int cursorPosition = 0;
     private final ObservableList<String> internalList = FXCollections.observableArrayList();
     private final ObservableList<String> unmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -103,4 +103,7 @@ public class CommandHistory implements ReadOnlyCommandHistory {
         return internalList.isEmpty();
     }
 
+    protected void setCursorPosition(int index) {
+        cursorPosition = index;
+    }
 }
