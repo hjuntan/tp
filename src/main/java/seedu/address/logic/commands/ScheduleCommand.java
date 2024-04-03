@@ -7,8 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NUSID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 
-import java.util.List;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,12 +23,12 @@ public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedule a meeting with a student. \n"
-            + "Note: SCHEDULE must be present if REMARK is present. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules a meeting with a student. \n"
             + "Parameters: "
             + PREFIX_NUSID + "NUSID "
             + "[" + PREFIX_SCHEDULE + "SCHEDULE] "
             + "[" + PREFIX_REMARK + "REMARK] \n"
+            + "Note: SCHEDULE must be present if REMARK is present. \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NUSID + "E1234567 "
             + PREFIX_SCHEDULE + "01-12-2021 "
@@ -57,10 +55,7 @@ public class ScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        List<Person> lastShownList = model.getFilteredPersonList();
-        Person personToEdit = lastShownList.stream().filter(person -> person.getNusId().equals(nusId))
-                .findFirst().orElse(null);
+        Person personToEdit = model.filterPersonListWithNusId(nusId);
 
         if (personToEdit == null) {
             throw new CommandException(MESSAGE_UNKNOWN_NUSID);

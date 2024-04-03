@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUSID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -39,15 +39,16 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the NusId used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: NusId (8 digits long, starting with an 'E'). \n "
+            + "by the NusId used in the displayed person list.\n"
+            + "Parameters: "
+            + PREFIX_NUSID + "NUSID"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TAG + "TAG] "
             + "[" + PREFIX_GROUP + "GROUP] \n"
-            + "Example: " + COMMAND_WORD + " id/E1234567 "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NUSID + "E1234567 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
@@ -71,9 +72,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        Person personToEdit = lastShownList.stream().filter(person -> person.getNusId().equals(nusId))
-                .findFirst().orElse(null);
+        Person personToEdit = model.filterPersonListWithNusId(nusId);
 
         if (personToEdit == null) {
             throw new CommandException(Messages.MESSAGE_NON_EXISTENT_PERSON);
