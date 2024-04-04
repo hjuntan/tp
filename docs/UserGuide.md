@@ -116,8 +116,9 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [g/GROUP] [g/MORE GROUPS]`
+Format: `find [id/NUSID] [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [g/GROUP] [g/MORE GROUPS]`
 
+* The NUSID search matches people that has a prefix that STARTS WITH the query (e.g `E0123` fetches `E0123456`)
 * The NAME search is case-insensitive. e.g `hans` will match `Hans`
 * The order of NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched for NAME e.g. `Han` will not match `Hans`
@@ -254,7 +255,7 @@ _Details coming soon ..._
 | **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/Student g/CS2103T-T15` |
 | **Clear**    | `clear`                                                                                                                                    |
 | **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                       |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                |
+| **Edit**     | `edit INDEX [id/NUSID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`     |
 | **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
 | **Group**    | `group [id/NUSID] [g/GROUP] [t/TAG] `                                                                                                      |
 | **Schedule** | `schedule id/NUSID s/DATE [r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                        |
