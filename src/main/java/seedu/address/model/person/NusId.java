@@ -38,7 +38,9 @@ public class NusId {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public static boolean isValidFindNusId(String test) { return test.matches(FIND_VALIDATION_REGEX); }
+    public static boolean isValidFindNusId(String test) {
+        return test.matches(FIND_VALIDATION_REGEX);
+    }
 
     @Override
     public String toString() {

@@ -32,11 +32,18 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NUSID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_GROUP);
+                ArgumentTokenizer.tokenize(args,
+                        PREFIX_NUSID,
+                        PREFIX_NAME,
+                        PREFIX_PHONE,
+                        PREFIX_EMAIL,
+                        PREFIX_TAG,
+                        PREFIX_GROUP);
 
-        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NUSID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
-        argumentMultimap.verifyAtLeastOnePrefixExists(PREFIX_NUSID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG,
-                PREFIX_GROUP);
+        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NUSID, PREFIX_NAME,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
+        argumentMultimap.verifyAtLeastOnePrefixExists(PREFIX_NUSID, PREFIX_NAME,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_GROUP);
         // Problems: Can't create Objects unless proper regex used.
         // Solution: Don't create objects
         String nusIdToMatch = argumentMultimap.getValue(PREFIX_NUSID).orElse(NOT_REQUIRED_VALUE);
