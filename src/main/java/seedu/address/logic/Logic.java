@@ -23,6 +23,8 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
+    CommandHistory getCommandHistory();
+
     /**
      * Returns the AddressBook.
      *
