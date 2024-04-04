@@ -37,7 +37,7 @@ public class PhoneTest {
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 digits
         assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("9312315345"));// exactly 10 digits
+        assertTrue(Phone.isValidPhone("9312315345")); // exactly 10 digits
 
     }
 
