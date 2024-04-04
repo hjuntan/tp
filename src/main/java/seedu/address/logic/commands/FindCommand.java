@@ -35,22 +35,22 @@ public class FindCommand extends Command {
     /**
      * Creates a FindCommand with predicates initialized with the provided predicates
      *
-     * @param n name
-     * @param e email
-     * @param g group
-     * @param p phone
-     * @param t tag
+     * @param containsName name
+     * @param containsEmail email
+     * @param containsGroup group
+     * @param containsPhone phone
+     * @param containsTag tag
      */
-    public FindCommand(NameContainsKeywordsPredicate n,
-                       EmailMatchesPredicate e,
-                       GroupMatchesPredicate g,
-                       PhoneMatchesPredicate p,
-                       TagMatchesPredicate t) {
-        namePredicate = n;
-        emailPredicate = e;
-        groupPredicate = g;
-        phonePredicate = p;
-        tagPredicate = t;
+    public FindCommand(NameContainsKeywordsPredicate containsName,
+                       EmailMatchesPredicate containsEmail,
+                       GroupMatchesPredicate containsGroup,
+                       PhoneMatchesPredicate containsPhone,
+                       TagMatchesPredicate containsTag) {
+        namePredicate = containsName;
+        emailPredicate = containsEmail;
+        groupPredicate = containsGroup;
+        phonePredicate = containsPhone;
+        tagPredicate = containsTag;
     }
 
     @Override
