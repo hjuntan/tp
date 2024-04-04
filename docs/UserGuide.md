@@ -88,12 +88,16 @@ Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 **Tip:** A person can have 0 or more groups
 
 Examples:
-* `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T-T15`
+* `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T`
   > This command would add a person with `NUSID` of E1234567, `NAME` of John Doe, `PHONE_NUMBER` of 98765432, `EMAIL` of johnd@example.com
     `TAG` of Student, `GROUP` of CS2103T-T15 into the address book.
+  >
+  > ![add-new-person](images/add/add-new-person.png)
 * `add id/E7654321 n/Betsy Crowe t/TA e/betsycrowe@example.com p/92345678`
   > This command would add a person with `NUSID` of E7654321, `NAME` of Betsy Crowe, `TAG` of TA,
     `EMAIL` of betsycrowe@example.com, `PHONE_NUMBER` of 92345678 into the address book.
+  > 
+  > ![add-new-TA](images/add/add-new-ta-without-group.png)
 
 ### Viewing all persons : `view`
 
@@ -105,7 +109,7 @@ Format: `view`
 
 Edits the information of a person of a specified `NUSID` in the address book.
 
-Format: `edit NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]` 
+Format: `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]` 
 
 > Note:
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
@@ -117,10 +121,14 @@ Format: `edit NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`
 
 
 Examples:
-*  `edit E0123456 p/91234567 e/johndoe@example.com` 
+*  `edit id/E0123456 p/91234567 e/johndoe@example.com` 
    > This command would edit the phone number and email address of the person with `NUSID` E0123456 to be `91234567` and `johndoe@example.com` respectively.
-*  `edit E1234567 n/Betsy t/Professor` 
+   >
+   > ![edit-phone-and-email](images/edit/edit-phone-and-email.png)
+*  `edit id/E1234567 n/Betsy t/Professor` 
    > This command would edit the name and the tag of the person with `NUSID` E1234567 to be `Betsy` and `Professor` respectively.
+   >
+   > ![edit-name-and-tag](images/edit/edit-name-and-tag.png)
 
 ### Locating persons by name: `find`
 
@@ -164,6 +172,8 @@ Format 1: `delete id/NUSID`
 Examples:
 * `delete id/E0123456` 
   > This commmand will delete an existing person with `NUSID` of "E0123456".
+  >
+  >  ![delete-person](images/delete/delete-person.png)
 
 Format 2: `delete g/group`
 
@@ -173,8 +183,10 @@ Format 2: `delete g/group`
 > * The group **must exist in the address book beforehand**.
 
 Examples:
-* `delete g/CS2013-T15`
+* `delete g/CS2103T`
   > This command will delete an existing person with `group` of "CS2013-T15".
+  > 
+  > ![delete-group](images/delete/delete-group.png)
 
 ### Assigning a person to a group : `group`
 
@@ -190,10 +202,13 @@ Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
 > * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None
 
 Examples:
-* `group id/E0123456 g/CS2101-T15`
-  > This command will assign a group CS2101-T15 to the person with `NUSID` E0123456.
-* `group id/E0123456 t/STUDENT` 
- > This command will assign a student tag to the person with `NUSID` E0123456.
+* `group id/E0123456 g/CS2101`
+  > This command will assign or change a group of the person with `NUSID` E0123456 to 'CS2101'.
+  >
+  > ![assign-group](images/group/assign-group.png)
+* `group id/E0123456 t/TA` 
+ > This command will assign or change the tag of the person with `NUSID` E0123456 to 'TA'.
+ > ![assign-tag](images/group/assign-tag.png)
 
 
 ### Schedule a meeting with a person: `schedule`
@@ -213,12 +228,20 @@ Format: `schedule id/NUSID d/DATE [r/REMARK]`
 
 
 Examples:
-* `schedule id/E0123456 d/12/12/2024 r/Consultation` 
+* `schedule id/E0123456 s/12-12/2024 r/Consultation` 
   > This command will schedule a meeting with the person of `NUSID` E0123456, with `DATE` on 12th December 2024 and a `REMARK` of Consultation.
+  > If there was a previous date, or remark, it will be replaced!
+  > 
+  > ![schedule-with-remark](images/schedule/schedule-with-remark.png)
 * `schedule id/E0123456 d/Dec 12, 2021`
   > This command will schedule a meeting with the person of `NUSID` E0123456, with `DATE` on 12th December 2024.
+  > If there was a previous date, it will be replaced, similarly the previous remark would be removed.
+  >
+  > ![schedule-without-remark](images/schedule/schedule-without-remark.png)
 * `schedule id/E0123456` 
   > This command will remove the schedule with the person of `NUSID` E0123456.
+  >
+  > ![remove-schedule](images/schedule/remove-schedule.png) 
 
 ### Pinning a person: `pin`
 
@@ -234,6 +257,8 @@ Examples:
 
 * `pin id/E0123456` 
   > This command will pin a student with `NUSID` of "E0123456".
+  >
+  > ![pin](images/pin/pin.png) 
 
 
 ### Clearing all entries : `clear`
@@ -241,6 +266,8 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+![clear](images/clear.png)
 
 ### Exiting the program : `exit`
 
