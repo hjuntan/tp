@@ -158,6 +158,136 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### `Add` feature
+
+`Add` for a person can be added using the `add` command. The `AddCommand` class is responsible for handling the addition of a person. This command is implemented through `AddCommand` which extend the `Command` class.
+
+A new `Person` can be added by specifying `nusId`, `name`, `phone`, `email`, `tags` and optional `group`.
+
+<box type="info" seamless>
+
+**Note:** There can be 0 or more optional `group`.
+
+</box>
+
+#### Proposed Implementation
+
+Given below is an example usage scenario and how the `AddCommand` mechanism behaves at each step.
+
+Step 1. The user executes `add` command.
+
+Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `AddCommandParser`.
+
+Step 3. `AddCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `AddCommand`.
+
+Step 4. The `LogicManager` calls the `execute` method in `AddCommand`.
+
+Step 5. The `execute` method in `AddCommand` executes and calls `Model#addPerson()` to add the person to the address book.
+
+Step 6. Success message is printed onto the results display to notify user.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addPerson()` and the person will not be added to the address book.
+
+</box>
+
+The following sequence diagram shows how an add operation goes through the `Logic` component:
+
+<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
+
+The following activity diagram summarizes what happens when a user inputs a schedule command:
+
+<puml src="diagrams/AddDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**How add executes**
+
+* User inputs an `add` command with `nusId`, `name`, `phone`, `email`, `tags` and optional `group` fields. The inputs are parsed and a `AddCommand` is created.
+* The instances of the relevant fields are created and the person is added to the model.
+
+**Alternative considerations**  
+
+* **Alternative 1 (current choice):** Create instances of objects for each of the fields and add the person to the model.
+    * Pros: Allow for each field to be validated before adding the person.
+    * Cons: Additional checks are required 
+
+    
+
+### `Schedule` feature
+
+#### Proposed Implementation
+
+`Schedule` for a person can be added or removed using the `schedule` command. The `ScheduleCommand` class is responsible for handling the scheduling of events for a person. This command is implemented through `ScheduleCommand` which extend the `Command` class.
+
+A new `Schedule` can be added by specifying `nusId`, `date` and an optional `remark`. If the `date` is not specified, the schedule will be removed instead.
+
+<box type="info" seamless>
+
+**Note:** If `remark` is present, `date` has to be present as well.
+
+</box>
+
+Given below is an example usage scenario and how the `ScheduleCommand` mechanism behaves at each step.
+
+Step 1. The user executes `schedule` command.
+
+Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `ScheduleCommandParser`.
+
+Step 3. `ScheduleCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `ScheduleCommand`.
+
+Step 4. The `LogicManager` calls the `execute` method in `ScheduleCommand`.
+
+Step 5. The `execute` method in `ScheduleCommand` executes and calls `Model#getFilteredPersonList()` to get a list of person in the address book and filter to find the relevant person with the given `nusId`. 
+
+Step 6. `Model#setPerson()` is called to update the schedule for that person.
+
+Step 7. Success message is printed onto the results display to notify user.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#setPerson()` and the schedule will not be updated for that person.
+
+</box>
+
+The following sequence diagram shows how a schedule operation goes through the `Logic` component:
+
+<puml src="diagrams/ScheduleSequenceDiagram.puml" alt="ScheduleSequenceDiagram" />
+
+The following activity diagram summarizes what happens when a user inputs a schedule command:
+
+<puml src="diagrams/ScheduleDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**How schedule executes**
+
+* User inputs a `schedule` command with `nusId`, `date` and an optional `remark`. The inputs are parsed and a `ScheduleCommand` is created.
+* A list of persons is retrieved from `model` and the relevant person is found by matching `nusId`.
+* The relevant fields are updated for the person and the person is set back into the model.
+
+**Why is it implemented this way?**
+
+* The functionality of adding and removing schedule is similar to the `EditCommand`. Both require changes in the `Person` object.
+* Hence, the approach is similar to how `edit` command works.
+
+**Alternative considerations**
+
+* **Alternative 1 (current choice):** Set the schedule for the person by indicating `date`, otherwise remove schedule.
+    * Pros: Easy to implement.
+    * Cons: Additional checks are required to check if it is an add or remove schedule command.
+
+* **Alternative 2:** Introduce add schedule and remove schedule command as separate commands.
+    * Pros: There is usage of Single Responsibility Principle.
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+* **Alternative 3:** Since schedule and edit commands are similar, we could consider adding a generic class which both extend from.
+    * Pros: It follows the DRY principle.
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -241,13 +371,67 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
+  
+_{more aspects and alternatives to be added}_
+
+
+### Schedule feature
+
+#### Proposed Implementation
+
+The schedule mechanism is facilitated by `ScheduleCommand` and it extends `Command`. A schedule is added if s/ and/or r/ parameter is present. Otherwise if s/ parameter is absent, the schedule is removed. Additionally, it implements the following operations:
+
+* `ScheduleCommand#execute()` — Execute the schedule command for the given person.
+* `ScheduleCommand#generateSuccessMessage()` — Generate message for either add schedule or remove schedule.
+
+`ScheduleCommand#execute()` is exposed in the `Logic` interface as `Logic#execute()`.
+
+Given below is an example usage scenario and how the `ScheduleCommand` mechanism behaves at each step.
+
+Step 1. The user launches the application. The `AddressBook` will be initialized with the initial address book state.
+
+Step 2. The user executes `schedule id/E1234567 s/20-12-2022 r/Consultation at 3pm` command to schedule a consultation session with person nusId E1234567 at date 20-12-2022 in the address book. The `schedule` command calls `Model#getFilteredPersonList()` to get a list of person in the `addressbook` and filter to find the relevant person with the given nusId. `Model#setPerson()` is called to update the schedule for that person in `addressbook`.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#setPerson()`, so the schedule will not be updated for that person in `addressbook`.
+
+</box>
+
+Step 3. Now the user decides to remove the schedule with that person. The user executes `schedule id/E1234567` to remove the schedule.`schedule` again calls `Model#getFilteredPersonList()` and filter to find the relevant person. `Model#setPerson()` is called to remove the schedule for that person in `addressbook`.
+
+The following sequence diagram shows how a schedule operation goes through the `Logic` component:
+
+<puml src="diagrams/ScheduleSequenceDiagram.puml" alt="ScheduleSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ScheduleCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes a schedule command:
+
+<puml src="diagrams/ScheduleDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How schedule executes:**
+
+* **Alternative 1 (current choice):** Set the schedule for the person by using s/ parameter. Remove schedule by removing s/ parameter.
+    * Pros: Easy to implement.
+    * Cons: Additional checks are required to check if it is an add or remove schedule command.
+
+* **Alternative 2:** Introduce add schedule and remove schedule command as separate commands.
+    * Pros: There is usage of Single Responsibility Principle.
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 

@@ -54,6 +54,9 @@ public class Schedule {
         return test.matches(VALIDATION_REGEX_WITHOUT_DATA);
     }
 
+    public boolean isPresent() {
+        return !date.equals("");
+    }
 
     @Override
     public String toString() {

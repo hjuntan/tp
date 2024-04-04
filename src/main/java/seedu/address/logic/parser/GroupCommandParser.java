@@ -44,8 +44,8 @@ public class GroupCommandParser implements Parser<GroupCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP, PREFIX_TAG);
-        NusId nusid = ParserUtil.parseNusId(argMultimap.getValue(PREFIX_NUSID).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
+
 
 
         GroupCommand.GroupPersonDescriptor groupPersonDescriptor = new GroupCommand.GroupPersonDescriptor();

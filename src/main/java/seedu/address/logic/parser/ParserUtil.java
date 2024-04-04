@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NusId;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Tag;
 
@@ -166,5 +167,19 @@ public class ParserUtil {
         } else {
             return new Schedule(schedule);
         }
+    }
+
+    /**
+     * Parses a {@code String schedule} into a {@code Schedule}.
+     *
+     * @throws ParseException if the given {@code schedule} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        if (remark == "") {
+            return new Remark(remark);
+        } else if (!Remark.isValidRemark(remark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(remark);
     }
 }
