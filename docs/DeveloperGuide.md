@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete E0123456`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete id/E0123456`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -90,7 +90,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete E0123456")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete id/E0123456")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete E0123456` Command" />
 
@@ -382,15 +382,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Tech-savvy university Computer Science teaching assistants
-* manages an array of students and professors’ contacts
-* appreciates an organized and vibrant approach to query, and manage contacts with CLI
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Tech-savvy university Computer Science teaching assistants and professors
+* Manages an array of students, professors and students' contacts
+* Appreciates an organised approach to query, and manage contacts with CLI
+* Prefers desktop apps over other types
+* Prefers typing to mouse interactions
+* Someone who is reasonably comfortable using CLI application
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Manage contacts faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -655,7 +654,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Pins a contact**
 
+**MSS**
+
+1.  User requests to pin a specific contact.
+2.  AddressBook pins the specified contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User uses the wrong format in his request.
+
+    * 1a1. AddressBook shows an error message.
+    * 1a2. User uses the correct format as shown in the error message for his request.
+
+      Use case resumes at step 2.
+
+* 2a. The contact does not exist.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
 
 
 ### Non-Functional Requirements
@@ -710,13 +731,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete E0123456`<br>
+   1. Test case: `delete id/E0123456`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete E0000000`<br>
+   1. Test case: `delete id/E0000000`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is NusId which does not exist currently in the address book)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete id/x`, `...` (where x is NusId which does not exist currently in the address book)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
