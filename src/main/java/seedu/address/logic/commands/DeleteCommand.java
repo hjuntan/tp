@@ -3,9 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -68,7 +66,7 @@ public class DeleteCommand extends Command {
         } else {
             List<Person> peopleToDelete = new ArrayList<Person>();
             Group deletedGroup = group;
-            //deletedGroup.add(group);
+
 
 
             for (int i = 0; i < lastShownList.size(); i++) {
