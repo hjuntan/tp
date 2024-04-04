@@ -17,11 +17,11 @@ AronaPro is a **desktop app for managing contacts, optimized for use via a  Line
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `aronapro.jar` from [here](https://github.com/AY2324S2-CS2103T-T15-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar aronapro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -92,7 +92,7 @@ Examples:
 
 ### Listing all persons : `view`
 
-Shows a list of all persons in the address book.
+Shows the entire list of persons in the address book.
 
 Format: `view`
 
