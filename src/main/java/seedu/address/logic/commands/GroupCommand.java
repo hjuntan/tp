@@ -35,16 +35,13 @@ import seedu.address.model.person.Tag;
  */
 public class GroupCommand extends Command {
     public static final String MESSAGE_GROUP_PERSON_SUCCESS = "Grouped Person: %1$s";
-
     public static final String COMMAND_WORD = "group";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns the person identified to a group\n"
             + "Parameters: "
             + PREFIX_NUSID + "NUSID "
             + "[" + PREFIX_GROUP + "GROUP] "
             + "[" + PREFIX_TAG + "TAG] \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NUSID + "E1234567 "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NUSID + "EXXXXXXX "
             + PREFIX_GROUP + "Class T15 "
             + PREFIX_TAG + "TA";
 
