@@ -40,7 +40,7 @@ public class GroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns the person identified to a group\n"
             + "Parameters: "
-            + PREFIX_NUSID + "NUSID"
+            + PREFIX_NUSID + "NUSID "
             + "[" + PREFIX_GROUP + "GROUP] "
             + "[" + PREFIX_TAG + "TAG] \n"
             + "Example: " + COMMAND_WORD + " "
