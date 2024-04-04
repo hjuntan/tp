@@ -40,9 +40,9 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NUSID, PREFIX_SCHEDULE, PREFIX_REMARK);
         NusId nusId = ParserUtil.parseNusId(argMultimap.getValue(PREFIX_NUSID).get());
         Schedule schedule = ParserUtil.parseSchedule(argMultimap.getValue(PREFIX_SCHEDULE).orElse(""));
-        String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
 
-        return new ScheduleCommand(nusId, schedule, new Remark(remark));
+        return new ScheduleCommand(nusId, schedule, remark);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
