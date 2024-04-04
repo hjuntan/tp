@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# AronaPro User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+AronaPro is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -28,7 +28,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `view` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -60,7 +60,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -100,9 +100,9 @@ Format: `view`
 
 Edits an existing person in the address book.
 
-Format: `edit nusId [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [g/GROUP]` 
+Format: `edit NUSID [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [g/GROUP]` 
 
-* Edits the person with a specified `nusId`. The nusId refers to the nusId shown in the displayed person list. The nusId **must be a 7-digit number following an 'E'**
+* Edits the person with a specified `NUSID`. The nusId refers to the nusId shown in the displayed person list. The nusId **must be a 7-digit number following an 'E'**
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None 
@@ -138,9 +138,9 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format 1: `delete id/nusId`
+Format 1: `delete id/NUSID`
 
-* Deletes the person of a specified `nusId`.
+* Deletes the person of a specified `NUSID`.
 * The nusId refers to the nusId shown in the displayed person list.
 * The nusId **must be a 7-digit number following an 'E'** 
 
@@ -162,13 +162,13 @@ Assigns the specified person either a group or a tag from the address book.
 
 Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
 
-* Edits the person with a specified `nusId`. The nusId refers to the nusId shown in the displayed person list. The nusId **must be a 7-digit number following an 'E'**
+* Edits the person with a specified `NUSID`. The nusId refers to the nusId shown in the displayed person list. The nusId **must be a 7-digit number following an 'E'**
 * At least one of the optional fields must be provided.
 * When editing tags, the valid forms have to be either 1 of these:  Group, Tag
 
 Examples:
 * `group id/E0123456 g/CS2101-T15` will assign the person with nusid E0123456 to the group CS2101-T15
-* `group id/E0123456 t/STUDENT` will assign the person with nusid E0123456 to the student tag
+* `group id/E0123456 t/Student` will assign the person with nusid E0123456 to the student tag
 
 ### Schedule a meeting with a person: `schedule`
 
@@ -196,10 +196,10 @@ Examples:
 
 Pins a person to the address book.
 
-Format: `pin id/nusId`
+Format: `pin id/NUSID`
 
 Examples:
-* `pin id/E0123456` will pin an existing person with `nusId` of "E0123456".
+* `pin id/E0123456` will pin an existing person with `NUSID` of "E0123456".
 
 ### Clearing all entries : `clear`
 
@@ -258,6 +258,7 @@ _Details coming soon ..._
 | **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
 | **Group**    | `group [id/NUSID] [g/GROUP] [t/TAG] `                                                                                                      |
 | **Schedule** | `schedule id/NUSID s/DATE [r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                        |
+| **Pin**      | `pin id/NUSID`                                                                                                                             |
 | **View**     | `view`                                                                                                                                     |
 | **Help**     | `help`                                                                                                                                     |
 

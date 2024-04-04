@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUSID;
 
-import java.util.List;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,8 +16,9 @@ import seedu.address.model.person.Person;
  */
 public class PinCommand extends Command {
     public static final String COMMAND_WORD = "pin";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pin a student to the top of the address book. "
-            + "Parameters: NusId (8 digits long, starting with an 'E'). \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pins a student to the top of the address book.\n"
+            + "Parameters: "
+            + PREFIX_NUSID + "NUSID\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NUSID + "E1234567 ";
 
@@ -34,9 +33,7 @@ public class PinCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        Person personToPin = lastShownList.stream().filter(person -> person.getNusId().equals(nusId))
-                .findFirst().orElse(null);
+        Person personToPin = model.filterPersonListWithNusId(nusId);
 
         if (personToPin == null) {
             throw new CommandException(Messages.MESSAGE_NON_EXISTENT_PERSON);

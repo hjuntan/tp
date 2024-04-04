@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.NusId;
 import seedu.address.model.person.Person;
 
 /**
@@ -135,6 +136,19 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getScheduleFilteredPersonList() {
         return filteredPersons.filtered(person -> person.hasSchedule());
+    }
+
+    /**
+     * Returns a person, if any, after filtering the list with the nusId of concern.
+     *
+     * @param nusId nusIf of the person.
+     * @return A person, if any, with the corresponding nusId
+     */
+    @Override
+    public Person filterPersonListWithNusId(NusId nusId) {
+        Person personOfConcern = filteredPersons.stream().filter(person -> person.getNusId().equals(nusId))
+                .findFirst().orElse(null);
+        return personOfConcern;
     }
 
     @Override
