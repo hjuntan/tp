@@ -70,6 +70,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG; // empty string not allowed for tags
     public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP + "hubby*"; // '*' not allowed in groups
     public static final String INVALID_SCHEDULE_DESC = " " + PREFIX_SCHEDULE + "2024-12-12"; // wrong date format
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + ""; // Empty remarks
 
     public static final String INVALID_NUSID = "e1234567"; // lowercase not accepted
     public static final String INVALID_SCHEDULE = "12-31-2020"; // Incorrect month

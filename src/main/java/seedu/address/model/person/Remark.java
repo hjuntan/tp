@@ -7,6 +7,7 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class Remark {
+    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values, and it should not be blank";
     public final String value;
 
     /**
@@ -29,6 +30,10 @@ public class Remark {
         return other == this // short circuit if same object
                 || (other instanceof Remark // instanceof handles nulls
                 && value.equals(((Remark) other).value)); // state check
+    }
+
+    public static boolean isValidRemark(String test) {
+        return !test.equals("");
     }
 
     @Override
