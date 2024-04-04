@@ -39,6 +39,4 @@ class NusIdMatchesPredicateTest {
         String expected = NusIdMatchesPredicate.class.getCanonicalName() + "{nusIdKeyword=" + nusIdToMatch + "}";
         assertEquals(p.toString(), expected);
     }
-
-
 }
