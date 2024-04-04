@@ -37,7 +37,7 @@ public class GroupCommand extends Command {
     public static final String MESSAGE_GROUP_PERSON_SUCCESS = "Grouped Person: %1$s";
 
     public static final String COMMAND_WORD = "group ";
-
+    
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns the person identified to a group\n"
             + "Parameters: "
             + PREFIX_NUSID + "NUSID"
