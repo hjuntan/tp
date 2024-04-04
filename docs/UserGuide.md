@@ -197,23 +197,23 @@ Examples:
 
 Schedule a meeting with a person in the address book.
 
-Format: `schedule id/NUSID d/DATE [r/REMARK]`
+Format: `schedule id/NUSID [s/SCHEDULE] [r/REMARK]`
 
 > Note: 
-> * Schedule a meeting with a person of the specified `nusId` on the specified `date` with an optional `remark`.
+> * Schedule a meeting with a person of the specified `nusId` on the specified `schedule` with a `remark`.
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
 > * The `NUSID` **must be a 7-digit number following an 'E'**
-> * If `date` and `remark` are not provided, the schedule will be removed.
->* If `remark` is provided, `date` must be provided as well.
+> * Both `schedule` and `remark` must be either provided or not provided.
+> * If `schedule` and `remark` are not provided, the schedule will be removed.
 
-**Tip:** The `date` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`.
+**Tip:** The `schedule` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`.
 
 
 Examples:
-* `schedule id/E0123456 d/12/12/2024 r/Consultation` 
-  > This command will schedule a meeting with the person of `NUSID` E0123456, with `DATE` on 12th December 2024 and a `REMARK` of Consultation.
-* `schedule id/E0123456 d/Dec 12, 2021`
-  > This command will schedule a meeting with the person of `NUSID` E0123456, with `DATE` on 12th December 2024.
+* `schedule id/E0123456 s/12/12/2024 r/Consultation` 
+  > This command will schedule a meeting with the person of `NUSID` E0123456, with `SCHEDULE` on 12th December 2024 and a `REMARK` of Consultation.
+* `schedule id/E0123456 s/Dec 12, 2021 r/Consultation`
+  > This command will schedule a meeting with the person of `NUSID` E0123456, with `SCHEDULE` on 12th December 2024 and a `REMARK` of Consultation.
 * `schedule id/E0123456` 
   > This command will remove the schedule with the person of `NUSID` E0123456.
 
