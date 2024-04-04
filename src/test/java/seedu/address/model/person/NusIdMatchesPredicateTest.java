@@ -3,8 +3,10 @@ package seedu.address.model.person;
 import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 
 class NusIdMatchesPredicateTest {
@@ -32,9 +34,11 @@ class NusIdMatchesPredicateTest {
     }
     @Test
     void testToString() {
+        String nusIdToMatch = "E01234567";
+        NusIdMatchesPredicate p = new NusIdMatchesPredicate(nusIdToMatch);
+        String expected = NusIdMatchesPredicate.class.getCanonicalName() + "{nusIdKeyword=" + nusIdToMatch + "}";
+        assertEquals(p.toString(), expected);
     }
 
-    @Test
-    void testEquals() {
-    }
+
 }
