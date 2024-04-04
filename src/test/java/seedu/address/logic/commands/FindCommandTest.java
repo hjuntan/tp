@@ -23,6 +23,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.EmailMatchesPredicate;
 import seedu.address.model.person.GroupMatchesPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NusIdMatchesPredicate;
 import seedu.address.model.person.PhoneMatchesPredicate;
 import seedu.address.model.person.Tag;
 import seedu.address.model.person.TagMatchesPredicate;
@@ -34,6 +35,28 @@ import seedu.address.testutil.FindCommandBuilder;
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void test_equals_withNusIdVariations() {
+        /* vv --------------------------- PHONE PRED VARIES ------------------------------------ */
+        NusIdMatchesPredicate firstNusIdPredicate =
+                new NusIdMatchesPredicate("E0123456");
+        NusIdMatchesPredicate secondNusIdPredicate =
+                new NusIdMatchesPredicate("E0123457");
+
+        FindCommand findNusIdFirstCommand = new FindCommandBuilder().withNusId(firstNusIdPredicate).build();
+        FindCommand findNusIdFirstCopy = new FindCommandBuilder().withNusId(firstNusIdPredicate).build();
+        FindCommand findNusIdSecondCommand = new FindCommandBuilder().withNusId(secondNusIdPredicate).build();
+
+        // Same object returns true
+        assertEquals(findNusIdFirstCommand, findNusIdFirstCommand);
+
+        // Same values returns true
+        assertEquals(findNusIdFirstCommand, findNusIdFirstCopy);
+
+        // Different phones returns false
+        assertNotEquals(findNusIdFirstCommand, findNusIdSecondCommand);
+    }
 
     @Test
     public void test_equals_withNameVariations() {
@@ -163,11 +186,28 @@ public class FindCommandTest {
     }
 
     @Test
+    public void test_toStringMethod_withNusIdChange() {
+        NusIdMatchesPredicate nusIdMatchesPredicate = new NusIdMatchesPredicate("E0123456");
+        FindCommand findCommand = new FindCommandBuilder().withNusId(nusIdMatchesPredicate).build();
+        String expected = FindCommand.class.getCanonicalName()
+                + "{"
+                + "nusIdPredicate=" + nusIdMatchesPredicate + ", "
+                + "namePredicate=" + FindCommandBuilder.DEFAULT_NAME_PRED + ", "
+                + "phonePredicate=" + FindCommandBuilder.DEFAULT_PHONE_PRED + ", "
+                + "emailPredicate=" + FindCommandBuilder.DEFAULT_EMAIL_PRED + ", "
+                + "tagPredicate=" + FindCommandBuilder.DEFAULT_TAG_PRED + ", "
+                + "groupPredicate=" + FindCommandBuilder.DEFAULT_GROUPS_PRED
+                + "}";
+        assertEquals(expected, findCommand.toString());
+    }
+
+    @Test
     public void test_toStringMethod_withNameChange() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommandBuilder().withNamePred(predicate).build();
         String expected = FindCommand.class.getCanonicalName()
                 + "{"
+                + "nusIdPredicate=" + FindCommandBuilder.DEFAULT_NUSID_PRED + ", "
                 + "namePredicate=" + predicate + ", "
                 + "phonePredicate=" + FindCommandBuilder.DEFAULT_PHONE_PRED + ", "
                 + "emailPredicate=" + FindCommandBuilder.DEFAULT_EMAIL_PRED + ", "
@@ -183,6 +223,7 @@ public class FindCommandTest {
         FindCommand findPhoneCommand = new FindCommandBuilder().withPhone(phoneMatchesPredicate).build();
         String expectedPhoneChange = FindCommand.class.getCanonicalName()
                 + "{"
+                + "nusIdPredicate=" + FindCommandBuilder.DEFAULT_NUSID_PRED + ", "
                 + "namePredicate=" + FindCommandBuilder.DEFAULT_NAME_PRED + ", "
                 + "phonePredicate=" + phoneMatchesPredicate + ", "
                 + "emailPredicate=" + FindCommandBuilder.DEFAULT_EMAIL_PRED + ", "
@@ -198,6 +239,7 @@ public class FindCommandTest {
         FindCommand findPhoneCommand = new FindCommandBuilder().withEmail(emailMatchesPredicate).build();
         String expectedPhoneChange = FindCommand.class.getCanonicalName()
                 + "{"
+                + "nusIdPredicate=" + FindCommandBuilder.DEFAULT_NUSID_PRED + ", "
                 + "namePredicate=" + FindCommandBuilder.DEFAULT_NAME_PRED + ", "
                 + "phonePredicate=" + FindCommandBuilder.DEFAULT_PHONE_PRED + ", "
                 + "emailPredicate=" + emailMatchesPredicate + ", "
@@ -213,6 +255,7 @@ public class FindCommandTest {
         FindCommand findPhoneCommand = new FindCommandBuilder().withTag(tagMatchesPredicate).build();
         String expectedPhoneChange = FindCommand.class.getCanonicalName()
                 + "{"
+                + "nusIdPredicate=" + FindCommandBuilder.DEFAULT_NUSID_PRED + ", "
                 + "namePredicate=" + FindCommandBuilder.DEFAULT_NAME_PRED + ", "
                 + "phonePredicate=" + FindCommandBuilder.DEFAULT_PHONE_PRED + ", "
                 + "emailPredicate=" + FindCommandBuilder.DEFAULT_EMAIL_PRED + ", "
@@ -228,6 +271,7 @@ public class FindCommandTest {
         FindCommand findPhoneCommand = new FindCommandBuilder().withGroups(groupMatchesPredicate).build();
         String expectedPhoneChange = FindCommand.class.getCanonicalName()
                 + "{"
+                + "nusIdPredicate=" + FindCommandBuilder.DEFAULT_NUSID_PRED + ", "
                 + "namePredicate=" + FindCommandBuilder.DEFAULT_NAME_PRED + ", "
                 + "phonePredicate=" + FindCommandBuilder.DEFAULT_PHONE_PRED + ", "
                 + "emailPredicate=" + FindCommandBuilder.DEFAULT_EMAIL_PRED + ", "

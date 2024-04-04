@@ -27,7 +27,7 @@ public class PhoneMatchesPredicate implements Predicate<Person> {
         if (numToMatch.equals(FindCommand.NOT_REQUIRED_VALUE)) {
             return true;
         } else {
-            return person.getPhone().value.startsWith(numToMatch.trim());
+            return person.getPhone().toString().startsWith(numToMatch.trim());
         }
     }
 

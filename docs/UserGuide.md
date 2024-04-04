@@ -19,12 +19,12 @@ Our product ensures that you can always centralise their contacts, connect and c
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `aronapro.jar` from [here](https://github.com/AY2324S2-CS2103T-T15-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar aronapro.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -88,16 +88,20 @@ Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 **Tip:** A person can have 0 or more groups
 
 Examples:
-* `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T-T15`
+* `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T`
   > This command would add a person with `NUSID` of E1234567, `NAME` of John Doe, `PHONE_NUMBER` of 98765432, `EMAIL` of johnd@example.com
     `TAG` of Student, `GROUP` of CS2103T-T15 into the address book.
+  >
+  > ![add-new-person](images/add/add-new-person.png)
 * `add id/E7654321 n/Betsy Crowe t/TA e/betsycrowe@example.com p/92345678`
   > This command would add a person with `NUSID` of E7654321, `NAME` of Betsy Crowe, `TAG` of TA,
     `EMAIL` of betsycrowe@example.com, `PHONE_NUMBER` of 92345678 into the address book.
+  > 
+  > ![add-new-TA](images/add/add-new-ta-without-group.png)
 
 ### Viewing all persons : `view`
 
-Shows a list of all persons in the address book.
+Shows the entire list of persons in the address book.
 
 Format: `view`
 
@@ -105,7 +109,7 @@ Format: `view`
 
 Edits the information of a person of a specified `NUSID` in the address book.
 
-Format: `edit NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]` 
+Format: `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]` 
 
 > Note:
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
@@ -117,35 +121,42 @@ Format: `edit NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`
 
 
 Examples:
-*  `edit E0123456 p/91234567 e/johndoe@example.com` 
+*  `edit id/E0123456 p/91234567 e/johndoe@example.com` 
    > This command would edit the phone number and email address of the person with `NUSID` E0123456 to be `91234567` and `johndoe@example.com` respectively.
-*  `edit E1234567 n/Betsy t/Professor` 
+   >
+   > ![edit-phone-and-email](images/edit/edit-phone-and-email.png)
+*  `edit id/E1234567 n/Betsy t/Professor` 
    > This command would edit the name and the tag of the person with `NUSID` E1234567 to be `Betsy` and `Professor` respectively.
+   >
+   > ![edit-name-and-tag](images/edit/edit-name-and-tag.png)
 
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP] [g/MORE GROUPS]`
+Format: `find [id/NUSID] [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [g/GROUP] [g/MORE GROUPS]`
 
 > Note:
-> * The NAME search is case-insensitive. e.g `hans` will match `Hans`.
-> * The order of NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-> * Only full words will be matched for NAME e.g. `Han` will not match `Hans`.
-> * Students matching ANY word will be selected for NAME (e.g. `Hans Bo` will fetch `Hans Gruber`, `Bo Yang`).
-> * The PHONE_NUMBER search matches student that has a number that STARTS WITH the query (e.g `9123` fetches `91237654`).
-> * The EMAIL search uses a PARTIAL, case-insensitive match. (e.g. `charles` matches `PrinceCharles@kingston.com`).
+> * The NUSID search matches people that has a prefix that STARTS WITH the query (e.g `E0123` fetches `E0123456`)
+> * The NAME search is case-insensitive. e.g `hans` will match `Hans`
+> * The order of NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+> * Only full words will be matched for NAME e.g. `Han` will not match `Hans`
+> * Persons matching ANY word will be selected for NAME (e.g. `Hans Bo` will fetch `Hans Gruber`, `Bo Yang`)
+> * The PHONE search matches people that has a number that STARTS WITH the query (e.g `9123` fetches `91237654`)
+> * The EMAIL search uses a PARTIAL, case-insensitive match. (e.g. `charles` matches `PrinceCharles@kingston.com`)
 > * The TAG search uses an EXACT case-sensitive match. 
-> * The GROUP search fetches students with ALL specified groups (e.g `g/CS2101 g/CS2103T` matches a person who minimally has BOTH these Groups).
->* Persons matching all parameters will be returned (i.e. `AND` search).
+> * The GROUP search fetches people with ALL specified groups (e.g `g/CS2101 g/CS2103T` matches a person who minimally has BOTH these Groups)
+> * Persons matching all parameters will be returned (i.e. `AND` search).
   
-
 Examples:
-* `find John` 
-  > This command would return `john` and `John Doe`.
-* `find alex david`
-  > This command would return `Alex Yeoh`, `David Li`
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/roy` 
+  > This command would return `Roy G Biv` and `Roy Balakrishnan`. 
+  > 
+  > ![findbyName](images/find/find-by-name.png)
+* `find n/roy g/CS2101`
+  > This command would return `Roy Balakrishnan` who is the only person matching both the 2 conditions.
+  > 
+  > ![findByNameAndGroup](images/find/find-by-name-and-group.png)
 
 ### Deleting a person : `delete`
 
@@ -161,6 +172,8 @@ Format 1: `delete id/NUSID`
 Examples:
 * `delete id/E0123456` 
   > This commmand will delete an existing person with `NUSID` of "E0123456".
+  >
+  >  ![delete-person](images/delete/delete-person.png)
 
 Format 2: `delete g/group`
 
@@ -170,8 +183,10 @@ Format 2: `delete g/group`
 > * The group **must exist in the address book beforehand**.
 
 Examples:
-* `delete g/CS2013-T15`
+* `delete g/CS2103T`
   > This command will delete an existing person with `group` of "CS2013-T15".
+  > 
+  > ![delete-group](images/delete/delete-group.png)
 
 ### Assigning a person to a group : `group`
 
@@ -186,36 +201,42 @@ Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
 > * At least one of the optional fields must be provided.
 > * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None
 
-Examples:
-* `group id/E0123456 g/CS2101-T15`
-  > This command will assign a group CS2101-T15 to the person with `NUSID` E0123456.
-* `group id/E0123456 t/STUDENT` 
-  > This command will assign a student tag to the person with `NUSID` E0123456.
+* `group id/E0123456 g/CS2101`
+  > This command will assign or change a group of the person with `NUSID` E0123456 to 'CS2101'.
+  >
+  > ![assign-group](images/group/assign-group.png)
+* `group id/E0123456 t/TA` 
+  > This command will assign or change the tag of the person with `NUSID` E0123456 to 'TA'.
+  > ![assign-tag](images/group/assign-tag.png)
 
 
 ### Schedule a meeting with a person: `schedule`
 
 Schedule a meeting with a person in the address book.
 
-Format: `schedule id/NUSID d/DATE [r/REMARK]`
+Format: `schedule id/NUSID [s/SCHEDULE] [r/REMARK]`
 
 > Note: 
-> * Schedule a meeting with a person of the specified `nusId` on the specified `date` with an optional `remark`.
+> * Schedule a meeting with a person of the specified `nusId` on the specified `schedule` with a `remark`.
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
 > * The `NUSID` **must be a 7-digit number following an 'E'**
-> * If `date` and `remark` are not provided, the schedule will be removed.
->* If `remark` is provided, `date` must be provided as well.
+> * Both `schedule` and `remark` must be either provided or not provided.
+> * If `schedule` and `remark` are not provided, the schedule will be removed.
 
-**Tip:** The `date` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`.
+**Tip:** The `schedule` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`.
 
 
 Examples:
-* `schedule id/E0123456 d/12/12/2024 r/Consultation` 
-  > This command will schedule a meeting with the person of `NUSID` E0123456, with `DATE` on 12th December 2024 and a `REMARK` of Consultation.
-* `schedule id/E0123456 d/Dec 12, 2021`
-  > This command will schedule a meeting with the person of `NUSID` E0123456, with `DATE` on 12th December 2024.
+
+* `schedule id/E0123456 s/12-12/2024 r/Consultation` 
+  > This command will schedule a meeting with the person of `NUSID` E0123456, with `SCHEDULE` on 12th December 2024 and a `REMARK` of Consultation.
+  > If there was a previous date, or remark, it will be replaced!
+  > 
+  > ![schedule-with-remark](images/schedule/schedule-with-remark.png)
 * `schedule id/E0123456` 
   > This command will remove the schedule with the person of `NUSID` E0123456.
+  >
+  > ![remove-schedule](images/schedule/remove-schedule.png) 
 
 ### Pinning a person: `pin`
 
@@ -231,6 +252,8 @@ Examples:
 
 * `pin id/E0123456` 
   > This command will pin a student with `NUSID` of "E0123456".
+  >
+  > ![pin](images/pin/pin.png) 
 
 
 ### Clearing all entries : `clear`
@@ -238,6 +261,8 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+![clear](images/clear.png)
 
 ### Exiting the program : `exit`
 
@@ -286,7 +311,7 @@ _Details coming soon ..._
 | **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/Student g/CS2103T-T15` |
 | **Clear**    | `clear`                                                                                                                                    |
 | **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                       |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                |
+| **Edit**     | `edit INDEX [id/NUSID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`     |
 | **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
 | **Group**    | `group [id/NUSID] [g/GROUP] [t/TAG] `                                                                                                      |
 | **Schedule** | `schedule id/NUSID s/DATE [r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                        |
