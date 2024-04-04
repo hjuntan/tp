@@ -16,6 +16,8 @@ public class NusId {
      */
     public static final String VALIDATION_REGEX = "^E\\d{7}";
 
+    public static final String FIND_VALIDATION_REGEX = "^E\\d{0,7}";
+
     public final String value;
 
     /**
@@ -34,6 +36,10 @@ public class NusId {
      */
     public static boolean isValidNusId(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public static boolean isValidFindNusId(String test) {
+        return test.matches(FIND_VALIDATION_REGEX);
     }
 
     @Override

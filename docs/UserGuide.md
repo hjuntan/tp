@@ -19,11 +19,11 @@ Our product ensures that you can always centralise their contacts, connect and c
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `aronapro.jar` from [here](https://github.com/AY2324S2-CS2103T-T15-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar aronapro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -101,7 +101,7 @@ Examples:
 
 ### Viewing all persons : `view`
 
-Shows a list of all persons in the address book.
+Shows the entire list of persons in the address book.
 
 Format: `view`
 
@@ -134,20 +134,20 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP] [g/MORE GROUPS]`
+Format: `find [id/NUSID] [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [g/GROUP] [g/MORE GROUPS]`
 
 > Note:
-> * The NAME search is case-insensitive. e.g `hans` will match `Hans`.
-> * The order of NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-> * Only full words will be matched for NAME e.g. `Han` will not match `Hans`.
-> * Students matching ANY word will be selected for NAME (e.g. `Hans Bo` will fetch `Hans Gruber`, `Bo Yang`).
-> * The PHONE_NUMBER search matches student that has a number that STARTS WITH the query (e.g `9123` fetches `91237654`).
-> * The EMAIL search uses a PARTIAL, case-insensitive match. (e.g. `charles` matches `PrinceCharles@kingston.com`).
+> * The NUSID search matches people that has a prefix that STARTS WITH the query (e.g `E0123` fetches `E0123456`)
+> * The NAME search is case-insensitive. e.g `hans` will match `Hans`
+> * The order of NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+> * Only full words will be matched for NAME e.g. `Han` will not match `Hans`
+> * Persons matching ANY word will be selected for NAME (e.g. `Hans Bo` will fetch `Hans Gruber`, `Bo Yang`)
+> * The PHONE search matches people that has a number that STARTS WITH the query (e.g `9123` fetches `91237654`)
+> * The EMAIL search uses a PARTIAL, case-insensitive match. (e.g. `charles` matches `PrinceCharles@kingston.com`)
 > * The TAG search uses an EXACT case-sensitive match. 
-> * The GROUP search fetches students with ALL specified groups (e.g `g/CS2101 g/CS2103T` matches a person who minimally has BOTH these Groups).
->* Persons matching all parameters will be returned (i.e. `AND` search).
+> * The GROUP search fetches people with ALL specified groups (e.g `g/CS2101 g/CS2103T` matches a person who minimally has BOTH these Groups)
+> * Persons matching all parameters will be returned (i.e. `AND` search).
   
-
 Examples:
 * `find n/roy` 
   > This command would return `Roy G Biv` and `Roy Balakrishnan`. 
@@ -316,7 +316,7 @@ _Details coming soon ..._
 | **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/Student g/CS2103T-T15` |
 | **Clear**    | `clear`                                                                                                                                    |
 | **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                       |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                |
+| **Edit**     | `edit INDEX [id/NUSID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`     |
 | **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
 | **Group**    | `group [id/NUSID] [g/GROUP] [t/TAG] `                                                                                                      |
 | **Schedule** | `schedule id/NUSID s/DATE [r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                        |
