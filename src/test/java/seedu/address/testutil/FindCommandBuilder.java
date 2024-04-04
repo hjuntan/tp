@@ -3,7 +3,12 @@ package seedu.address.testutil;
 import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.*;
+import seedu.address.model.person.EmailMatchesPredicate;
+import seedu.address.model.person.GroupMatchesPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NusIdMatchesPredicate;
+import seedu.address.model.person.PhoneMatchesPredicate;
+import seedu.address.model.person.TagMatchesPredicate;
 
 /**
  * A class that aids in creating {@code FindCommand} instances for testing
