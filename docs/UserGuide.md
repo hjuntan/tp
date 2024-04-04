@@ -190,7 +190,7 @@ Examples:
 * `group id/E0123456 g/CS2101-T15`
   > This command will assign a group CS2101-T15 to the person with `NUSID` E0123456.
 * `group id/E0123456 t/STUDENT` 
- > This command will assign a student tag to the person with `NUSID` E0123456.
+  > This command will assign a student tag to the person with `NUSID` E0123456.
 
 
 ### Schedule a meeting with a person: `schedule`
