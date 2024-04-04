@@ -24,7 +24,7 @@ Our product ensures that you can always centralise their contacts, connect and c
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar aronapro.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -201,14 +201,13 @@ Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
 > * At least one of the optional fields must be provided.
 > * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None
 
-Examples:
 * `group id/E0123456 g/CS2101`
   > This command will assign or change a group of the person with `NUSID` E0123456 to 'CS2101'.
   >
   > ![assign-group](images/group/assign-group.png)
 * `group id/E0123456 t/TA` 
- > This command will assign or change the tag of the person with `NUSID` E0123456 to 'TA'.
- > ![assign-tag](images/group/assign-tag.png)
+  > This command will assign or change the tag of the person with `NUSID` E0123456 to 'TA'.
+  > ![assign-tag](images/group/assign-tag.png)
 
 
 ### Schedule a meeting with a person: `schedule`
