@@ -141,11 +141,14 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP] [g/MORE GROU
   
 
 Examples:
-* `find John` 
-  > This command would return `john` and `John Doe`.
-* `find alex david`
-  > This command would return `Alex Yeoh`, `David Li`
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/roy` 
+  > This command would return `Roy G Biv` and `Roy Balakrishnan`. 
+  > 
+  > ![findbyName](images/find/find-by-name.png)
+* `find n/roy g/CS2101`
+  > This command would return `Roy Balakrishnan` who is the only person matching both the 2 conditions.
+  > 
+  > ![findByNameAndGroup](images/find/find-by-name-and-group.png)
 
 ### Deleting a person : `delete`
 
