@@ -13,8 +13,8 @@ import java.util.List;
 public class Schedule {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Schedule should contain only dates formatted as DD/MM/YYYY, DD-MM-YYYY, "
-                    + "DD.MM.YYYY, DD MMM YYYY, MMM DD, YYYY";
+            "Schedule should contain only dates formatted as \"DD/MM/YYYY\", \"DD-MM-YYYY\", "
+                    + "\"DD.MM.YYYY\", \"DD MMM YYYY\", \"MMM DD, YYYY\"";
 
     public static final List<String> VALIDATION_REGEX_WITH_DATA = new ArrayList<>(
             List.of(
