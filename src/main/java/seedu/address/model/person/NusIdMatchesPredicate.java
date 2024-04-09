@@ -20,7 +20,7 @@ public class NusIdMatchesPredicate implements Predicate<Person> {
         if (keyword.equals(FindCommand.NOT_REQUIRED_VALUE)) {
             return true;
         } else if (NusId.isValidFindNusId(keyword)) {
-            return person.getNusId().toString().toLowerCase().startsWith(keyword.trim().toLowerCase());
+            return person.getNusId().toString().startsWith(keyword.trim());
         } else {
             return false;
         }
