@@ -23,9 +23,9 @@ public class FindCommand extends Command {
     public static final String NOT_REQUIRED_VALUE = "$$NOT_REQUIRED$$";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list.\n"
-            + "Parameters: KEYWORD [id/NUSID] [n/NAME] [e/EMAIL] [p/PHONE_NUMBER] [t/TAG] [g/GROUP]...\n"
-            + "Example: " + COMMAND_WORD + " n/Peter Parker " + "g/CS2101";
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " n/alice bob charlie";
 
     private final NusIdMatchesPredicate nusIdPredicate;
     private final NameContainsKeywordsPredicate namePredicate;
