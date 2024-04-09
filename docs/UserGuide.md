@@ -83,7 +83,7 @@ Click [here](#Table of Contents) to return back to the table of content
   > `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  > `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  > `[g/GROUP]…​` can be used as ` ` (i.e. 0 times), `g/School`, `g/Family` etc.
 
 * Parameters can be in any order.<br>
   > if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
