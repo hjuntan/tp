@@ -348,6 +348,7 @@ Team size: 5
 3. **Group name visibility:** When using the `group` command with a very long group name, the group name may be hidden from view. We plan to implement a feature to allow users to view the full group name. Either by truncating the group name, allowing the user to view the full group name or limiting the length of the group name.
 4. **Email address visibility:** When adding/editing a person's email address with a very long email address, the email address may be hidden from view. We plan to implement a feature to allow users to view the full email address. Either by truncating the email address, allowing the user to view the full email address or limiting the length of the email address.
 5. **Tag information visibility:** When resizing the window to a smaller size, the GUI may not fully display the person's tag information. We plan to implement a minimum size for the window to ensure that all information is displayed.
+6. **Tag case sensitivity:** When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None. We plan to implement a feature to allow users to enter tags in any case (e.g., professor, ta, student, none) and still be recognised as valid tags.
 
 --------------------------------------------------------------------------------------------------------------------
 
