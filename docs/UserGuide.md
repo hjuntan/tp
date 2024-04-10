@@ -244,21 +244,21 @@ Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
 
 Schedule a meeting with a person in the address book.
 
-Format: `schedule id/NUSID [s/SCHEDULE] [r/REMARK]`
+Format: `schedule id/NUSID [s/SCHEDULE r/REMARK]`
 
 > Note: 
 > * Schedule a meeting with a person of the specified `nusId` on the specified `schedule` with a `remark`.
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
-> * The `NUSID` **must be a 7-digit number following an 'E'**
+> * The `NUSID` **must be a 7-digit number following an 'E'**.
 > * Both `schedule` and `remark` must be either provided or not provided.
 > * If `schedule` and `remark` are not provided, the schedule will be removed.
 
-**Tip:** The `schedule` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`.
+**Tip:** The `schedule` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`. Example of date formats include: `12-12-2024`, `12/12/2024`, `12.12.2024`, `Dec 12, 2024`, `12 Dec 2024`.
 
 
 Examples:
 
-* `schedule id/E0123456 s/12-12/2024 r/Consultation` 
+* `schedule id/E0123456 s/12-12-2024 r/Consultation` 
   > This command will schedule a meeting with the person of `NUSID` E0123456, with `SCHEDULE` on 12th December 2024 and a `REMARK` of Consultation.
   > If there was a previous date, or remark, it will be replaced!
   > 
@@ -331,6 +331,17 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **When using the `schedule` command**, the command does not check for the validity of the date entered. Hence, it is important to ensure that the date entered is valid.
+3. **When using the `schedule` command**, the command does not check if the valid date entered is in the future. Hence, it is important to ensure that the date entered is in the future.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Planned enhancements
+
+Team size: 5
+
+1. **Validity of date entered:** The current behaviour of the `schedule` command does not check for the validity of the date entered. We plan to implement a check to ensure that the date entered is valid.
+2. **Future date check:** The current behaviour of the `schedule` command does not check if the valid date entered is in the future. We plan to implement a check to ensure that the date entered is in the future.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -344,7 +355,7 @@ _Details coming soon ..._
 | **Edit**     | `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]…​`<br> e.g.,`edit id/E1234567 n/James Lee e/jameslee@example.com`     |
 | **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
 | **Group**    | `group [id/NUSID] [g/GROUP] [t/TAG] `                                                                                                      |
-| **Schedule** | `schedule id/NUSID s/DATE [r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                        |
+| **Schedule** | `schedule id/NUSID [s/SCHEDULE r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                    |
 | **Pin**      | `pin id/NUSID`                                                                                                                             |
 | **View**     | `view`                                                                                                                                     |
 | **Help**     | `help`                                                                                                                                     |

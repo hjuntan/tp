@@ -27,8 +27,8 @@ public class ScheduleCommand extends Command {
 
             + "Parameters: "
             + PREFIX_NUSID + "NUSID "
-            + "[" + PREFIX_SCHEDULE + "SCHEDULE] "
-            + "[" + PREFIX_REMARK + "REMARK] \n"
+            + "[" + PREFIX_SCHEDULE + "SCHEDULE "
+            + PREFIX_REMARK + "REMARK] \n"
             + "Note: Both SCHEDULE and REMARK must be either present or absent. \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NUSID + "E1234567 "
