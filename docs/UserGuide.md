@@ -336,6 +336,15 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Planned enhancements
+
+Team size: 5
+
+1. **Validity of date entered:** The current behaviour of the `schedule` command does not check for the validity of the date entered. We plan to implement a check to ensure that the date entered is valid.
+2. **Future date check:** The current behaviour of the `schedule` command does not check if the valid date entered is in the future. We plan to implement a check to ensure that the date entered is in the future.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Command summary
 
 | Action       | Format, Examples                                                                                                                           |
