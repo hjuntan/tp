@@ -51,9 +51,9 @@
         "storage-component": "Storage component",
         "common-classes": "Common classes",
         "implementation": "Implementation",
-        "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
+        "add-feature": "Add feature",
         "schedule-feature": "Schedule feature",
-        "schedule-feature-2": "Schedule feature",
+        "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "proposed-data-archiving": "[Proposed] Data archiving",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
@@ -64,7 +64,7 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-a-person": "Deleting a person",
+        "example-deleting-a-person": "Example: Deleting a person",
         "saving-data": "Saving data"
       },
       "headingKeywords": {}
@@ -109,7 +109,7 @@
       "src": "UserGuide.md",
       "title": "User Guide",
       "headings": {
-        "aronapro-s-user-guide": "AronaPro's User Guide",
+        "about-aronapro": "About AronaPro",
         "quick-start": "Quick start",
         "features": "Features",
         "notes-about-the-command-format": "Notes about the command format:",
@@ -129,6 +129,7 @@
         "archiving-data-files-coming-in-v2-0": "Archiving data files [coming in v2.0]",
         "faq": "FAQ",
         "known-issues": "Known issues",
+        "planned-enhancements": "Planned enhancements",
         "command-summary": "Command summary"
       },
       "headingKeywords": {}
@@ -137,7 +138,7 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "aronapro": "AronaPro"
       },
       "headingKeywords": {}
     },
