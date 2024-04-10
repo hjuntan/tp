@@ -221,17 +221,17 @@ The following activity diagram summarizes what happens when a user inputs a sche
 
 `Schedule` for a person can be added or removed using the `schedule` command. The `ScheduleCommand` class is responsible for handling the scheduling of events for a person. This command is implemented through `ScheduleCommand` which extend the `Command` class.
 
-A new `Schedule` can be added by specifying `nusId`, `date` and an optional `remark`. If the `date` is not specified, the schedule will be removed instead.
+A new `Schedule` can be added by specifying `nusId`, `schedule` and `remark`. If the `schedule` and `remark` prefixes are not specified, the schedule will be removed instead.
 
 <box type="info" seamless>
 
-**Note:** If `remark` is present, `date` has to be present as well.
+**Note:** `schedule` and `remark` are either both present or absent.
 
 </box>
 
 Given below is an example usage scenario and how the `ScheduleCommand` mechanism behaves at each step.
 
-Step 1. The user executes `schedule` command.
+Step 1. The user executes `Schedule` command.
 
 Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `ScheduleCommandParser`.
 
@@ -263,7 +263,7 @@ The following activity diagram summarizes what happens when a user inputs a sche
 
 **How schedule executes**
 
-* User inputs a `schedule` command with `nusId`, `date` and an optional `remark`. The inputs are parsed and a `ScheduleCommand` is created.
+* User inputs a `Schedule` command with `nusId`, `schedule` and  `remark`. The inputs are parsed and a `ScheduleCommand` is created.
 * A list of persons is retrieved from `model` and the relevant person is found by matching `nusId`.
 * The relevant fields are updated for the person and the person is set back into the model.
 
@@ -274,7 +274,7 @@ The following activity diagram summarizes what happens when a user inputs a sche
 
 **Alternative considerations**
 
-* **Alternative 1 (current choice):** Set the schedule for the person by indicating `date`, otherwise remove schedule.
+* **Alternative 1 (current choice):** Set the schedule for the person by indicating `schedule` and `remark`, otherwise remove schedule.
     * Pros: Easy to implement.
     * Cons: Additional checks are required to check if it is an add or remove schedule command.
 
