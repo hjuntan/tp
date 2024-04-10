@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.NusId;
 import seedu.address.model.person.Person;
 
 /**
@@ -79,9 +80,25 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Person> getScheduleFilteredPersonList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
+    /**
+     * Pins the given person.
+     * The person must exist in the address book.
+     */
+    void pinPerson(Person person);
+
+
+    /**
+     * Returns a person with the nudId of concern from the filtered person list.
+     */
+    Person filterPersonListWithNusId(NusId nusId);
 }

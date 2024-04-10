@@ -13,6 +13,7 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -28,6 +29,7 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.ui.CommandBox;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -36,7 +38,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 2, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -62,7 +64,7 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, new CommandHistory());
 
         ui = new UiManager(logic);
     }
@@ -166,6 +168,10 @@ public class MainApp extends Application {
         }
 
         return initializedPrefs;
+    }
+
+    protected void provideStorageForCommandBox(Storage storage) throws DataLoadingException {
+        CommandBox.setCommandHistory(storage.readCommandHistory().orElse(new CommandHistory()));
     }
 
     @Override

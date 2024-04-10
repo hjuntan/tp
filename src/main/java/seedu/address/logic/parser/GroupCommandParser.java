@@ -38,7 +38,15 @@ public class GroupCommandParser implements Parser<GroupCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP, PREFIX_TAG);
+        if (arePrefixesPresent(argMultimap, PREFIX_NUSID)
+                && !arePrefixesPresent(argMultimap, PREFIX_GROUP)
+                && !arePrefixesPresent(argMultimap, PREFIX_TAG)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
+
+
 
         GroupCommand.GroupPersonDescriptor groupPersonDescriptor = new GroupCommand.GroupPersonDescriptor();
 
