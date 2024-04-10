@@ -258,7 +258,7 @@ Format: `schedule id/NUSID [s/SCHEDULE r/REMARK]`
 
 Examples:
 
-* `schedule id/E0123456 s/12-12/2024 r/Consultation` 
+* `schedule id/E0123456 s/12-12-2024 r/Consultation` 
   > This command will schedule a meeting with the person of `NUSID` E0123456, with `SCHEDULE` on 12th December 2024 and a `REMARK` of Consultation.
   > If there was a previous date, or remark, it will be replaced!
   > 
