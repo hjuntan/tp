@@ -333,6 +333,9 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **When using the `schedule` command**, the command does not check for the validity of the date entered. Hence, it is important to ensure that the date entered is valid.
 3. **When using the `schedule` command**, the command does not check if the valid date entered is in the future. Hence, it is important to ensure that the date entered is in the future.
+4. **When using the `group` command with a very long group name**, the group name may be hidden from view. The remedy is to resize the window to view the full group name.
+5. **When adding/editing a person's email address with a very long email address**, the email address may be hidden from view. The remedy is to resize the window to view the full email address.
+6. **When resizing the window to a smaller size**, the GUI may not fully display the person's information; for example: name, tag, remark. The remedy is to resize the window to a larger size to view all the information.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -342,6 +345,9 @@ Team size: 5
 
 1. **Validity of date entered:** The current behaviour of the `schedule` command does not check for the validity of the date entered. We plan to implement a check to ensure that the date entered is valid.
 2. **Future date check:** The current behaviour of the `schedule` command does not check if the valid date entered is in the future. We plan to implement a check to ensure that the date entered is in the future.
+3. **Group name visibility:** When using the `group` command with a very long group name, the group name may be hidden from view. We plan to implement a feature to allow users to view the full group name. Either by truncating the group name, allowing the user to view the full group name or limiting the length of the group name.
+4. **Email address visibility:** When adding/editing a person's email address with a very long email address, the email address may be hidden from view. We plan to implement a feature to allow users to view the full email address. Either by truncating the email address, allowing the user to view the full email address or limiting the length of the email address.
+5. **Tag information visibility:** When resizing the window to a smaller size, the GUI may not fully display the person's tag information. We plan to implement a minimum size for the window to ensure that all information is displayed.
 
 --------------------------------------------------------------------------------------------------------------------
 
