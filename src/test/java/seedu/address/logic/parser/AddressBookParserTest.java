@@ -51,19 +51,20 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         NusId testNusId = new NusId("E1234567");
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + testNusId);
+                DeleteCommand.COMMAND_WORD + " id/" + testNusId);
         assertEquals(new DeleteCommand(testNusId), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
         String defaultNusId = "E1234567";
+        String userInputNusId = " id/E1234567";
         NusId nusId = new NusId(defaultNusId);
 
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + defaultNusId + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + userInputNusId + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(nusId, descriptor), command);
     }
 

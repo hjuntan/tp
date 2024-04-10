@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.FindCommand.NOT_REQUIRED_VALUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUSID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -15,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EmailMatchesPredicate;
 import seedu.address.model.person.GroupMatchesPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NusIdMatchesPredicate;
 import seedu.address.model.person.PhoneMatchesPredicate;
 import seedu.address.model.person.TagMatchesPredicate;
 
@@ -30,13 +32,21 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_GROUP);
+                ArgumentTokenizer.tokenize(args,
+                        PREFIX_NUSID,
+                        PREFIX_NAME,
+                        PREFIX_PHONE,
+                        PREFIX_EMAIL,
+                        PREFIX_TAG,
+                        PREFIX_GROUP);
 
-        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
-        argumentMultimap.verifyAtLeastOnePrefixExists(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG,
-                PREFIX_GROUP);
+        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NUSID, PREFIX_NAME,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
+        argumentMultimap.verifyAtLeastOnePrefixExists(PREFIX_NUSID, PREFIX_NAME,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_GROUP);
         // Problems: Can't create Objects unless proper regex used.
         // Solution: Don't create objects
+        String nusIdToMatch = argumentMultimap.getValue(PREFIX_NUSID).orElse(NOT_REQUIRED_VALUE);
         String nameToMatch = argumentMultimap.getValue(PREFIX_NAME).orElse(NOT_REQUIRED_VALUE);
         String phoneToMatch = argumentMultimap.getValue(PREFIX_PHONE).orElse(NOT_REQUIRED_VALUE);
         String emailToMatch = argumentMultimap.getValue(PREFIX_EMAIL).orElse(NOT_REQUIRED_VALUE);
@@ -46,7 +56,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = nameToMatch.split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
+        return new FindCommand(new NusIdMatchesPredicate(nusIdToMatch),
+                new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
                 new EmailMatchesPredicate(emailToMatch),
                 new GroupMatchesPredicate(groupToMatch),
                 new PhoneMatchesPredicate(phoneToMatch),

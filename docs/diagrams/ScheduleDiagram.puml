@@ -3,6 +3,8 @@ skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
+
+
 :User inputs schedule command;
 :Parse schedule command;
 
