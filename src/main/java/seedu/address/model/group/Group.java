@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Group {
 
-    public static final String MESSAGE_CONSTRAINTS = "Group input should only contain"
+    public static final String MESSAGE_CONSTRAINTS = "Group input should only contain "
             + "alphanumeric characters and spaces, and it should not be blank";
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9.\\-_ ]+";
 
