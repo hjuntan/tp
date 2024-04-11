@@ -4,11 +4,19 @@
   pageNav: 3
 ---
 
-# AronaPro's User Guide
+# About AronaPro
 
-AronaPro is a **desktop app** catered primarily for Computing Professors and Teaching Assistants(TAs) to manage your students/professors/TAs contacts efficiently, optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-Our product ensures that you can always centralise their contacts, connect and coordinate with them. 
+--------------------------------------------------------------------------------------------------------------------
 
+Welcome to AronaPro's User Guide, and thank you for choosing us as your all-in-one solution! 
+Our product is a desktop app designed primarily for **Computing Professors and Teaching Assistants(TAs)** to manage your 
+students/professors/TAs' contacts and schedules efficiently, optimised for use via a Command Line Interface (CLI) 
+while still having the benefits of a Graphical User Interface (GUI). Our simple-to-grasp software also warmly welcomes
+professors and TAs from various faculties without any technological background! 
+
+We are excited to have you on board and to guide you through how to use our software with this guide.
+
+Together, let's **_Centralise_, _Connect_ and _Coordinate_!**
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -19,20 +27,37 @@ Our product ensures that you can always centralise their contacts, connect and c
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `aronapro.jar` from [here](https://github.com/AY2324S2-CS2103T-T15-2/tp/releases).
+1. Download the latest `aronapro.jar` [here](https://github.com/AY2324S2-CS2103T-T15-2/tp/releases). 
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for AronaPro in your desired location. For demonstration purpose, we will save the downloaded jar file into `test` folder and saved it to `Desktop` on either Mac or Windows machines. 
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar aronapro.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Open a command terminal, either by typing `terminal` on Mac or `PowerShell` on windows and perform the following steps to reach the `test` folder created earlier in order to run the application:
+   1. First type `ls` to see what are all the folders in your current directory.
+   2. Type `cd <file_name>` where the file name refers to the file name you are trying to enter. One tip is that file name can be auto-completed simply by typing the first few words and hitting `Tab`.
+   3. Repeat i. and ii. above until you see the `test` folder and `cd` into it as show in the sequence of diagrams for both Mac and Windows machines below:
+   <p align="centerleft">
+    <img src="images/UserGuide/Navigation step one.png" alt="Ui" width="600" style="margin-left: 10px; margin-top:30px"/>
+   </p>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try to get started with our application:
+   <p align="centerleft">
+    <img src="images/UserGuide/Navigation step two.png" alt="Ui" width="600" style="margin-left: 10px; margin-top:30px"/>
+   </p> 
+
+   <p align="centerleft">
+    <img src="images/UserGuide/Navigation step three.png" alt="Ui" width="600" style="margin-left: 10px; margin-top:30px"/>
+   </p>  
+   
+1. Lastly, enter the `java -jar aronapro.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds.<br>
+   <p align="centerleft">
+    <img src="images/Ui.png" alt="Ui" width="600" style="margin-left: 10px; margin-top:20px"/>
+   </p>
+   e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   Some example commands you can try to quickly get started with our application:
 
    * `view` : Lists all contacts.
 
-   * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T-T15` : Adds a student with `NAME` John Doe with `NUSD` of E1234567 to the Address Book.
+   * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T-T15` : Adds a student with `NAME` John Doe with `NUSID` of E1234567 to the Address Book.
 
    * `delete id/E1234567` : Deletes the person with `NUSID` of E1234567.
 
@@ -41,6 +66,8 @@ Our product ensures that you can always centralise their contacts, connect and c
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
+Click [here](#Table of Contents) to return back to the table of content 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -56,7 +83,7 @@ Our product ensures that you can always centralise their contacts, connect and c
   > `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  > `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  > `[g/GROUP]…​` can be used as ` ` (i.e. 0 times), `g/School`, `g/Family` etc.
 
 * Parameters can be in any order.<br>
   > if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -85,7 +112,7 @@ Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 > Note:
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
 
-**Tip:** A person can have 0 or more groups
+**Tip:** A person can have 0 or more groups.
 
 Examples:
 * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T`
@@ -114,10 +141,13 @@ Format: `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`
 > Note:
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
+> * > * `NAME` can consist of numbers.
+> * `PHONE_NUMBER` has to be 3-10 digits long.
+> * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None.
 > * At least one of the optional fields must be provided.
 > * Existing values will be replaced by and updated to the new input values.
-> * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None.
 > * Attempt to edit a person with `NUSID` not in the address book would result in an error message.
+
 
 
 Examples:
@@ -201,43 +231,38 @@ Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
 > * At least one of the optional fields must be provided.
 > * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None
 
-Examples:
 * `group id/E0123456 g/CS2101`
   > This command will assign or change a group of the person with `NUSID` E0123456 to 'CS2101'.
   >
   > ![assign-group](images/group/assign-group.png)
 * `group id/E0123456 t/TA` 
- > This command will assign or change the tag of the person with `NUSID` E0123456 to 'TA'.
- > ![assign-tag](images/group/assign-tag.png)
+  > This command will assign or change the tag of the person with `NUSID` E0123456 to 'TA'.
+  > ![assign-tag](images/group/assign-tag.png)
 
 
 ### Schedule a meeting with a person: `schedule`
 
 Schedule a meeting with a person in the address book.
 
-Format: `schedule id/NUSID d/DATE [r/REMARK]`
+Format: `schedule id/NUSID [s/SCHEDULE r/REMARK]`
 
 > Note: 
-> * Schedule a meeting with a person of the specified `nusId` on the specified `date` with an optional `remark`.
+> * Schedule a meeting with a person of the specified `nusId` on the specified `schedule` with a `remark`.
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
-> * The `NUSID` **must be a 7-digit number following an 'E'**
-> * If `date` and `remark` are not provided, the schedule will be removed.
->* If `remark` is provided, `date` must be provided as well.
+> * The `NUSID` **must be a 7-digit number following an 'E'**.
+> * Both `schedule` and `remark` must be either provided or not provided.
+> * If `schedule` and `remark` are not provided, the schedule will be removed.
 
-**Tip:** The `date` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`.
+**Tip:** The `schedule` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`. Example of date formats include: `12-12-2024`, `12/12/2024`, `12.12.2024`, `Dec 12, 2024`, `12 Dec 2024`.
 
 
 Examples:
-* `schedule id/E0123456 s/12-12/2024 r/Consultation` 
-  > This command will schedule a meeting with the person of `NUSID` E0123456, with `DATE` on 12th December 2024 and a `REMARK` of Consultation.
+
+* `schedule id/E0123456 s/12-12-2024 r/Consultation` 
+  > This command will schedule a meeting with the person of `NUSID` E0123456, with `SCHEDULE` on 12th December 2024 and a `REMARK` of Consultation.
   > If there was a previous date, or remark, it will be replaced!
   > 
   > ![schedule-with-remark](images/schedule/schedule-with-remark.png)
-* `schedule id/E0123456 d/Dec 12, 2021`
-  > This command will schedule a meeting with the person of `NUSID` E0123456, with `DATE` on 12th December 2024.
-  > If there was a previous date, it will be replaced, similarly the previous remark would be removed.
-  >
-  > ![schedule-without-remark](images/schedule/schedule-without-remark.png)
 * `schedule id/E0123456` 
   > This command will remove the schedule with the person of `NUSID` E0123456.
   >
@@ -306,6 +331,24 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **When using the `schedule` command**, the command does not check for the validity of the date entered. Hence, it is important to ensure that the date entered is valid.
+3. **When using the `schedule` command**, the command does not check if the valid date entered is in the future. Hence, it is important to ensure that the date entered is in the future.
+4. **When using the `group` command with a very long group name**, the group name may be hidden from view. The remedy is to resize the window to view the full group name.
+5. **When adding/editing a person's email address with a very long email address**, the email address may be hidden from view. The remedy is to resize the window to view the full email address.
+6. **When resizing the window to a smaller size**, the GUI may not fully display the person's information; for example: name, tag, remark. The remedy is to resize the window to a larger size to view all the information.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Planned enhancements
+
+Team size: 5
+
+1. **Validity of date entered:** The current behaviour of the `schedule` command does not check for the validity of the date entered. We plan to implement a check to ensure that the date entered is valid.
+2. **Future date check:** The current behaviour of the `schedule` command does not check if the valid date entered is in the future. We plan to implement a check to ensure that the date entered is in the future.
+3. **Group name visibility:** When using the `group` command with a very long group name, the group name may be hidden from view. We plan to implement a feature to allow users to view the full group name. Either by truncating the group name, allowing the user to view the full group name or limiting the length of the group name.
+4. **Email address visibility:** When adding/editing a person's email address with a very long email address, the email address may be hidden from view. We plan to implement a feature to allow users to view the full email address. Either by truncating the email address, allowing the user to view the full email address or limiting the length of the email address.
+5. **Tag information visibility:** When resizing the window to a smaller size, the GUI may not fully display the person's tag information. We plan to implement a minimum size for the window to ensure that all information is displayed.
+6. **Tag case sensitivity:** When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None. We plan to implement a feature to allow users to enter tags in any case (e.g., professor, ta, student, none) and still be recognised as valid tags.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -316,10 +359,10 @@ _Details coming soon ..._
 | **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/Student g/CS2103T-T15` |
 | **Clear**    | `clear`                                                                                                                                    |
 | **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                       |
-| **Edit**     | `edit INDEX [id/NUSID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`     |
+| **Edit**     | `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]…​`<br> e.g.,`edit id/E1234567 n/James Lee e/jameslee@example.com`     |
 | **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
 | **Group**    | `group [id/NUSID] [g/GROUP] [t/TAG] `                                                                                                      |
-| **Schedule** | `schedule id/NUSID s/DATE [r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                        |
+| **Schedule** | `schedule id/NUSID [s/SCHEDULE r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                    |
 | **Pin**      | `pin id/NUSID`                                                                                                                             |
 | **View**     | `view`                                                                                                                                     |
 | **Help**     | `help`                                                                                                                                     |

@@ -22,10 +22,12 @@ public class FindCommand extends Command {
     // This string is used by Predicates to help them know when a parameter isn't required.
     public static final String NOT_REQUIRED_VALUE = "$$NOT_REQUIRED$$";
 
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all people who matches ALL of "
             + "the specified keywords and displays them as a list.\n"
             + "Usage: find [id/NUSID] [n/NAME] [e/EMAIL] [p/PHONE_NUMBER] [t/TAG] [g/GROUP]...\n"
             + "Example: " + COMMAND_WORD + " n/Peter Parker " + "g/CS2101";
+
 
     private final NusIdMatchesPredicate nusIdPredicate;
     private final NameContainsKeywordsPredicate namePredicate;

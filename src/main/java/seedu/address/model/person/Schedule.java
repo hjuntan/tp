@@ -13,20 +13,15 @@ import java.util.List;
 public class Schedule {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Schedule should contain only dates formatted as DD/MM/YYYY, DD-MM-YYYY, "
-                    + "DD.MM.YYYY, DD MMM YYYY, MMM DD, YYYY";
+            "Schedule should contain only dates formatted as \"DD/MM/YYYY\", \"DD-MM-YYYY\", "
+                    + "\"DD.MM.YYYY\", \"DD MMM YYYY\", \"MMM DD, YYYY\"";
 
-    /*
-     * Date should be formatted as DD/MM/YYYY or DD-MM-YYYY
-     */
     public static final List<String> VALIDATION_REGEX_WITH_DATA = new ArrayList<>(
             List.of(
                     "^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$",
                     "^(0?[1-9]|[1-2][0-9]|3[01])\\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s+\\d{4}$",
                     "^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s+(0?[1-9]|[1-2][0-9]|3[01]),\\s+\\d{4}$"));
-
     public static final String VALIDATION_REGEX_WITHOUT_DATA = "^$";
-
     public final String date;
 
     /**
