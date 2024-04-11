@@ -170,9 +170,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String schedule} into a {@code Schedule}.
+     * Parses a {@code String remark} into a {@code Remark}.
      *
-     * @throws ParseException if the given {@code schedule} is invalid.
+     * @throws ParseException if the given {@code rmark} is invalid.
      */
     public static Remark parseRemark(String remark) throws ParseException {
         if (remark == "") {

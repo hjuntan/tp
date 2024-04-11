@@ -23,12 +23,12 @@ public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedule or remove a meeting with a student. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedule or remove a meeting with a person. \n"
 
             + "Parameters: "
             + PREFIX_NUSID + "NUSID "
-            + "[" + PREFIX_SCHEDULE + "SCHEDULE] "
-            + "[" + PREFIX_REMARK + "REMARK] \n"
+            + "[" + PREFIX_SCHEDULE + "SCHEDULE "
+            + PREFIX_REMARK + "REMARK] \n"
             + "Note: Both SCHEDULE and REMARK must be either present or absent. \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NUSID + "E1234567 "

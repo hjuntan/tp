@@ -34,8 +34,7 @@ public class ScheduleTest {
         // valid schedule
         assertTrue(Schedule.isValidSchedule("12-12-2020")); // Correct format
         assertTrue(Schedule.isValidSchedule("12/12/2020")); // Correct format
-        assertTrue(Schedule.isValidSchedule("")); // Empty string
-
+        assertTrue(Schedule.isValidSchedule("")); // Empty string that indicates no schedule
     }
 
     @Test
