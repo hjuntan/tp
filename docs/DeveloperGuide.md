@@ -517,12 +517,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-**Use case: Find a specific existing contact**
+**Use case: Find some specific contact(s)**
 
 **MSS**
 
-1.  User requests to find a specific contact.
-2.  AddressBook outputs the contact with all relevant information about the contact.
+1.  User requests to find some contact(s).
+2.  AronaPro outputs the contact(s) with all relevant information about the contact.
 
     Use case ends.
 
@@ -530,14 +530,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User uses the wrong format in his request.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. AronaPro shows an error message.
     * 1a2. User uses the correct format as shown in the error message for his request.
 
       Use case resumes at step 2.
 
 * 2a. The contact does not exist.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. AronaPro shows an empty list, informing that no contacts were found.
 
       Use case ends.
 
