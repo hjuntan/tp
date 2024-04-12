@@ -8,18 +8,33 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
-Welcome to AronaPro's User Guide, and thank you for choosing us as your all-in-one solution! 
+Welcome to AronaPro, and we thank you for choosing us as your all-in-one solution! 
 Our product is a desktop app designed primarily for **Computing Professors and Teaching Assistants(TAs)** to manage your 
 students/professors/TAs' contacts and schedules efficiently, optimised for use via a Command Line Interface (CLI) 
 while still having the benefits of a Graphical User Interface (GUI). Our simple-to-grasp software also warmly welcomes
 professors and TAs from various faculties without any technological background! 
 
-We are excited to have you on board and to guide you through how to use our software with this guide.
+We are excited to have you on board and to guide you through how to use our software with this guide. Click 
+[Here](#about-userguide) to learn more about our UserGuide.
 
-Together, let's **_Centralise_, _Connect_ and _Coordinate_!**
+Together, let us **_Centralise_, _Connect_ and _Coordinate_!**
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Table of content
 
 <!-- * Table of Contents -->
 <page-nav-print />
+
+--------------------------------------------------------------------------------------------------------------------
+
+## About UserGuide
+
+Welcome to our User Guide! Here, we have got everything you need to know about using all of our application's features. 
+If you are already familiar with our application, dive straight into the [Features](#features) section to discover more. 
+However, if you are new to the application, we have got you covered. You can simply do so by following our guide step-by-step, 
+starting with the [Quick Start](#quick-start) section, to quickly get up to speed with AronaPro before you start your own adventure. 
+Let us get started!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -33,31 +48,31 @@ Together, let's **_Centralise_, _Connect_ and _Coordinate_!**
 
 1. Open a command terminal, either by typing `terminal` on Mac or `PowerShell` on windows and perform the following steps to reach the `test` folder created earlier in order to run the application:
    1. First type `ls` to see what are all the folders in your current directory.
-   2. Type `cd <file_name>` where the file name refers to the file name you are trying to enter. One tip is that file name can be auto-completed simply by typing the first few words and hitting `Tab`.
+   2. Type `cd <file_name>` where the file name refers to the file name you are trying to enter. One tip is that file name can be auto-completed simply by typing the first few letters and hitting `Tab`.
    3. Repeat i. and ii. above until you see the `test` folder and `cd` into it as show in the sequence of diagrams for both Mac and Windows machines below:
    <p align="centerleft">
-    <img src="images/UserGuide/Navigation step one.png" alt="Ui" width="600" style="margin-left: 10px; margin-top:30px"/>
+    <img src="images/UserGuide/Navigation step one.png" alt="Navigation step one" width="900" style="margin-left: 10px; margin-top:30px"/>
    </p>
 
    <p align="centerleft">
-    <img src="images/UserGuide/Navigation step two.png" alt="Ui" width="600" style="margin-left: 10px; margin-top:30px"/>
+    <img src="images/UserGuide/Navigation step two.png" alt="Navigation step two" width="900" style="margin-left: 10px; margin-top:30px"/>
    </p> 
 
    <p align="centerleft">
-    <img src="images/UserGuide/Navigation step three.png" alt="Ui" width="600" style="margin-left: 10px; margin-top:30px"/>
+    <img src="images/UserGuide/Navigation step three.png" alt="Navigation step three" width="900" style="margin-left: 10px; margin-top:30px"/>
    </p>  
    
-1. Lastly, enter the `java -jar aronapro.jar` command to run the application.<br>
+1. Lastly, enter the command: `java -jar aronapro.jar` to run the application.<br>
    A GUI similar to the below should appear in a few seconds.<br>
    <p align="centerleft">
-    <img src="images/Ui.png" alt="Ui" width="600" style="margin-left: 10px; margin-top:20px"/>
+    <img src="images/Ui.png" alt="Ui" width="900" style="margin-left: 10px; margin-top:20px"/>
    </p>
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try to quickly get started with our application:
 
    * `view` : Lists all contacts.
 
-   * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T-T15` : Adds a student with `NAME` John Doe with `NUSID` of E1234567 to the Address Book.
+   * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T-T15` : Adds a student with `NAME` John Doe with `NUSID` of E1234567 to AronaPro.
 
    * `delete id/E1234567` : Deletes the person with `NUSID` of E1234567.
 
@@ -67,29 +82,42 @@ Together, let's **_Centralise_, _Connect_ and _Coordinate_!**
 
 1. Refer to the [Features](#features) below for details of each command.
 
-Click [here](#Table of Contents) to return back to the table of content 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
+### Understanding our application's interface
+
+<p align="centerleft">
+    <img src="images/UserGuide/Understanding UI.png" alt="Understanding UI" width="900" style="margin-top:10px"/>
+</p>
+
+
+| Name                                       | Functionality                                                                                               |
+|--------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| **Command panel**                          | Allows you to key in your commands here.                                                                    |
+| **Response panel**                         | Echoes the contact's information you have keyed and displays error messages if any to allow you to rectify. |
+| **Students/TAs/Professors contacts panel** | Displays all the information of your contact list.                                                          |
+| **Scheduled meetings information panel**   | Displays all the information of your scheduled meetings.                                                    |
+
+    
 
 ### **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  > `add id/NUSID n/NAME`, `NAME` is a parameter which can be used.
+  > `delete id/NUSID`, `NUSID` is a parameter which need to be supplied.
 
 * Items in square brackets are optional.<br>
-  > `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply as `n/John Doe`.
+  > `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply as `n/John Doe` without specifying the `TAG` as it is optional.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  > `[g/GROUP]…​` can be used as ` ` (i.e. 0 times), `g/School`, `g/Family` etc.
+* Items with `…`​ after them can be used multiple times or zero times.<br>
+  > `[g/GROUP]…​` can be used as ` ` (i.e. 0 times) or `g/School` `g/Family`, demonstrating that group can be used two times by writing them successively on the same line etc.
 
 * Parameters can be in any order.<br>
-  > if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  > If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will be ignored.<br>
-  > if the command specifies `help 123`, it will be interpreted as `help`.
+  > If the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -105,7 +133,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to AronaPro.
 
 Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 
@@ -117,48 +145,56 @@ Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 Examples:
 * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T`
   > This command would add a person with `NUSID` of E1234567, `NAME` of John Doe, `PHONE_NUMBER` of 98765432, `EMAIL` of johnd@example.com
-    `TAG` of Student, `GROUP` of CS2103T-T15 into the address book.
-  >
-  > ![add-new-person](images/add/add-new-person.png)
+    `TAG` of Student, `GROUP` of CS2103T-T15 into AronaPro.
+  <p align="centerleft">
+        <img src="images/add/add-new-person.png" alt="add new person" width="700" style="margin-top:20px"/>
+  </p>
+  
+ 
 * `add id/E7654321 n/Betsy Crowe t/TA e/betsycrowe@example.com p/92345678`
   > This command would add a person with `NUSID` of E7654321, `NAME` of Betsy Crowe, `TAG` of TA,
-    `EMAIL` of betsycrowe@example.com, `PHONE_NUMBER` of 92345678 into the address book.
-  > 
-  > ![add-new-TA](images/add/add-new-ta-without-group.png)
+    `EMAIL` of betsycrowe@example.com, `PHONE_NUMBER` of 92345678 into AronaPro.
+  <p align="centerleft">
+        <img src="images/add/add-new-ta-without-group.png" alt="add new ta without group" width="700" style="margin-top:20px"/>
+  </p>  
 
 ### Viewing all persons : `view`
 
-Shows the entire list of persons in the address book.
+Shows the entire list of persons in AronaPro.
 
 Format: `view`
 
 ### Editing a person's information : `edit`
 
-Edits the information of a person of a specified `NUSID` in the address book.
+Edits the information of a person of a specified `NUSID` in AronaPro.
 
 Format: `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]` 
 
 > Note:
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
-> * > * `NAME` can consist of numbers.
+> * `NAME` can consist of numbers.
 > * `PHONE_NUMBER` has to be 3-10 digits long.
+> * `EMAIL` has to have a valid domain name (e.g. hotmail/gmail/yahoo etc).
 > * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None.
 > * At least one of the optional fields must be provided.
 > * Existing values will be replaced by and updated to the new input values.
-> * Attempt to edit a person with `NUSID` not in the address book would result in an error message.
+> * Attempt to edit a person with `NUSID` not in AronaPro would result in an error message.
 
 
 
 Examples:
 *  `edit id/E0123456 p/91234567 e/johndoe@example.com` 
    > This command would edit the phone number and email address of the person with `NUSID` E0123456 to be `91234567` and `johndoe@example.com` respectively.
-   >
-   > ![edit-phone-and-email](images/edit/edit-phone-and-email.png)
+    <p align="centerleft">
+        <img src="images/edit/edit-phone-and-email.png" alt="edit-phone-and-email" width="700" style="margin-top:20px; margin-bottom:20px"/>
+    </p> 
+   
 *  `edit id/E1234567 n/Betsy t/Professor` 
    > This command would edit the name and the tag of the person with `NUSID` E1234567 to be `Betsy` and `Professor` respectively.
-   >
-   > ![edit-name-and-tag](images/edit/edit-name-and-tag.png)
+    <p align="centerleft">
+        <img src="images/edit/edit-name-and-tag.png" alt="edit-name-and-tag" width="700" style="margin-top:20px"/>
+    </p>
 
 ### Locating persons by name: `find`
 
@@ -182,15 +218,20 @@ Examples:
 * `find n/roy` 
   > This command would return `Roy G Biv` and `Roy Balakrishnan`. 
   > 
-  > ![findbyName](images/find/find-by-name.png)
+    <p align="centerleft">
+        <img src="images/find/find-by-name.png" alt="find-by-name" width="700" style="margin-top:20px; margin-bottom:20px"/>
+    </p>
+  
 * `find n/roy g/CS2101`
   > This command would return `Roy Balakrishnan` who is the only person matching both the 2 conditions.
   > 
-  > ![findByNameAndGroup](images/find/find-by-name-and-group.png)
+    <p align="centerleft">
+        <img src="images/find/find-by-name-and-group.png" alt="find-by-name-and-group" width="700" style="margin-top:20px"/>
+    </p>
 
 ### Deleting a person : `delete`
 
-Deletes person of a specified `NUSID` from the address book.
+Deletes person of a specified `NUSID` from AronaPro.
 
 Format 1: `delete id/NUSID`
 
@@ -203,24 +244,28 @@ Examples:
 * `delete id/E0123456` 
   > This commmand will delete an existing person with `NUSID` of "E0123456".
   >
-  >  ![delete-person](images/delete/delete-person.png)
+    <p align="centerleft">
+        <img src="images/delete/delete-person.png" alt="delete-person" width="700" style="margin-top:20px"/>
+    </p>
 
 Format 2: `delete g/group`
 
 > Note:
 > * Deletes the person in a specified `group`.
 > * The group refers to the group shown in the displayed person list.
-> * The group **must exist in the address book beforehand**.
+> * The group **must exist in AronaPro beforehand**.
 
 Examples:
 * `delete g/CS2103T`
   > This command will delete an existing person with `group` of "CS2013-T15".
-  > 
-  > ![delete-group](images/delete/delete-group.png)
+  >
+    <p align="centerleft">
+        <img src="images/delete/delete-group.png" alt="delete-group" width="700" style="margin-top:20px"/>
+    </p>
 
 ### Assigning a person to a group : `group`
 
-Assigns either a group or a tag to a person of a specified `NUSID` from the address book.
+Assigns either a group or a tag to a person of a specified `NUSID` from AronaPro.
 
 Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
 
@@ -234,15 +279,20 @@ Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
 * `group id/E0123456 g/CS2101`
   > This command will assign or change a group of the person with `NUSID` E0123456 to 'CS2101'.
   >
-  > ![assign-group](images/group/assign-group.png)
+    <p align="centerleft">
+        <img src="images/group/assign-group.png" alt="assign-group" width="700" style="margin-top:20px; margin-bottom:20px"/>
+    </p>
 * `group id/E0123456 t/TA` 
   > This command will assign or change the tag of the person with `NUSID` E0123456 to 'TA'.
-  > ![assign-tag](images/group/assign-tag.png)
+  >
+    <p align="centerleft">
+        <img src="images/group/assign-tag.png" alt="assign-tag" width="700" style="margin-top:20px"/>
+    </p>
 
 
 ### Schedule a meeting with a person: `schedule`
 
-Schedule a meeting with a person in the address book.
+Schedule a meeting with a person in AronaPro.
 
 Format: `schedule id/NUSID [s/SCHEDULE r/REMARK]`
 
@@ -262,15 +312,19 @@ Examples:
   > This command will schedule a meeting with the person of `NUSID` E0123456, with `SCHEDULE` on 12th December 2024 and a `REMARK` of Consultation.
   > If there was a previous date, or remark, it will be replaced!
   > 
-  > ![schedule-with-remark](images/schedule/schedule-with-remark.png)
+    <p align="centerleft">
+        <img src="images/schedule/schedule-with-remark.png" alt="schedule-with-remark" width="700" style="margin-top:20px; margin-bottom:20px"/>
+    </p>
 * `schedule id/E0123456` 
   > This command will remove the schedule with the person of `NUSID` E0123456.
   >
-  > ![remove-schedule](images/schedule/remove-schedule.png) 
+    <p align="centerleft">
+        <img src="images/schedule/remove-schedule.png" alt="remove-schedule" width="700" style="margin-top:20px"/>
+    </p>
 
 ### Pinning a person: `pin`
 
-Pins a person to the top of the address book.
+Pins a person to the top of AronaPro.
 
 Format: `pin id/NUSID`
 
@@ -283,16 +337,21 @@ Examples:
 * `pin id/E0123456` 
   > This command will pin a student with `NUSID` of "E0123456".
   >
-  > ![pin](images/pin/pin.png) 
+    <p align="centerleft">
+        <img src="images/pin/pin.png" alt="pin" width="700" style="margin-top:20px"/>
+    </p>
 
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from AronaPro.
 
 Format: `clear`
 
-![clear](images/clear.png)
+<p align="centerleft">
+   <img src="images/clear.png" alt="clear" width="700" style="margin-top:20px"/>
+</p>
+
 
 ### Exiting the program : `exit`
 
@@ -302,17 +361,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AronaPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AronaPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, AronaPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause AronaPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -324,7 +383,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -333,6 +392,7 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **When using the `schedule` command**, the command does not check for the validity of the date entered. Hence, it is important to ensure that the date entered is valid.
 3. **When using the `schedule` command**, the command does not check if the valid date entered is in the future. Hence, it is important to ensure that the date entered is in the future.
+4. **When using the `edit` command**, the command does not check for the validity of the domain name of the email entered. Hence, it is important to ensure that a valid domain name is entered.
 4. **When using the `group` command with a very long group name**, the group name may be hidden from view. The remedy is to resize the window to view the full group name.
 5. **When adding/editing a person's email address with a very long email address**, the email address may be hidden from view. The remedy is to resize the window to view the full email address.
 6. **When resizing the window to a smaller size**, the GUI may not fully display the person's information; for example: name, tag, remark. The remedy is to resize the window to a larger size to view all the information.
@@ -345,6 +405,7 @@ Team size: 5
 
 1. **Validity of date entered:** The current behaviour of the `schedule` command does not check for the validity of the date entered. We plan to implement a check to ensure that the date entered is valid.
 2. **Future date check:** The current behaviour of the `schedule` command does not check if the valid date entered is in the future. We plan to implement a check to ensure that the date entered is in the future.
+3. **Validity of email domain entered:** The current behaviour of the `edit` command does not check for the validity of the domain name of the email entered. We plan to implement a check to ensure that a valid domain name is entered.
 3. **Group name visibility:** When using the `group` command with a very long group name, the group name may be hidden from view. We plan to implement a feature to allow users to view the full group name. Either by truncating the group name, allowing the user to view the full group name or limiting the length of the group name.
 4. **Email address visibility:** When adding/editing a person's email address with a very long email address, the email address may be hidden from view. We plan to implement a feature to allow users to view the full email address. Either by truncating the email address, allowing the user to view the full email address or limiting the length of the email address.
 5. **Tag information visibility:** When resizing the window to a smaller size, the GUI may not fully display the person's tag information. We plan to implement a minimum size for the window to ensure that all information is displayed.
