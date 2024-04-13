@@ -175,7 +175,14 @@ Format: `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
 > * `NAME` can consist of numbers.
 > * `PHONE_NUMBER` has to be 3-10 digits long.
-> * `EMAIL` has to have a valid domain name (e.g. hotmail/gmail/yahoo etc).
+> * `EMAIL` follows the following format and constraints:
+>   * It should have a local-part followed by a `@` and then a domain name.
+>   * Local-part should only contain alphanumeric characters and special characters(+ _ . -).
+>   * Local-part may not start or end with any special characters.
+>   * Domain name is made up  of domain label separated by periods.
+>     * Domain name must end with a domain label at least 2 characters long.
+>     * Have each domain label start and end with alphanumeric characters.
+>     * Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 > * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None.
 > * At least one of the optional fields must be provided.
 > * Existing values will be replaced by and updated to the new input values.
@@ -392,7 +399,7 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **When using the `schedule` command**, the command does not check for the validity of the date entered. Hence, it is important to ensure that the date entered is valid.
 3. **When using the `schedule` command**, the command does not check if the valid date entered is in the future. Hence, it is important to ensure that the date entered is in the future.
-4. **When using the `edit` command**, the command does not check for the validity of the domain name of the email entered. Hence, it is important to ensure that a valid domain name is entered.
+4. **When using the `edit` command**, the command does not check for the validity of the domain name of the email entered as writing an incorrect domain name after the `@` is accepted (e.g. `@random.com`). Hence, it is important to ensure that a valid domain name is entered.
 4. **When using the `group` command with a very long group name**, the group name may be hidden from view. The remedy is to resize the window to view the full group name.
 5. **When adding/editing a person's email address with a very long email address**, the email address may be hidden from view. The remedy is to resize the window to view the full email address.
 6. **When resizing the window to a smaller size**, the GUI may not fully display the person's information; for example: name, tag, remark. The remedy is to resize the window to a larger size to view all the information.
