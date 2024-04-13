@@ -117,7 +117,7 @@ Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 Examples:
 * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T`
   > This command would add a person with `NUSID` of E1234567, `NAME` of John Doe, `PHONE_NUMBER` of 98765432, `EMAIL` of johnd@example.com
-    `TAG` of Student, `GROUP` of CS2103T-T15 into the address book.
+    `TAG` of Student, `GROUP` of CS2103T into the address book.
   >
   > ![add-new-person](images/add/add-new-person.png)
 * `add id/E7654321 n/Betsy Crowe t/TA e/betsycrowe@example.com p/92345678`
@@ -136,7 +136,7 @@ Format: `view`
 
 Edits the information of a person of a specified `NUSID` in the address book.
 
-Format: `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]` 
+Format: `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]...` 
 
 > Note:
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
@@ -222,12 +222,13 @@ Examples:
 
 Assigns either a group or a tag to a person of a specified `NUSID` from the address book.
 
-Format: `group id/NUSID [g/GROUP] [t/TAG]`
+Format: `group id/NUSID... [g/GROUP]... [t/TAG]`
 
 > Note:
 > * Groups the person of a specified `NUSID`.
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
 > * The `NUSID` **must be a 7-digit number following an 'E'**
+> * More than one `NUSID` can be specified for a group command to group more than one person.
 > * At least one of the optional fields must be provided.
 > * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None
 
@@ -354,16 +355,16 @@ Team size: 5
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                         |
-|--------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| Action       | Format, Examples                                                                                                                           |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/Student g/CS2103T-T15` |
-| **Clear**    | `clear`                                                                                                                                  |
-| **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                     |
-| **Edit**     | `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]…​`<br> e.g.,`edit id/E1234567 n/James Lee e/jameslee@example.com`   |
-| **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                          |
-| **Group**    | `group id/NUSID [g/GROUP] [t/TAG] `                                                                                                      |
-| **Schedule** | `schedule id/NUSID [s/SCHEDULE r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                  |
-| **Pin**      | `pin id/NUSID`                                                                                                                           |
-| **View**     | `view`                                                                                                                                   |
-| **Help**     | `help`                                                                                                                                   |
+| **Clear**    | `clear`                                                                                                                                    |
+| **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                       |
+| **Edit**     | `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]…​`<br> e.g.,`edit id/E1234567 n/James Lee e/jameslee@example.com`     |
+| **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
+| **Group**    | `group id/NUSID... [g/GROUP]... [t/TAG] `                                                                                                  |
+| **Schedule** | `schedule id/NUSID [s/SCHEDULE r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                    |
+| **Pin**      | `pin id/NUSID`                                                                                                                             |
+| **View**     | `view`                                                                                                                                     |
+| **Help**     | `help`                                                                                                                                     |
 

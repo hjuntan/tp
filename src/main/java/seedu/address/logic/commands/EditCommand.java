@@ -46,7 +46,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_GROUP + "GROUP] \n"
+            + "[" + PREFIX_GROUP + "GROUP]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NUSID + "E1234567 "
             + PREFIX_PHONE + "91234567 "
