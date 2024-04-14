@@ -134,8 +134,9 @@ Let us get started!
   > `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply as `n/John Doe` without specifying the `TAG` as it is optional.
 
 * Items with `…`​ after them can be used multiple times or zero times.<br>
-  > `[g/GROUP]…​` can be used as ` ` (i.e. 0 times) or `g/School` `g/Family`, demonstrating that group can be used 2 times by writing them successively on the same line etc.
-
+  > * `[g/GROUP]…​` can be used as ` ` (i.e. 0 times) or `g/School` `g/Family`, demonstrating that group can be used 2 times by writing them successively on the same line etc.
+  > * The only exception to the above is when `NUSID` is of concern where it needs to be used **at least once** or more. `id/NUSID...` means that you need to use it once as such: `id/E1234567` 
+  > or you can choose to use it more than once: `id/E1234567 id/E0123456`.
 * Parameters can be in any order.<br>
   > If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
