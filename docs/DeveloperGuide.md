@@ -724,7 +724,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The tag does not exist.
 
     * 2a1. AddressBook shows an error message.
-    * 2a2. User has to request the classification again using a correct classifier
+    * 2a2. User has to request the classification again using a correct classifier.
 
       Use case resumes at step 1.
 
@@ -749,13 +749,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The contact does not exist.
 
     * 2a1. AddressBook shows an error message.
+    * 2a2. User inputs an existing contact as required in the error message for his request.
 
-      Use case ends.
+      Use case resumes at step 2.
 
 * 2a. The information required is not sufficiently inputted.
 
     * 2a1. AddressBook shows an error message.
-    * 2a2. User has to request the classification again using a correct classifier
+    * 2a2. User has to request the classification again using a correct classifier.
 
       Use case resumes at step 1.
 
@@ -814,7 +815,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  A novice user should be able to learn basic operations (add, delete, search entries) within 30 minutes of using the documentation.
 5.  The system should respond within two seconds.
-6.  The system should be backward compatible with data produced by earlier versions of the system
+6.  The system should be backward compatible with data produced by earlier versions of the system.
 7.  The system should smoothly handle user input errors and system issues, providing meaningful error messages without crashing.
 8.  Comply with relevant data protection regulations, Personal Data Protection Act (PDPA) in handling personal information.
 9.  Adhere to recommended coding standards, such as readability, modularity, and application of design patterns, to make upgrades and maintenance simpler.
@@ -829,7 +830,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<boxtype="info" seamless>
+<box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -840,9 +841,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. cd into that folder and execute the command `java -jar AronaPro.jar` <br>
+   1. cd into that folder and execute the command `java -jar AronaPro.jar`. <br>
    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
@@ -856,7 +857,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Example: Deleting a person
 
-1. Deleting a person with a specified `while all persons are being shown
+1. Deleting a person with a specified `while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -873,7 +874,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data files.
 
    1. Open a command terminal, `cd` into the folder you put the jar file in, and delete the data file `data/addressbook.json`.<br>
         Expected: The app should create a new data file with default data when it is launched.

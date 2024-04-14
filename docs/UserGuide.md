@@ -145,7 +145,7 @@ Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 Examples:
 * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T`
   > This command would add a person with `NUSID` of E1234567, `NAME` of John Doe, `PHONE_NUMBER` of 98765432, `EMAIL` of johnd@example.com
-    `TAG` of Student, `GROUP` of CS2103T-T15 into AronaPro.
+    `TAG` of Student, `GROUP` of CS2103T into AronaPro.
   <p align="centerleft">
         <img src="images/add/add-new-person.png" alt="add new person" width="700" style="margin-top:20px"/>
   </p>
@@ -210,15 +210,15 @@ Finds persons whose names contain any of the given keywords.
 Format: `find [id/NUSID] [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [g/GROUP] [g/MORE GROUPS]`
 
 > Note:
-> * The NUSID search matches people that has a prefix that STARTS WITH the query (e.g `E0123` fetches `E0123456`)
-> * The NAME search is case-insensitive. e.g `hans` will match `Hans`
-> * The order of NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only full words will be matched for NAME e.g. `Han` will not match `Hans`
-> * Persons matching ANY word will be selected for NAME (e.g. `Hans Bo` will fetch `Hans Gruber`, `Bo Yang`)
-> * The PHONE search matches people that has a number that STARTS WITH the query (e.g `9123` fetches `91237654`)
-> * The EMAIL search uses a PARTIAL, case-insensitive match. (e.g. `charles` matches `PrinceCharles@kingston.com`)
+> * The NUSID search matches people that has a prefix that STARTS WITH the query (e.g `E0123` fetches `E0123456`).
+> * The NAME search is case-insensitive. e.g `hans` will match `Hans`.
+> * The order of NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+> * Only full words will be matched for NAME e.g. `Han` will not match `Hans`.
+> * Persons matching ANY word will be selected for NAME (e.g. `Hans Bo` will fetch `Hans Gruber`, `Bo Yang`).
+> * The PHONE search matches people that has a number that STARTS WITH the query (e.g `9123` fetches `91237654`).
+> * The EMAIL search uses a PARTIAL, case-insensitive match. (e.g. `charles` matches `PrinceCharles@kingston.com`).
 > * The TAG search uses an EXACT case-sensitive match. 
-> * The GROUP search fetches people with ALL specified groups (e.g `g/CS2101 g/CS2103T` matches a person who minimally has BOTH these Groups)
+> * The GROUP search fetches people with ALL specified groups (e.g `g/CS2101 g/CS2103T` matches a person who minimally has BOTH these Groups).
 > * Persons matching all parameters will be returned (i.e. `AND` search).
   
 Examples:
@@ -264,7 +264,7 @@ Format 2: `delete g/group`
 
 Examples:
 * `delete g/CS2103T`
-  > This command will delete an existing person with `group` of "CS2013-T15".
+  > This command will delete an existing person with `group` of "CS2103T".
   >
     <p align="centerleft">
         <img src="images/delete/delete-group.png" alt="delete-group" width="700" style="margin-top:20px"/>
@@ -279,10 +279,11 @@ Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
 > Note:
 > * Groups the person of a specified `NUSID`.
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
-> * The `NUSID` **must be a 7-digit number following an 'E'**
+> * The `NUSID` **must be a 7-digit number following an 'E'**.
 > * At least one of the optional fields must be provided.
-> * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None
+> * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None.
 
+Examples:
 * `group id/E0123456 g/CS2101`
   > This command will assign or change a group of the person with `NUSID` E0123456 to 'CS2101'.
   >
@@ -304,13 +305,13 @@ Schedule a meeting with a person in AronaPro.
 Format: `schedule id/NUSID [s/SCHEDULE r/REMARK]`
 
 > Note: 
-> * Schedule a meeting with a person of the specified `nusId` on the specified `schedule` with a `remark`.
+> * Schedule a meeting with a person of the specified `nusId` on the specified `SCHEDULE` with a `REMARK`.
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
-> * Both `schedule` and `remark` must be either provided or not provided.
-> * If `schedule` and `remark` are not provided, the schedule will be removed.
+> * Both `SCHEDULE` and `REMARK` must be either provided or not provided.
+> * If `SCHEDULE` and `REMARK` are not provided, the schedule will be removed.
 
-**Tip:** The `schedule` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`. Example of date formats include: `12-12-2024`, `12/12/2024`, `12.12.2024`, `Dec 12, 2024`, `12 Dec 2024`.
+**Tip:** The `SCHEDULE` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`. Example of date formats include: `12-12-2024`, `12/12/2024`, `12.12.2024`, `Dec 12, 2024`, `12 Dec 2024`.
 
 
 Examples:
