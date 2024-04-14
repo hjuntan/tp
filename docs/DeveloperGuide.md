@@ -160,7 +160,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### `Add` feature
 
-`Add` for a person can be added using the `add` command. The `AddCommand` class is responsible for handling the addition of a person. This command is implemented through `AddCommand` which extend the `Command` class.
+`Add` for a person can be added using the `add` command. The `AddCommand` class is responsible for handling the addition of a person. This command is implemented through `AddCommand` which extends the `Command` class.
 
 A new `Person` can be added by specifying `nusId`, `name`, `phone`, `email`, `tags` and optional `group`.
 
@@ -170,7 +170,7 @@ A new `Person` can be added by specifying `nusId`, `name`, `phone`, `email`, `ta
 
 </box>
 
-#### Proposed Implementation
+#### Implementation
 
 Given below is an example usage scenario and how the `AddCommand` mechanism behaves at each step.
 
@@ -277,9 +277,9 @@ The following activity diagram summarizes what happens when a user inputs an Edi
 
 ### `Schedule` feature
 
-#### Proposed Implementation
+#### Implementation
 
-`Schedule` for a person can be added or removed using the `schedule` command. The `ScheduleCommand` class is responsible for handling the scheduling of events for a person. This command is implemented through `ScheduleCommand` which extend the `Command` class.
+`Schedule` for a person can be added or removed using the `schedule` command. The `ScheduleCommand` class is responsible for handling the scheduling of events for a person. This command is implemented through `ScheduleCommand` which extends the `Command` class.
 
 A new `Schedule` can be added by specifying `nusId`, `schedule` and `remark`. If the `schedule` and `remark` prefixes are not specified, the schedule will be removed instead.
 
@@ -457,8 +457,54 @@ The following activity diagram summarizes what happens when a user inputs a pin 
 * The instances of the relevant fields are created and the person is added to the model.
 
 
+### `Group` feature
+
+`Group` for a person can be added using the `group` command. The `GroupCommand` class is responsible for handling the grouping and the tagging of a person. This command is implemented through `GroupCommand` which extends the `Command` class.
+
+A new `Person` can be grouped by specifying `nusId` and either `group` and/or `tag`.
+
+<box type="info" seamless>
+
+**Note:** There needs to be at least one `group` and/or `tag` keyword.
+**Note:** More than one `nusId` keyword can be used if grouping more than one person at once.
+
+</box>
+
+#### Implementation
+
+Given below is an example usage scenario and how the `GroupCommand` mechanism behaves at each step.
+
+Step 1. The user executes `group` command with `nusId`, `group` and  `tag`.
+
+Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `GroupCommandParser`.
+
+Step 3. `GroupCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `GroupCommand`.
+
+Step 4. The `LogicManager` calls the `execute` method in `GroupCommand`.
+
+Step 5. The `execute` method in `GroupCommand` executes and creates a list of Persons `personToGroup`. It then calls `Model#setPerson()` on all Persons in the list to modify the group and tag fields of the Persons in the address book.
+
+Step 6. Success message is printed onto the results display to notify user.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#setPerson()` and the Persons will not be grouped in the address book.
+
+</box>
+
+The following sequence diagram shows how a group operation goes through the `Logic` component:
+
+<puml src="diagrams/AddSequenceDiagram.puml" alt="GroupSequenceDiagram" />
 
 
+#### Design considerations:
+
+**How group executes**
+
+* User inputs an `group` command with `nusId` and either `tags` and/or `group` fields. The inputs are parsed and a `GroupCommand` is created.
+* The instances of the relevant fields are created and the person(s) is/are grouped in the model.
+
+  
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
