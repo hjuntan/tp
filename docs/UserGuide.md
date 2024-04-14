@@ -275,7 +275,7 @@ Examples:
         <img src="images/delete/delete-group.png" alt="delete-group" width="700" style="margin-top:20px"/>
     </p>
 
-### Assigning a person to a group : `group`
+### Assigning people to a group : `group`
 
 Assigns either a group or a tag to a person of a specified `NUSID` from AronaPro.
 
