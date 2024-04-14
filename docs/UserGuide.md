@@ -73,7 +73,7 @@ Let us get started!
    * `view` : Lists all contacts.
 
 
-   * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T-T15` : Adds a student with `NAME` John Doe with `NUSID` of E1234567 to AronaPro.
+   * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T` : Adds a student with `NAME` John Doe with `NUSID` of E1234567 to AronaPro.
 
    * `delete id/E1234567` : Deletes the person with `NUSID` of E1234567.
 
@@ -432,16 +432,16 @@ Team size: 5
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                           |
-|--------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Action       | Format, Examples                                                                                                                       |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/Student g/CS2103T-T15` |
-| **Clear**    | `clear`                                                                                                                                    |
-| **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                       |
-| **Edit**     | `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]…​`<br> e.g.,`edit id/E1234567 n/James Lee e/jameslee@example.com`     |
-| **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
-| **Group**    | `group id/NUSID... [g/GROUP]... [t/TAG] ` <br> e.g., `group id/E1234567 g/T15`                                                                                                 |
-| **Schedule** | `schedule id/NUSID [s/SCHEDULE r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                    |
-| **Pin**      | `pin id/NUSID`                                                                                                                             |
-| **View**     | `view`                                                                                                                                     |
-| **Help**     | `help`                                                                                                                                     |
+| **Clear**    | `clear`                                                                                                                                |
+| **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103`                                       |
+| **Edit**     | `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]…​`<br> e.g.,`edit id/E1234567 n/James Lee e/jameslee@example.com` |
+| **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                        |
+| **Group**    | `group id/NUSID... [g/GROUP]... [t/TAG] ` <br> e.g., `group id/E1234567 g/T15`                                                                                             |
+| **Schedule** | `schedule id/NUSID [s/SCHEDULE r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                |
+| **Pin**      | `pin id/NUSID`                                                                                                                         |
+| **View**     | `view`                                                                                                                                 |
+| **Help**     | `help`                                                                                                                                 |
 
