@@ -53,6 +53,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         String tagToMatch = argumentMultimap.getValue(PREFIX_TAG).orElse(NOT_REQUIRED_VALUE);
         List<String> groupToMatch = argumentMultimap.getAllValues(PREFIX_GROUP);
 
+        if (someParameterIsEmpty(groupToMatch, nusIdToMatch, nameToMatch, phoneToMatch, emailToMatch, tagToMatch)) {
+            throw new ParseException(buildErrorMessage(nusIdToMatch, nameToMatch, phoneToMatch,
+                    emailToMatch, tagToMatch, groupToMatch));
+        }
 
         String[] nameKeywords = nameToMatch.split("\\s+");
 
@@ -64,4 +68,62 @@ public class FindCommandParser implements Parser<FindCommand> {
                 new TagMatchesPredicate(tagToMatch));
     }
 
+    private String buildErrorMessage(String id, String name, String phone,
+                                     String email, String tag, List<String> groups) {
+        // Stop user from entering a command if any field is empty
+        StringBuilder errorMessage = new StringBuilder();
+        errorMessage.append("The provided fields should not be empty: ");
+        if (id.isBlank()) {
+            errorMessage.append("[id/NUSID] ");
+        }
+
+        if (name.isBlank()) {
+            errorMessage.append("[n/NAME] ");
+        }
+
+        if (phone.isBlank()) {
+            errorMessage.append("[p/PHONE_NUMBER] ");
+        }
+
+        if (email.isBlank()) {
+            errorMessage.append("[e/EMAIL] ");
+        }
+
+        if (tag.isBlank()) {
+            errorMessage.append("[t/TAG] ");
+        }
+
+        boolean someGroupIsEmpty = false;
+        for (String group : groups) {
+            if (group.isBlank()) {
+                someGroupIsEmpty = true;
+                break;
+            }
+        }
+
+        if (someGroupIsEmpty) {
+            errorMessage.append("[g/GROUP]...");
+        }
+
+        return errorMessage.toString();
+    }
+
+    private boolean someParameterIsEmpty(List<String> groups, String... params) {
+        boolean hasEmptyParams = false;
+        for (String group : groups) {
+            if (group.isBlank()) {
+                hasEmptyParams = true;
+                break;
+            }
+        }
+
+        for (String param : params) {
+            if (param.isBlank()) {
+                hasEmptyParams = true;
+                break;
+            }
+        }
+
+        return hasEmptyParams;
+    }
 }

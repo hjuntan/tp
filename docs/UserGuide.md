@@ -90,10 +90,11 @@ Let us get started!
    <p align="centerleft">
     <img src="images/Ui.png" alt="Ui" width="900" style="margin-left: 10px; margin-top:20px"/>
    </p>
-   e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   e.g. Typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try to quickly get started with our application:
 
    * `view` : Lists all contacts.
+
 
    * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T-T15` : Adds a student with `NAME` John Doe with `NUSID` of E1234567 to AronaPro.
 
@@ -162,18 +163,21 @@ Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 
 > Note:
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
+> * `PHONE_NUMBER` has to be 3-10 digits long.
 
 **Tip:** A person can have 0 or more groups.
 
 Examples:
 * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T`
   > This command would add a person with `NUSID` of E1234567, `NAME` of John Doe, `PHONE_NUMBER` of 98765432, `EMAIL` of johnd@example.com
-    `TAG` of Student, `GROUP` of CS2103T-T15 into AronaPro.
+    `TAG` of Student, `GROUP` of CS2103T into AronaPro.
+
   <p align="centerleft">
         <img src="images/add/add-new-person.png" alt="add new person" width="700" style="margin-top:20px"/>
   </p>
   
  
+
 * `add id/E7654321 n/Betsy Crowe t/TA e/betsycrowe@example.com p/92345678`
   > This command would add a person with `NUSID` of E7654321, `NAME` of Betsy Crowe, `TAG` of TA,
     `EMAIL` of betsycrowe@example.com, `PHONE_NUMBER` of 92345678 into AronaPro.
@@ -191,7 +195,7 @@ Format: `view`
 
 Edits the information of a person of a specified `NUSID` in AronaPro.
 
-Format: `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]` 
+Format: `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]...` 
 
 > Note:
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
@@ -228,20 +232,20 @@ Examples:
 
 ### Finding a person: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose details match ALL the given keywords.
 
 Format: `find [id/NUSID] [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [g/GROUP] [g/MORE GROUPS]`
 
 > Note:
-> * The NUSID search matches people that has a prefix that STARTS WITH the query (e.g `E0123` fetches `E0123456`)
-> * The NAME search is case-insensitive. e.g `hans` will match `Hans`
-> * The order of NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only full words will be matched for NAME e.g. `Han` will not match `Hans`
-> * Persons matching ANY word will be selected for NAME (e.g. `Hans Bo` will fetch `Hans Gruber`, `Bo Yang`)
-> * The PHONE search matches people that has a number that STARTS WITH the query (e.g `9123` fetches `91237654`)
-> * The EMAIL search uses a PARTIAL, case-insensitive match. (e.g. `charles` matches `PrinceCharles@kingston.com`)
+> * The NUSID search matches people that has a prefix that STARTS WITH the query (e.g `E0123` fetches `E0123456`).
+> * The NAME search is case-insensitive. e.g `hans` will match `Hans`.
+> * The order of NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+> * Only full words will be matched for NAME e.g. `Han` will not match `Hans`.
+> * Persons matching ANY word will be selected for NAME (e.g. `Hans Bo` will fetch `Hans Gruber`, `Bo Yang`).
+> * The PHONE search matches people that has a number that STARTS WITH the query (e.g `9123` fetches `91237654`).
+> * The EMAIL search uses a PARTIAL, case-insensitive match. (e.g. `charles` matches `PrinceCharles@kingston.com`).
 > * The TAG search uses an EXACT case-sensitive match. 
-> * The GROUP search fetches people with ALL specified groups (e.g `g/CS2101 g/CS2103T` matches a person who minimally has BOTH these Groups)
+> * The GROUP search fetches people with ALL specified groups (e.g `g/CS2101 g/CS2103T` matches a person who minimally has BOTH these Groups).
 > * Persons matching all parameters will be returned (i.e. `AND` search).
   
 Examples:
@@ -261,7 +265,8 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes person of a specified `NUSID` from AronaPro.
+
+Deletes person of a specified `NUSID` from the address book OR deletes all persons from a specified `GROUP` from the address book.
 
 Format 1: `delete id/NUSID`
 
@@ -278,7 +283,7 @@ Examples:
         <img src="images/delete/delete-person.png" alt="delete-person" width="700" style="margin-top:20px"/>
     </p>
 
-Format 2: `delete g/group`
+Format 2: `delete g/GROUP`
 
 > Note:
 > * Deletes the person in a specified `group`.
@@ -287,7 +292,7 @@ Format 2: `delete g/group`
 
 Examples:
 * `delete g/CS2103T`
-  > This command will delete an existing person with `group` of "CS2013-T15".
+  > This command will delete an existing person with `group` of "CS2103T".
   >
     <p align="centerleft">
         <img src="images/delete/delete-group.png" alt="delete-group" width="700" style="margin-top:20px"/>
@@ -297,15 +302,19 @@ Examples:
 
 Assigns either a group or a tag to a person of a specified `NUSID` from AronaPro.
 
-Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
+Format: `group id/NUSID... [g/GROUP]... [t/TAG]`
 
 > Note:
 > * Groups the person of a specified `NUSID`.
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
-> * The `NUSID` **must be a 7-digit number following an 'E'**
+> * The `NUSID` **must be a 7-digit number following an 'E'**.
+> * More than one `NUSID` can be specified for a group command to group more than one person.
 > * At least one of the optional fields must be provided.
-> * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None
+> * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None.
+> * Existing values will be replaced by and updated to the new input values.
+> * A person can be assigned to a non-existing group.
 
+Examples:
 * `group id/E0123456 g/CS2101`
   > This command will assign or change a group of the person with `NUSID` E0123456 to 'CS2101'.
   >
@@ -327,13 +336,13 @@ Schedule a meeting with a person in AronaPro.
 Format: `schedule id/NUSID [s/SCHEDULE r/REMARK]`
 
 > Note: 
-> * Schedule a meeting with a person of the specified `nusId` on the specified `schedule` with a `remark`.
+> * Schedule a meeting with a person of the specified `nusId` on the specified `SCHEDULE` with a `REMARK`.
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
-> * Both `schedule` and `remark` must be either provided or not provided.
-> * If `schedule` and `remark` are not provided, the schedule will be removed.
+> * Both `SCHEDULE` and `REMARK` must be either provided or not provided.
+> * If `SCHEDULE` and `REMARK` are not provided, the schedule will be removed.
 
-**Tip:** The `schedule` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`. Example of date formats include: `12-12-2024`, `12/12/2024`, `12.12.2024`, `Dec 12, 2024`, `12 Dec 2024`.
+**Tip:** The `SCHEDULE` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`. Example of date formats include: `12-12-2024`, `12/12/2024`, `12.12.2024`, `Dec 12, 2024`, `12 Dec 2024`.
 
 
 Examples:
@@ -448,7 +457,7 @@ Team size: 5
 | **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                       |
 | **Edit**     | `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]…​`<br> e.g.,`edit id/E1234567 n/James Lee e/jameslee@example.com`     |
 | **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
-| **Group**    | `group [id/NUSID] [g/GROUP] [t/TAG] `                                                                                                      |
+| **Group**    | `group id/NUSID... [g/GROUP]... [t/TAG] ` <br> e.g., `group id/E1234567 g/T15`                                                                                                 |
 | **Schedule** | `schedule id/NUSID [s/SCHEDULE r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                    |
 | **Pin**      | `pin id/NUSID`                                                                                                                             |
 | **View**     | `view`                                                                                                                                     |

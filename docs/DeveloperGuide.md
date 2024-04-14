@@ -160,7 +160,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### `Add` feature
 
-`Add` for a person can be added using the `add` command. The `AddCommand` class is responsible for handling the addition of a person. This command is implemented through `AddCommand` which extend the `Command` class.
+`Add` for a person can be added using the `add` command. The `AddCommand` class is responsible for handling the addition of a person. This command is implemented through `AddCommand` which extends the `Command` class.
 
 A new `Person` can be added by specifying `nusId`, `name`, `phone`, `email`, `tags` and optional `group`.
 
@@ -170,7 +170,7 @@ A new `Person` can be added by specifying `nusId`, `name`, `phone`, `email`, `ta
 
 </box>
 
-#### Proposed Implementation
+#### Implementation
 
 Given below is an example usage scenario and how the `AddCommand` mechanism behaves at each step.
 
@@ -277,9 +277,9 @@ The following activity diagram summarizes what happens when a user inputs an Edi
 
 ### `Schedule` feature
 
-#### Proposed Implementation
+#### Implementation
 
-`Schedule` for a person can be added or removed using the `schedule` command. The `ScheduleCommand` class is responsible for handling the scheduling of events for a person. This command is implemented through `ScheduleCommand` which extend the `Command` class.
+`Schedule` for a person can be added or removed using the `schedule` command. The `ScheduleCommand` class is responsible for handling the scheduling of events for a person. This command is implemented through `ScheduleCommand` which extends the `Command` class.
 
 A new `Schedule` can be added by specifying `nusId`, `schedule` and `remark`. If the `schedule` and `remark` prefixes are not specified, the schedule will be removed instead.
 
@@ -346,6 +346,73 @@ The following activity diagram summarizes what happens when a user inputs a sche
     * Pros: It follows the DRY principle.
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+
+### `Find` feature
+
+A `Person` has many details one may query for, this command searches for contacts that matches all the given details.
+Currently, this command supports finding by `nusId`, `name`, `phone`, `email`, `group`s, `tag` fields.
+
+<box type="info" seamless>
+
+**Note:** `find` requires at least one field mentioned above to be an input
+
+</box>
+
+Given below is an example usage scenario and how the `find` mechanism behaves at each step.
+
+Step 1. The user executes `find` command.
+
+Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `FindCommandParser`.
+
+Step 3. `FindCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `FindCommand`.
+
+Step 4. The `LogicManager` calls the `execute` method in `FindCommand`.
+
+Step 5. The `execute` method in `FindCommand` executes and finds the relevant person(s) with the given fields.
+
+Step 6. `Model#updateFilteredPersonList()` is called to update the list of persons displayed in AronaPro.
+
+Step 7. Success message is printed onto the results display to notify user.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#updateFilteredPersonList()` and the list of persons displayed remains the same.
+**Note:** If a command finds no person, it will display an empty list and not an error message.
+
+</box>
+
+The following sequence diagram shows how a find operation goes through the `Logic` component:
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram">
+
+The following activity diagram summarizes what happens when a user inputs a `find` command:
+<puml src="diagrams/FindActivityDiagram.puml" alt="FindActivityDiagram">
+
+#### Design considerations:
+
+**How find executes**
+
+* User inputs a `find` command with at least one of the fields `nusId`, `name`, `phone`, `email`, `group` or `tag`. The inputs are parsed and a `FindCommand` is created.
+* Each of these fields are made into Java `Predicates` which checks if each field's input matches any person's field (Choice of matching can be changed flexibly in each field's corresponding `Predicate` class) in AronaPro.
+* If any field was not required by the user, a special string (not possible for the user to type when using the add or edit commands) is used to default the `Predicate` to True.
+* A list of persons is created by chaining these `Predicates` using logical `AND`. A list of relevant person(s) are found.
+* The relevant persons are used to update the person list which the model displays.
+
+**Why is it implemented this way?**
+
+* The functionality of find is advertised as finding people that matches ALL the supplemented fields. As such logical AND search is relevant to our case.
+* Use of predicates is also easily extendable, requiring future programmers to simply create a new `Predicate` for new fields and chaining it with the existing predicates
+* The use of a special string to denote a non-specified field, while rudimentary, avoids the hassle required to juggle Java `Optional`s and less transparent Functional Programming paradigms.
+
+**Alternative considerations**
+
+* **Alternative 1 (current choice):** Set non-required fields to a special string that makes a field match everyone, otherwise filter based on the input.
+    * Pros: Easy to implement.
+    * Cons: If the user is able to enter this special string in `add` or `edit` commands, it could result in unexpected behaviour.
+
+* **Alternative 2:** Introduce Java `Optional`s to determine which fields are required.
+    * Pros: There is usage of Single Responsibility Principle. (Current implementation has `Predicate` implicitly handling added responsibility of checking optionality)
+    * Cons: Harder to debug when using Functional Programming paradigms while passing results across classes.
+
 ### `Pin` feature
 
 `Pin` for a person can be added using the `pin` command. The `PinCommand` class is responsible for handling the addition of a person. This command is implemented through `PinCommand` which extend the `Command` class.
@@ -384,15 +451,60 @@ The following activity diagram summarizes what happens when a user inputs a pin 
 
 #### Design considerations:
 
-**How add executes**
+**How Pin executes**
 
 * User inputs a `pin` command with `nusId`.The inputs are parsed and a `PinCommand` is created.
 * The instances of the relevant fields are created and the person is added to the model.
 
 
+### `Group` feature
+
+`Group` for a person can be added using the `group` command. The `GroupCommand` class is responsible for handling the grouping and the tagging of a person. This command is implemented through `GroupCommand` which extends the `Command` class.
+
+A new `Person` can be grouped by specifying `nusId` and either `group` and/or `tag`.
+
+<box type="info" seamless>
+
+**Note:** There needs to be at least one `group` and/or `tag` keyword.
+**Note:** More than one `nusId` keyword can be used if grouping more than one person at once.
+
+</box>
+
+#### Implementation
+
+Given below is an example usage scenario and how the `GroupCommand` mechanism behaves at each step.
+
+Step 1. The user executes `group` command with `nusId`, `group` and  `tag`.
+
+Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `GroupCommandParser`.
+
+Step 3. `GroupCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `GroupCommand`.
+
+Step 4. The `LogicManager` calls the `execute` method in `GroupCommand`.
+
+Step 5. The `execute` method in `GroupCommand` executes and creates a list of Persons `personToGroup`. It then calls `Model#setPerson()` on all Persons in the list to modify the group and tag fields of the Persons in the address book.
+
+Step 6. Success message is printed onto the results display to notify user.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#setPerson()` and the Persons will not be grouped in the address book.
+
+</box>
+
+The following sequence diagram shows how a group operation goes through the `Logic` component:
+
+<puml src="diagrams/AddSequenceDiagram.puml" alt="GroupSequenceDiagram" />
 
 
+#### Design considerations:
 
+**How group executes**
+
+* User inputs an `group` command with `nusId` and either `tags` and/or `group` fields. The inputs are parsed and a `GroupCommand` is created.
+* The instances of the relevant fields are created and the person(s) is/are grouped in the model.
+
+  
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -724,7 +836,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The tag does not exist.
 
     * 2a1. AddressBook shows an error message.
-    * 2a2. User has to request the classification again using a correct classifier
+    * 2a2. User has to request the classification again using a correct classifier.
 
       Use case resumes at step 1.
 
@@ -749,13 +861,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The contact does not exist.
 
     * 2a1. AddressBook shows an error message.
+    * 2a2. User inputs an existing contact as required in the error message for his request.
 
-      Use case ends.
+      Use case resumes at step 2.
 
 * 2a. The information required is not sufficiently inputted.
 
     * 2a1. AddressBook shows an error message.
-    * 2a2. User has to request the classification again using a correct classifier
+    * 2a2. User has to request the classification again using a correct classifier.
 
       Use case resumes at step 1.
 
@@ -814,7 +927,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  A novice user should be able to learn basic operations (add, delete, search entries) within 30 minutes of using the documentation.
 5.  The system should respond within two seconds.
-6.  The system should be backward compatible with data produced by earlier versions of the system
+6.  The system should be backward compatible with data produced by earlier versions of the system.
 7.  The system should smoothly handle user input errors and system issues, providing meaningful error messages without crashing.
 8.  Comply with relevant data protection regulations, Personal Data Protection Act (PDPA) in handling personal information.
 9.  Adhere to recommended coding standards, such as readability, modularity, and application of design patterns, to make upgrades and maintenance simpler.
@@ -829,7 +942,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<boxtype="info" seamless>
+<box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -840,9 +953,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. cd into that folder and execute the command `java -jar AronaPro.jar` <br>
+   1. cd into that folder and execute the command `java -jar AronaPro.jar`. <br>
    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
@@ -856,7 +969,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Example: Deleting a person
 
-1. Deleting a person with a specified `while all persons are being shown
+1. Deleting a person with a specified `while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -873,7 +986,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data files.
 
    1. Open a command terminal, `cd` into the folder you put the jar file in, and delete the data file `data/addressbook.json`.<br>
         Expected: The app should create a new data file with default data when it is launched.
