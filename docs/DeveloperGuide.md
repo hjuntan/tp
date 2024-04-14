@@ -303,7 +303,7 @@ Step 1. The user executes `find` command.
 
 Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `FindCommandParser`.
 
-Step 3. `ScheduleCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `FindCommand`.
+Step 3. `FindCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `FindCommand`.
 
 Step 4. The `LogicManager` calls the `execute` method in `FindCommand`.
 
