@@ -67,7 +67,7 @@ Let us get started!
    <p align="centerleft">
     <img src="images/Ui.png" alt="Ui" width="900" style="margin-left: 10px; margin-top:20px"/>
    </p>
-   e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   e.g. Typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try to quickly get started with our application:
 
    * `view` : Lists all contacts.
@@ -139,6 +139,7 @@ Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 
 > Note:
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
+> * `PHONE_NUMBER` has to be 3-10 digits long.
 
 **Tip:** A person can have 0 or more groups.
 
@@ -274,7 +275,7 @@ Examples:
 
 Assigns either a group or a tag to a person of a specified `NUSID` from AronaPro.
 
-Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
+Format: `group id/NUSID [g/GROUP] [t/TAG]`
 
 > Note:
 > * Groups the person of a specified `NUSID`.
@@ -282,6 +283,8 @@ Format: `group [id/NUSID] [g/GROUP] [t/TAG]`
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
 > * At least one of the optional fields must be provided.
 > * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None.
+> * Existing values will be replaced by and updated to the new input values.
+> * A person can be assigned to a non-existing group.
 
 Examples:
 * `group id/E0123456 g/CS2101`
@@ -430,7 +433,7 @@ Team size: 5
 | **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                       |
 | **Edit**     | `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]…​`<br> e.g.,`edit id/E1234567 n/James Lee e/jameslee@example.com`     |
 | **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
-| **Group**    | `group [id/NUSID] [g/GROUP] [t/TAG] `                                                                                                      |
+| **Group**    | `group id/NUSID [g/GROUP] [t/TAG] ` <br> e.g., `group id/E1234567 g/T15`                                                                   |
 | **Schedule** | `schedule id/NUSID [s/SCHEDULE r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                    |
 | **Pin**      | `pin id/NUSID`                                                                                                                             |
 | **View**     | `view`                                                                                                                                     |
