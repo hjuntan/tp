@@ -23,8 +23,31 @@ Together, let us **_Centralise_, _Connect_ and _Coordinate_!**
 
 ## Table of content
 
-<!-- * Table of Contents -->
-<page-nav-print />
+* [**About AronaPro**](#about-aronapro)
+  *  [**Table of Content**](#table-of-content)
+  * [**About UserGuide**](#about-userguide)
+  * [**Quick Start**](#quick-start)
+  * [**Features**](#features)
+    * [Understanding our application's interface](#understanding-our-applications-interface)
+    * [Notes about command format](#notes-about-the-command-formatbr)
+    * [Help command](#viewing-help--help)
+    * [Add command](#adding-a-person-add)
+    * [View command](#viewing-all-persons--view)
+    * [Edit command](#editing-a-persons-information--edit)
+    * [Find command](#finding-a-person-find)
+    * [Delete command](#deleting-a-person--delete)
+    * [Group command](#assigning-a-person-to-a-group--group)
+    * [Schedule command](#schedule-a-meeting-with-a-person-schedule)
+    * [Pin command](#pinning-a-person-pin)
+    * [Clear command](#clearing-all-entries--clear)
+    * [Exit command](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editting the data file](#editing-the-data-file)
+  * [**FAQ**](#faq)
+  * [**Existing issues**](#known-issues)
+  * [**Planned enhancements**](#planned-enhancements)
+  * [**Command summary**](#command-summary)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -102,7 +125,7 @@ Let us get started!
 
     
 
-### **Notes about the command format:**<br>
+### **Notes about the command format:**
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   > `delete id/NUSID`, `NUSID` is a parameter which need to be supplied.
@@ -203,7 +226,7 @@ Examples:
         <img src="images/edit/edit-name-and-tag.png" alt="edit-name-and-tag" width="700" style="margin-top:20px"/>
     </p>
 
-### Locating persons by name: `find`
+### Finding a person: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -380,10 +403,6 @@ All data from the application is saved automatically as a JSON file `[JAR file l
 If your changes to the data file makes its format invalid, AronaPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause AronaPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
