@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
             + ": Deletes all the people identified by the group used in the displayed person list.\n"
             + "Parameters: "
             + PREFIX_GROUP + "GROUP\n"
-            + "Example: " + COMMAND_WORD + " g/CS2103-T15";
+            + "Example: " + COMMAND_WORD + " g/CS2103";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
