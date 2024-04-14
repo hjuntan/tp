@@ -54,20 +54,7 @@
         "add-feature": "Add feature",
         "edit-feature": "Edit feature",
         "schedule-feature": "Schedule feature",
-        "pin-feature": "Pin feature",
-        "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
-        "proposed-data-archiving": "[Proposed] Data archiving",
-        "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
-        "appendix-requirements": "Appendix: Requirements",
-        "product-scope": "Product scope",
-        "user-stories": "User stories",
-        "use-cases": "Use cases",
-        "non-functional-requirements": "Non-Functional Requirements",
-        "glossary": "Glossary",
-        "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
-        "launch-and-shutdown": "Launch and shutdown",
-        "example-deleting-a-person": "Example: Deleting a person",
-        "saving-data": "Saving data"
+        "find-feature": "Find feature"
       },
       "headingKeywords": {}
     },
@@ -160,14 +147,6 @@
       "title": "Tan Hong Jun's Project Portfolio Page",
       "headings": {
         "project-aronapro": "Project: AronaPro"
-      },
-      "headingKeywords": {}
-    },
-    {
-      "src": "team/johndoe.md",
-      "title": "John Doe's Project Portfolio Page",
-      "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
       },
       "headingKeywords": {}
     },
