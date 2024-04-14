@@ -346,6 +346,73 @@ The following activity diagram summarizes what happens when a user inputs a sche
     * Pros: It follows the DRY principle.
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+
+### `Find` feature
+
+A `Person` has many details one may query for, this command searches for contacts that matches all the given details.
+Currently, this command supports finding by `nusId`, `name`, `phone`, `email`, `group`s, `tag` fields.
+
+<box type="info" seamless>
+
+**Note:** `find` requires at least one field mentioned above to be an input
+
+</box>
+
+Given below is an example usage scenario and how the `find` mechanism behaves at each step.
+
+Step 1. The user executes `find` command.
+
+Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `FindCommandParser`.
+
+Step 3. `FindCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `FindCommand`.
+
+Step 4. The `LogicManager` calls the `execute` method in `FindCommand`.
+
+Step 5. The `execute` method in `FindCommand` executes and finds the relevant person(s) with the given fields.
+
+Step 6. `Model#updateFilteredPersonList()` is called to update the list of persons displayed in AronaPro.
+
+Step 7. Success message is printed onto the results display to notify user.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#updateFilteredPersonList()` and the list of persons displayed remains the same.
+**Note:** If a command finds no person, it will display an empty list and not an error message.
+
+</box>
+
+The following sequence diagram shows how a find operation goes through the `Logic` component:
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram">
+
+The following activity diagram summarizes what happens when a user inputs a `find` command:
+<puml src="diagrams/FindActivityDiagram.puml" alt="FindActivityDiagram">
+
+#### Design considerations:
+
+**How find executes**
+
+* User inputs a `find` command with at least one of the fields `nusId`, `name`, `phone`, `email`, `group` or `tag`. The inputs are parsed and a `FindCommand` is created.
+* Each of these fields are made into Java `Predicates` which checks if each field's input matches any person's field (Choice of matching can be changed flexibly in each field's corresponding `Predicate` class) in AronaPro.
+* If any field was not required by the user, a special string (not possible for the user to type when using the add or edit commands) is used to default the `Predicate` to True.
+* A list of persons is created by chaining these `Predicates` using logical `AND`. A list of relevant person(s) are found.
+* The relevant persons are used to update the person list which the model displays.
+
+**Why is it implemented this way?**
+
+* The functionality of find is advertised as finding people that matches ALL the supplemented fields. As such logical AND search is relevant to our case.
+* Use of predicates is also easily extendable, requiring future programmers to simply create a new `Predicate` for new fields and chaining it with the existing predicates
+* The use of a special string to denote a non-specified field, while rudimentary, avoids the hassle required to juggle Java `Optional`s and less transparent Functional Programming paradigms.
+
+**Alternative considerations**
+
+* **Alternative 1 (current choice):** Set non-required fields to a special string that makes a field match everyone, otherwise filter based on the input.
+    * Pros: Easy to implement.
+    * Cons: If the user is able to enter this special string in `add` or `edit` commands, it could result in unexpected behaviour.
+
+* **Alternative 2:** Introduce Java `Optional`s to determine which fields are required.
+    * Pros: There is usage of Single Responsibility Principle. (Current implementation has `Predicate` implicitly handling added responsibility of checking optionality)
+    * Cons: Harder to debug when using Functional Programming paradigms while passing results across classes.
+
 ### `Pin` feature
 
 `Pin` for a person can be added using the `pin` command. The `PinCommand` class is responsible for handling the addition of a person. This command is implemented through `PinCommand` which extend the `Command` class.
@@ -384,13 +451,10 @@ The following activity diagram summarizes what happens when a user inputs a pin 
 
 #### Design considerations:
 
-**How add executes**
+**How Pin executes**
 
 * User inputs a `pin` command with `nusId`.The inputs are parsed and a `PinCommand` is created.
 * The instances of the relevant fields are created and the person is added to the model.
-
-
-
 
 
 ### `Group` feature
@@ -440,8 +504,7 @@ The following sequence diagram shows how a group operation goes through the `Log
 * User inputs an `group` command with `nusId` and either `tags` and/or `group` fields. The inputs are parsed and a `GroupCommand` is created.
 * The instances of the relevant fields are created and the person(s) is/are grouped in the model.
 
-
-
+  
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
