@@ -211,8 +211,68 @@ The following activity diagram summarizes what happens when a user inputs a sche
 
 * **Alternative 1 (current choice):** Create instances of objects for each of the fields and add the person to the model.
     * Pros: Allow for each field to be validated before adding the person.
-    * Cons: Additional checks are required 
+    * Cons: Additional checks are required.
 
+### `Edit` feature
+
+#### Implementation
+
+`Edit` for a person can be added or removed using the `edit` command. The `EditCommand` class is responsible for handling the editing of a person's information. This command is implemented through `EditCommand` which extend the `Command` class.
+
+A new `Edit` can be added by specifying `nusId`, and `NAME`, `PHONE_NUMBER`, `EMAIL`, `TAG` and `GROUP` are optional fields but the user needs to enter at least 1 of these optional fields.
+
+<box type="info" seamless>
+
+**Note:** Existing values will be replaced by and updated to the new input values.
+
+</box>
+
+Given below is an example usage scenario and how the `EditCommand` mechanism behaves at each step.
+
+Step 1. The user executes `Edit` command.
+
+Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `EditCommandParser`.
+
+Step 3. `EditCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `EditCommand`.
+
+Step 4. The `LogicManager` calls the `execute` method in `EditCommand`.
+
+Step 5. The `execute` method in `EditCommand` executes and calls `Model#getFilteredPersonListWithNusId()` to get a list of person in the address book and filter to find the relevant person with the given `nusId`.
+
+Step 6. `Model#setPerson()` is called to update the contact information for that person.
+
+Step 7. `Model#updateFilteredPersonList()` is called to update the person list.
+
+Step 8. Success message is printed onto the results display to notify user.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#setPerson()` and the contact information will not be updated for that person.
+
+</box>
+
+The following sequence diagram shows how a schedule operation goes through the `Logic` component:
+
+<puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
+
+The following activity diagram summarizes what happens when a user inputs an Edit command:
+
+<puml src="diagrams/EditDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**How edit executes**
+
+* User inputs a `Edit` command with `nusId`, and at least 1 of these optional fields: `NAME`, `PHONE_NUMBER`, `EMAIL`, `TAG` and `GROUP`. The inputs are parsed and a `EditCommand` is created.
+* A list of persons is retrieved from `model` and the relevant person is found by matching `nusId`.
+* The relevant fields are updated for the person and the person is set back into the model.
+
+
+**Alternative considerations**
+
+* **Alternative 1 (current choice):** Create instances of objects for each of the fields and edits the person's contact information to the model.
+    * Pros: Allow for each field to be validated before editing the person.
+    * Cons: Additional checks are required.
     
 
 ### `Schedule` feature
@@ -286,6 +346,7 @@ The following activity diagram summarizes what happens when a user inputs a sche
     * Pros: It follows the DRY principle.
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+
 ### `Find` feature
 
 A `Person` has many details one may query for, this command searches for contacts that matches all the given details.
@@ -351,6 +412,50 @@ The following activity diagram summarizes what happens when a user inputs a `fin
 * **Alternative 2:** Introduce Java `Optional`s to determine which fields are required.
     * Pros: There is usage of Single Responsibility Principle. (Current implementation has `Predicate` implicitly handling added responsibility of checking optionality)
     * Cons: Harder to debug when using Functional Programming paradigms while passing results across classes.
+
+### `Pin` feature
+
+`Pin` for a person can be added using the `pin` command. The `PinCommand` class is responsible for handling the addition of a person. This command is implemented through `PinCommand` which extend the `Command` class.
+
+A `Person` can be pinned by specifying `nusId`.
+
+#### Implementation
+
+Given below is an example usage scenario and how the `PinCommand` mechanism behaves at each step.
+
+Step 1. The user executes `pin` command.
+
+Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `PinCommandParser`.
+
+Step 3. `PinCommandParser` will call `parse` which create instances of objects for each of the fields and return an instance of `PinCommand`.
+
+Step 4. The `LogicManager` calls the `execute` method in `PinCommand`.
+
+Step 5. The `execute` method in `PinCommand` executes and calls `Model#pinPerson()` to add the person to the address book.
+
+Step 6. Success message is printed onto the results display to notify user.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#pinPerson()` and the person will not be added to the address book.
+
+</box>
+
+The following sequence diagram shows how a pin operation goes through the `Logic` component:
+
+<puml src="diagrams/PinSequenceDiagram.puml" alt="PinSequenceDiagram" />
+
+The following activity diagram summarizes what happens when a user inputs a pin command:
+
+<puml src="diagrams/PinDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**How Pin executes**
+
+* User inputs a `pin` command with `nusId`.The inputs are parsed and a `PinCommand` is created.
+* The instances of the relevant fields are created and the person is added to the model.
+
 
 
 
@@ -491,18 +596,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Teaching Assistant                                                            | add a new student, prof, TA                                  | know how to contact them                                               |
 | `* * *`  | user                                                                          | delete a person                                              | remove entries that I no longer need                                   |
 | `* * *`  | Teaching Assistant                                                            | find a student by name or class                              | locate details of persons without having to go through the entire list |
-| `* * *`  | Teaching Assistant                                                            | Group students into classes                                  | know which class my student is in                                      |
+| `* * *`  | Teaching Assistant                                                            | group students into classes                                  | know which class my student is in                                      |
 | `* * *`  | Teaching assistant                                                            | find my supervisor(s)                                        | Report any admin issues my students would raise                        |
-| `* * *`  | University student with different friend groups                               | Tag or categorize my contacts                                | Search by the friend groups I'm concerned with                         |
-| `* * *`  | Teaching Assistant who wants to meet up with Profs and students               | Schedule events to do so                                     | remind myself to meet up or know my free times.                        |
+| `* * *`  | University student with different friend groups                               | tag or categorize my contacts                                | Search by the friend groups I'm concerned with                         |
+| `* * *`  | Teaching Assistant who wants to meet up with Profs and students               | schedule events to do so                                     | remind myself to meet up or know my free times.                        |
 | `* * *`  | Teaching Assistant with important people to report to or stay in contact with | pin important contacts                                       |                                                                        |
 | `* * *`  | Teaching Assistant who needs to announce information to his students          | copy a (group of) student(s)' contact info onto my clipboard | announce a message efficiently to many students                        |
-| `* *`    | Forgetful Teaching Assistant                                                  | A check for addition of duplicate contacts                   | can reduce clutter of my list                                          |
-| `* *`    | Teaching assistant who might mistype                                          | Have a Confirm Delete warning when doing deletions           | Provide a safety net in case I accidentally delete important info      |
-| `* *`    | Teaching assistant with many students                                         | Personalize contacts with photos                             | Attribute names to faces and distinguish similar names.                |
-| `* *`    | user                                                                          | hide private contact details                                 | minimize chance of someone else seeing them by accident                |
+| `* *`    | Forgetful Teaching Assistant                                                  | have a check for addition of duplicate contacts              | can reduce clutter of my list                                          |
+| `* *`    | Teaching assistant who might mistype                                          | have a Confirm Delete warning when doing deletions           | provide a safety net in case I accidentally delete important info      |
+| `* *`    | Teaching assistant with many students                                         | personalise contacts with photos                             | attribute names to faces and distinguish similar names.                |
+| `* *`    | user                                                                          | hide private contact details                                 | minimise chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book                                    | sort persons by name                                         | locate a person easily                                                 |
-| `*`      | detail-oriented Teaching Assistant                                            | Add a note with additional information about the contact     | remind myself of things I may need to follow up on                     |
+| `*`      | detail-oriented Teaching Assistant                                            | add a note with additional information about the contact     | remind myself of things I may need to follow up on                     |
 | `*`      | Teaching assistant who tires from work                                        | use an app with a cheerful interface                         | feel encouraged / at peace                                             |
 | `*`      | Teaching assistant                                                            | import and export contact details to/from the app            | can easily shift to using this app, or another                         |
 

@@ -46,7 +46,7 @@ public class Schedule {
                 return true;
             }
         }
-        return test.matches(VALIDATION_REGEX_WITHOUT_DATA);
+        return false;
     }
 
     public boolean isPresent() {

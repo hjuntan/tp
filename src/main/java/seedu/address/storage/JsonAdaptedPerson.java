@@ -128,7 +128,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Schedule.class.getSimpleName()));
         }
-        if (!Schedule.isValidSchedule(schedule)) {
+        if (!(Schedule.isValidSchedule(schedule) || schedule.matches(Schedule.VALIDATION_REGEX_WITHOUT_DATA))) {
             throw new IllegalValueException(Schedule.MESSAGE_CONSTRAINTS);
         }
         final Schedule modelSchedule = new Schedule(schedule);
