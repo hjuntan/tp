@@ -288,6 +288,7 @@ Format: `group id/NUSID... [g/GROUP]... [t/TAG]`
 > * More than one `NUSID` can be specified for a group command to group more than one person.
 > * At least one of the optional fields must be provided.
 > * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None.
+> * When editing groups, the group must only contain alphanumeric characters or spaces.
 > * Existing values will be replaced by and updated to the new input values.
 > * A person can be assigned to a non-existing group.
 
