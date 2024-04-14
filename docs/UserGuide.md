@@ -15,7 +15,7 @@ while still having the benefits of a Graphical User Interface (GUI). Our simple-
 professors and TAs from various faculties without any technological background! 
 
 We are excited to have you on board and to guide you through how to use our software with this guide. Click 
-[Here](#about-userguide) to learn more about our UserGuide.
+[here](#about-userguide) to learn more about our User Guide.
 
 Together, let us **_Centralise_, _Connect_ and _Coordinate_!**
 
@@ -55,7 +55,7 @@ Together, let us **_Centralise_, _Connect_ and _Coordinate_!**
 
 Welcome to our User Guide! Here, we have got everything you need to know about using all of our application's features. 
 If you are already familiar with our application, dive straight into the [Features](#features) section to discover more. 
-However, if you are new to the application, we have got you covered. You can simply do so by following our guide step-by-step, 
+However, if you are new to the application, we have got you covered. You can simply do so by following our guide systematically, 
 starting with the [Quick Start](#quick-start) section, to quickly get up to speed with AronaPro before you start your own adventure. 
 Let us get started!
 
@@ -69,7 +69,7 @@ Let us get started!
 
 1. Copy the file to the folder you want to use as the _home folder_ for AronaPro in your desired location. For demonstration purpose, we will save the downloaded jar file into `test` folder and saved it to `Desktop` on either Mac or Windows machines. 
 
-1. Open a command terminal, either by typing `terminal` on Mac or `PowerShell` on windows and perform the following steps to reach the `test` folder created earlier in order to run the application:
+1. Open a command terminal, either by typing `terminal` on Mac or `PowerShell` on Windows machine and perform the following steps to reach the `test` folder created earlier in order to run the application:
    1. First type `ls` to see what are all the folders in your current directory.
    2. Type `cd <file_name>` where the file name refers to the file name you are trying to enter. One tip is that file name can be auto-completed simply by typing the first few letters and hitting `Tab`.
    3. Repeat i. and ii. above until you see the `test` folder and `cd` into it as show in the sequence of diagrams for both Mac and Windows machines below:
@@ -94,7 +94,6 @@ Let us get started!
    Some example commands you can try to quickly get started with our application:
 
    * `view` : Lists all contacts.
-
 
    * `add id/E1234567 n/John Doe p/98765432 e/johnd@example.com t/Student g/CS2103T-T15` : Adds a student with `NAME` John Doe with `NUSID` of E1234567 to AronaPro.
 
@@ -129,13 +128,13 @@ Let us get started!
 ### **Notes about the command format:**
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  > `delete id/NUSID`, `NUSID` is a parameter which need to be supplied.
+  > In the delete command as such: `delete id/NUSID`, `NUSID` is a parameter which need to be supplied.
 
 * Items in square brackets are optional.<br>
   > `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply as `n/John Doe` without specifying the `TAG` as it is optional.
 
 * Items with `…`​ after them can be used multiple times or zero times.<br>
-  > `[g/GROUP]…​` can be used as ` ` (i.e. 0 times) or `g/School` `g/Family`, demonstrating that group can be used two times by writing them successively on the same line etc.
+  > `[g/GROUP]…​` can be used as ` ` (i.e. 0 times) or `g/School` `g/Family`, demonstrating that group can be used 2 times by writing them successively on the same line etc.
 
 * Parameters can be in any order.<br>
   > If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -162,8 +161,21 @@ Adds a person to AronaPro.
 Format: `add id/NUSID n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​`
 
 > Note:
+> * The `NUSID` refers to the NUSID shown in the displayed person list.
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
+> * `NAME` can consist of numbers.
+> * `NAME` can be duplicated for different persons.
 > * `PHONE_NUMBER` has to be 3-10 digits long.
+> * `EMAIL` can be duplicated for different persons.
+> * `EMAIL` follows the following format and constraints:
+  >   * It should have a local-part followed by a `@` and then a domain name.
+>     * Local-part should only contain alphanumeric characters and special characters(+ _ . -).
+>     * Local-part may not start or end with any special characters.
+>     * Domain name is made up  of domain label separated by periods.
+  >     * Domain name must end with a domain label at least 2 characters long.
+>       * Have each domain label start and end with alphanumeric characters.
+>       * Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+> * For `TAG``, the valid forms have to be either 1 of these:  Professor, TA, Student, None.
 
 **Tip:** A person can have 0 or more groups.
 
@@ -201,7 +213,9 @@ Format: `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]...`
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
 > * `NAME` can consist of numbers.
+> * `NAME` can be duplicated for different persons.
 > * `PHONE_NUMBER` has to be 3-10 digits long.
+> * `EMAIL` can be duplicated for different persons.
 > * `EMAIL` follows the following format and constraints:
 >   * It should have a local-part followed by a `@` and then a domain name.
 >   * Local-part should only contain alphanumeric characters and special characters(+ _ . -).
@@ -308,9 +322,9 @@ Format: `group id/NUSID... [g/GROUP]... [t/TAG]`
 > * Groups the person of a specified `NUSID`.
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
-> * More than one `NUSID` can be specified for a group command to group more than one person.
+> * More than one `NUSID` can be specified for a group command to group more than one person (`group id/E1234567 id/E0123456 g/Friends`).
 > * At least one of the optional fields must be provided.
-> * When editing tags, the valid forms have to be either 1 of these:  Professor, TA, Student, None.
+> * For `tags`, the valid forms have to be either 1 of these:  Professor, TA, Student, None.
 > * Existing values will be replaced by and updated to the new input values.
 > * A person can be assigned to a non-existing group.
 
@@ -340,7 +354,7 @@ Format: `schedule id/NUSID [s/SCHEDULE r/REMARK]`
 > * The `NUSID` refers to the NUSID shown in the displayed person list.
 > * The `NUSID` **must be a 7-digit number following an 'E'**.
 > * Both `SCHEDULE` and `REMARK` must be either provided or not provided.
-> * If `SCHEDULE` and `REMARK` are not provided, the schedule will be removed.
+> * If `SCHEDULE` and `REMARK` are not provided and the `Schedule` command is used as a standalone, the schedule will be removed (`schedule id/E1234567`).
 
 **Tip:** The `SCHEDULE` must be in one of the formats: `DD/MM/YYYY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `MMM DD, YYYY`, `DD MMM YYYY`. Example of date formats include: `12-12-2024`, `12/12/2024`, `12.12.2024`, `Dec 12, 2024`, `12 Dec 2024`.
 
@@ -441,6 +455,7 @@ Team size: 5
 1. **Validity of date entered:** The current behaviour of the `schedule` command does not check for the validity of the date entered. We plan to implement a check to ensure that the date entered is valid.
 2. **Future date check:** The current behaviour of the `schedule` command does not check if the valid date entered is in the future. We plan to implement a check to ensure that the date entered is in the future.
 3. **Validity of email domain entered:** The current behaviour of the `edit` command does not check for the validity of the domain name of the email entered. We plan to implement a check to ensure that a valid domain name is entered.
+3. **Ordering date in chronological order:** There is currently no ordering of date in any ways in our UI. We plan to implement sorting of the dates in chronological order to aid our users in remembering the dates for their schedules.
 3. **Group name visibility:** When using the `group` command with a very long group name, the group name may be hidden from view. We plan to implement a feature to allow users to view the full group name. Either by truncating the group name, allowing the user to view the full group name or limiting the length of the group name.
 4. **Email address visibility:** When adding/editing a person's email address with a very long email address, the email address may be hidden from view. We plan to implement a feature to allow users to view the full email address. Either by truncating the email address, allowing the user to view the full email address or limiting the length of the email address.
 5. **Tag information visibility:** When resizing the window to a smaller size, the GUI may not fully display the person's tag information. We plan to implement a minimum size for the window to ensure that all information is displayed.
@@ -452,14 +467,15 @@ Team size: 5
 
 | Action       | Format, Examples                                                                                                                           |
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**     | `help`                                                                                                                                     |
 | **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL t/TAG [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/Student g/CS2103T-T15` |
-| **Clear**    | `clear`                                                                                                                                    |
-| **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                       |
+| **View**     | `view`                                                                                                                                     |
 | **Edit**     | `edit id/NUSID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]…​`<br> e.g.,`edit id/E1234567 n/James Lee e/jameslee@example.com`     |
 | **Find**     | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG] [g/GROUP]`<br> e.g., `find n/James g/CS2103T`                                            |
-| **Group**    | `group id/NUSID... [g/GROUP]... [t/TAG] ` <br> e.g., `group id/E1234567 g/T15`                                                                                                 |
+| **Delete**   | `delete id/NUSID`<br> e.g., `delete id/E01234567 OR delete g/GROUP` <br> e.g., `delete g/CS2103-T15`                                       |
+| **Group**    | `group id/NUSID... [g/GROUP]... [t/TAG] ` <br> e.g., `group id/E1234567 g/T15`                                                             |
 | **Schedule** | `schedule id/NUSID [s/SCHEDULE r/REMARK]` <br> e.g., `schedule id/E1234567 s/12-12-2021 r/Consultation`                                    |
 | **Pin**      | `pin id/NUSID`                                                                                                                             |
-| **View**     | `view`                                                                                                                                     |
-| **Help**     | `help`                                                                                                                                     |
+| **Clear**    | `clear`                                                                                                                                    |
+| **Exit**     | `exit`                                                                                                                                     |
 

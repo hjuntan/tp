@@ -17,7 +17,7 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**f
+## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -162,7 +162,7 @@ This section describes some noteworthy details on how certain features are imple
 
 `Add` for a person can be added using the `add` command. The `AddCommand` class is responsible for handling the addition of a person. This command is implemented through `AddCommand` which extends the `Command` class.
 
-A new `Person` can be added by specifying `nusId`, `name`, `phone`, `email`, `tags` and optional `group`.
+A new `Person` can be added by specifying `NUSID`, `name`, `phone`, `email`, `tags` and optional `group`.
 
 <box type="info" seamless>
 
@@ -204,7 +204,7 @@ The following activity diagram summarizes what happens when a user inputs a sche
 
 **How add executes**
 
-* User inputs an `add` command with `nusId`, `name`, `phone`, `email`, `tags` and optional `group` fields. The inputs are parsed and a `AddCommand` is created.
+* User inputs an `add` command with `NUSID`, `name`, `phone`, `email`, `tags` and optional `group` fields. The inputs are parsed and a `AddCommand` is created.
 * The instances of the relevant fields are created and the person is added to the model.
 
 **Alternative considerations**  
@@ -217,9 +217,9 @@ The following activity diagram summarizes what happens when a user inputs a sche
 
 #### Implementation
 
-`Edit` for a person can be added or removed using the `edit` command. The `EditCommand` class is responsible for handling the editing of a person's information. This command is implemented through `EditCommand` which extend the `Command` class.
+`Edit` on a person can be done using the `edit` command. The `EditCommand` class is responsible for handling the editing of a person's information. This command is implemented through `EditCommand` which extend the `Command` class.
 
-A new `Edit` can be added by specifying `nusId`, and `NAME`, `PHONE_NUMBER`, `EMAIL`, `TAG` and `GROUP` are optional fields but the user needs to enter at least 1 of these optional fields.
+A new `Edit` can be added by specifying a compulsory `NUSID`, while `NAME`, `PHONE_NUMBER`, `EMAIL`, `TAG` and `GROUP` are optional fields but the user needs to enter at least 1 of these optional fields.
 
 <box type="info" seamless>
 
@@ -237,7 +237,7 @@ Step 3. `EditCommandParser` will call `parse` which create instances of objects 
 
 Step 4. The `LogicManager` calls the `execute` method in `EditCommand`.
 
-Step 5. The `execute` method in `EditCommand` executes and calls `Model#getFilteredPersonListWithNusId()` to get a list of person in the address book and filter to find the relevant person with the given `nusId`.
+Step 5. The `execute` method in `EditCommand` executes and calls `Model#getFilteredPersonListWithNusId()` to get a list of person in the address book and filter to find the relevant person with the given `NUSID`.
 
 Step 6. `Model#setPerson()` is called to update the contact information for that person.
 
@@ -263,8 +263,8 @@ The following activity diagram summarizes what happens when a user inputs an Edi
 
 **How edit executes**
 
-* User inputs a `Edit` command with `nusId`, and at least 1 of these optional fields: `NAME`, `PHONE_NUMBER`, `EMAIL`, `TAG` and `GROUP`. The inputs are parsed and a `EditCommand` is created.
-* A list of persons is retrieved from `model` and the relevant person is found by matching `nusId`.
+* User inputs a `Edit` command with `NUSID`, and at least 1 of these optional fields: `NAME`, `PHONE_NUMBER`, `EMAIL`, `TAG` and `GROUP`. The inputs are parsed and a `EditCommand` is created.
+* A list of persons is retrieved from `model` and the relevant person is found by matching `NUSID`.
 * The relevant fields are updated for the person and the person is set back into the model.
 
 
@@ -281,7 +281,7 @@ The following activity diagram summarizes what happens when a user inputs an Edi
 
 `Schedule` for a person can be added or removed using the `schedule` command. The `ScheduleCommand` class is responsible for handling the scheduling of events for a person. This command is implemented through `ScheduleCommand` which extends the `Command` class.
 
-A new `Schedule` can be added by specifying `nusId`, `schedule` and `remark`. If the `schedule` and `remark` prefixes are not specified, the schedule will be removed instead.
+A new `Schedule` can be added by specifying `NUSID`, `schedule` and `remark`. If the `schedule` and `remark` prefixes are not specified, the schedule will be removed instead.
 
 <box type="info" seamless>
 
@@ -299,7 +299,7 @@ Step 3. `ScheduleCommandParser` will call `parse` which create instances of obje
 
 Step 4. The `LogicManager` calls the `execute` method in `ScheduleCommand`.
 
-Step 5. The `execute` method in `ScheduleCommand` executes and calls `Model#getFilteredPersonList()` to get a list of person in the address book and filter to find the relevant person with the given `nusId`. 
+Step 5. The `execute` method in `ScheduleCommand` executes and calls `Model#getFilteredPersonList()` to get a list of person in the address book and filter to find the relevant person with the given `NUSID`. 
 
 Step 6. `Model#setPerson()` is called to update the schedule for that person.
 
@@ -323,8 +323,8 @@ The following activity diagram summarizes what happens when a user inputs a sche
 
 **How schedule executes**
 
-* User inputs a `Schedule` command with `nusId`, `schedule` and  `remark`. The inputs are parsed and a `ScheduleCommand` is created.
-* A list of persons is retrieved from `model` and the relevant person is found by matching `nusId`.
+* User inputs a `Schedule` command with `NUSID`, `schedule` and  `remark`. The inputs are parsed and a `ScheduleCommand` is created.
+* A list of persons is retrieved from `model` and the relevant person is found by matching `NUSID`.
 * The relevant fields are updated for the person and the person is set back into the model.
 
 **Why is it implemented this way?**
@@ -350,7 +350,7 @@ The following activity diagram summarizes what happens when a user inputs a sche
 ### `Find` feature
 
 A `Person` has many details one may query for, this command searches for contacts that matches all the given details.
-Currently, this command supports finding by `nusId`, `name`, `phone`, `email`, `group`s, `tag` fields.
+Currently, this command supports finding by `NUSID`, `name`, `phone`, `email`, `group`s, `tag` fields.
 
 <box type="info" seamless>
 
@@ -391,7 +391,7 @@ The following activity diagram summarizes what happens when a user inputs a `fin
 
 **How find executes**
 
-* User inputs a `find` command with at least one of the fields `nusId`, `name`, `phone`, `email`, `group` or `tag`. The inputs are parsed and a `FindCommand` is created.
+* User inputs a `find` command with at least one of the fields `NUSID`, `name`, `phone`, `email`, `group` or `tag`. The inputs are parsed and a `FindCommand` is created.
 * Each of these fields are made into Java `Predicates` which checks if each field's input matches any person's field (Choice of matching can be changed flexibly in each field's corresponding `Predicate` class) in AronaPro.
 * If any field was not required by the user, a special string (not possible for the user to type when using the add or edit commands) is used to default the `Predicate` to True.
 * A list of persons is created by chaining these `Predicates` using logical `AND`. A list of relevant person(s) are found.
@@ -415,9 +415,9 @@ The following activity diagram summarizes what happens when a user inputs a `fin
 
 ### `Pin` feature
 
-`Pin` for a person can be added using the `pin` command. The `PinCommand` class is responsible for handling the addition of a person. This command is implemented through `PinCommand` which extend the `Command` class.
+`Pin` for a person can be done using the `pin` command. The `PinCommand` class is responsible for handling the addition of a person. This command is implemented through `PinCommand` which extend the `Command` class.
 
-A `Person` can be pinned by specifying `nusId`.
+A `Person` can be pinned by specifying `NUSID`.
 
 #### Implementation
 
@@ -453,7 +453,7 @@ The following activity diagram summarizes what happens when a user inputs a pin 
 
 **How Pin executes**
 
-* User inputs a `pin` command with `nusId`.The inputs are parsed and a `PinCommand` is created.
+* User inputs a `pin` command with `NUSID`.The inputs are parsed and a `PinCommand` is created.
 * The instances of the relevant fields are created and the person is added to the model.
 
 
@@ -461,12 +461,12 @@ The following activity diagram summarizes what happens when a user inputs a pin 
 
 `Group` for a person can be added using the `group` command. The `GroupCommand` class is responsible for handling the grouping and the tagging of a person. This command is implemented through `GroupCommand` which extends the `Command` class.
 
-A new `Person` can be grouped by specifying `nusId` and either `group` and/or `tag`.
+A new `Person` can be grouped by specifying `NUSID` and either `group` and/or `tag`.
 
 <box type="info" seamless>
 
 **Note:** There needs to be at least one `group` and/or `tag` keyword.
-**Note:** More than one `nusId` keyword can be used if grouping more than one person at once.
+**Note:** More than one `NUSID` keyword can be used if grouping more than one person at once.
 
 </box>
 
@@ -474,7 +474,7 @@ A new `Person` can be grouped by specifying `nusId` and either `group` and/or `t
 
 Given below is an example usage scenario and how the `GroupCommand` mechanism behaves at each step.
 
-Step 1. The user executes `group` command with `nusId`, `group` and  `tag`.
+Step 1. The user executes `group` command with `NUSID`, `group` and  `tag`.
 
 Step 2. The `AddressBookParser` will call `parseCommand` on the user's input string and return an instance of `GroupCommandParser`.
 
@@ -501,107 +501,8 @@ The following sequence diagram shows how a group operation goes through the `Log
 
 **How group executes**
 
-* User inputs an `group` command with `nusId` and either `tags` and/or `group` fields. The inputs are parsed and a `GroupCommand` is created.
+* User inputs an `group` command with `NUSID` and either `tags` and/or `group` fields. The inputs are parsed and a `GroupCommand` is created.
 * The instances of the relevant fields are created and the person(s) is/are grouped in the model.
-
-  
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-  
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -707,12 +608,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: Edit a contact's particulars**
+**Use case: Edit a contact's information**
 
 **MSS**
 
 1.  User requests to edit a contact.
-2.  User inputs all fields he wishes to edit about said contact,as well as the information required to edit a contact into AddressBook.
+2.  User inputs new information about the fields he wishes to edit about a specified contact.
 3.  AddressBook edits the contact by changing all the specified fields into the newly inputted information.
 
     Use case ends.
@@ -841,7 +742,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 
-**Use case: schedules an event with a contact**
+**Use case: Schedule an event with a contact**
 
 **MSS**
 
@@ -872,7 +773,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: deletes a group of people**
+**Use case: Delete a group of people**
 
 **MSS**
 
@@ -895,7 +796,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Pins a contact**
+**Use case: Pin a contact**
 
 **MSS**
 
@@ -979,7 +880,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete id/E0000000`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete id/x`, `...` (where x is NusId which does not exist currently in the address book)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete id/x`, `...` (where x is NUSID which does not exist currently in the address book)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
